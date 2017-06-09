@@ -1,18 +1,18 @@
+package model;
+
 
 import java.util.*;
 
 public class Contratado extends Corretor {
 
-    public float salarioFixo;
-    public Date dataAdmissao;
-    public static float comissao = 1 / 100;
+    private  float salarioFixo;
+    private Date dataAdmissao;
+    private static float comissao = 1 / 100;
 
     public Contratado(String pNome,String pCrecic, float pSalarioFixo, Date pDataAdmissao){
-
         super(pNome,pCrecic);
         salarioFixo = pSalarioFixo;
-        dataAdmissao = pDataAdmissao;
-        
+        dataAdmissao = pDataAdmissao;        
     }
 
     public float getSalarioFixo() {

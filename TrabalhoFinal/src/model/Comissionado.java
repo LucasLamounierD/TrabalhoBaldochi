@@ -1,10 +1,12 @@
+package model;
+
 
 import java.io.*;
 
 
 public class Comissionado extends Corretor implements Serializable{
 
-    float comissao;
+    private float comissao;
 
     public Comissionado(String pNome, String pCrecic,float pComissao) {
         super(pNome, pCrecic);

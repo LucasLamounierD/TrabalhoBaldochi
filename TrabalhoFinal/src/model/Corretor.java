@@ -1,14 +1,14 @@
+package model;
+
 
 public class Corretor {
 
-    String nome = new String("");
-    String crecic = new String("");
+    private String nome;
+    private String crecic;
 
     public Corretor(String pNome,String pCrecic) {
-
         nome = pNome;
-        crecic = pCrecic;
-        
+        crecic = pCrecic;        
     }
 
     public String getNome() {

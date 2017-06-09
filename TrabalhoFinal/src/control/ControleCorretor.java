@@ -1,4 +1,9 @@
+package control;
 
+
+import limit.LimiteComissionado;
+import model.Contratado;
+import model.Comissionado;
 import java.io.*;
 import java.util.*;
 
@@ -14,11 +19,9 @@ public class ControleCorretor {
     }
 
     public void cadComissionado(Comissionado c) {
-
-            entComissionado = new Comissionado(c.nome,c.crecic,c.comissao);
-            vecCorretor.add(entComissionado);
-            salva();
-
+        entComissionado = new Comissionado(c.getNome(),c.getCrecic(),c.getComissao());
+        vecCorretor.add(entComissionado);
+        salva();
     }
 
     private void serializaCorretor() throws Exception {

@@ -1,24 +1,24 @@
+package model;
+
 
 import java.util.*;
 
 public class Imovel {
 
-    String codigo = new String("");
-    String tipo = new String("");
-    String descricao = new String("");
-    String nomePropietario = new String("");
-    float preço;
-    Date dataCad;
+    private String codigo;
+    private String tipo;
+    private String descricao;
+    private String nomePropietario;
+    private float preço;
+    private Date dataCad;
 
     public Imovel(String pCod, String pTipo, String pDescricao, String pNomePropietario, float pPreço, Date pDataCad) {
-
         codigo = pCod;
         tipo = pTipo;
         descricao = pDescricao;
         nomePropietario = pNomePropietario;
         preço = pPreço;
         dataCad = pDataCad;
-
     }
 
     public String getCodigo() {
