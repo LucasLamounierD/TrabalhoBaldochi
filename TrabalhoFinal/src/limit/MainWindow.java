@@ -62,6 +62,10 @@ public class MainWindow extends javax.swing.JFrame {
         jMenuItem9 = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setMinimumSize(new java.awt.Dimension(1024, 720));
+        setModalExclusionType(null);
+        setPreferredSize(new java.awt.Dimension(1024, 720));
+        setSize(new java.awt.Dimension(1024, 720));
 
         jMenuCadastros.setText("Cadastrar");
 
@@ -75,6 +79,11 @@ public class MainWindow extends javax.swing.JFrame {
         jMenuCadastros.add(menuItemComissionado);
 
         menuItemContratado.setText("Contratado");
+        menuItemContratado.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                menuItemContratadoActionPerformed(evt);
+            }
+        });
         jMenuCadastros.add(menuItemContratado);
 
         jMenuBarMainWindow.add(jMenuCadastros);
@@ -113,11 +122,11 @@ public class MainWindow extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+            .addGap(0, 576, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 279, Short.MAX_VALUE)
+            .addGap(0, 416, Short.MAX_VALUE)
         );
 
         pack();
@@ -127,6 +136,11 @@ public class MainWindow extends javax.swing.JFrame {
        
         ctrPrincipal.abrirJanelaCadastro(Util.CADASTRO_COMISSIONADO);
     }//GEN-LAST:event_menuItemComissionadoActionPerformed
+
+    private void menuItemContratadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuItemContratadoActionPerformed
+        
+        ctrPrincipal.abrirJanelaCadastro(Util.CADASTRO_CONTRATADO);
+    }//GEN-LAST:event_menuItemContratadoActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

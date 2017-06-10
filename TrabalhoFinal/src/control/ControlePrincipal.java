@@ -1,7 +1,6 @@
 package control;
 
 import control.ControleCorretor;
-import model.Comissionado;
 import javax.swing.JOptionPane;
 import limit.MainWindow;
 import util.Util;
@@ -34,9 +33,8 @@ public class ControlePrincipal {
     
     //Gerencia qual opção de menu o usuario acionou e chama o controle responsavel 
     public void abrirJanelaCadastro(int janela){
-        if(janela == Util.CADASTRO_COMISSIONADO){//Se for comissionado
-            objControleCorretor.abrirJanelaCadastro(Util.CADASTRO_COMISSIONADO); 
-        }
+            objControleCorretor.abrirJanelaCadastro(janela); 
+
     }
 
     public void finalize() {
