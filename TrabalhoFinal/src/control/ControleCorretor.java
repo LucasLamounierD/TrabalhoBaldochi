@@ -15,14 +15,16 @@ import util.Util;
 
 public class ControleCorretor {
     private LimiteCorretor lmtCorretor;
-    private ArrayList<Corretor> vecCorretor = new ArrayList<Corretor>();
-    
+    private Vector<Corretor> vecCorretor = new Vector();
+    private ControlePrincipal ctrPrincipal;
     //Constantes
     public final static int OP_CONTRATADO =0;
     public final static int OP_COMISSIONADO =1;
 
-    public ControleCorretor(){//Construtor do ControleCorretor
+    public ControleCorretor(ControlePrincipal pCtrPrincipal){//Construtor do ControleCorretor
+        ctrPrincipal = pCtrPrincipal;
         lmtCorretor = new LimiteCorretor(this);//Instacia uma janela para o cadastro
+        vecCorretor.add(new Comissionado("nome","123",3));
       //  desserializaCorretor();
     }
     
@@ -52,8 +54,7 @@ public class ControleCorretor {
                 Logger.getLogger(LimiteCorretor.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
-        
-        
+
          if(pNome.equals("")){//Validação dos campos, caso estiver incorreto lança um Exception
             throw new Exception("Campo nome não foi preechido!");  
          }else if(pCrecic.equals("")){
@@ -62,7 +63,8 @@ public class ControleCorretor {
             if (comissao<1 || comissao>3){
               throw new Exception("Valor Invalido no campo Comissão!"); 
             }else{//Se todos dados corretos cadastra Comissionados
-               vecCorretor.add( new Comissionado(pNome,pCrecic,comissao)); 
+               vecCorretor.add( new Comissionado(pNome,pCrecic,comissao));
+               ctrPrincipal.updateTableCorretores();
             }
          }else{//Validando campos mais especificos e chamando construtor do contratado
             if (pData.isEmpty()){
@@ -72,9 +74,10 @@ public class ControleCorretor {
             }
             else{//Se todos dados corretos cadastra Comissionados
                vecCorretor.add( new Contratado(pNome,pCrecic,comissao,new Date((long)salario))); 
+               ctrPrincipal.updateTableCorretores();
             } 
          }
-    }
+    }    
 
     private void serializaCorretor() throws Exception {
         FileOutputStream objFileOS = new FileOutputStream("corretores.dat");
@@ -89,7 +92,7 @@ public class ControleCorretor {
         if (objFile.exists()) {
             FileInputStream objFileIS = new FileInputStream("corretores.dat");
             ObjectInputStream objIS = new ObjectInputStream(objFileIS);
-            vecCorretor = (ArrayList) objIS.readObject();
+            vecCorretor = (Vector)objIS.readObject();
             objIS.close();
         }
     }
@@ -102,11 +105,19 @@ public class ControleCorretor {
         }
     }
 
-    public ArrayList getVecCorretor() {
+    public Vector getVecCorretor() {
         return vecCorretor;
     }
 
+    public ControlePrincipal getCtrPrincipal() {
+        return ctrPrincipal;
+    }
+    
     public void finalize() throws Exception {
         serializaCorretor();
     }
+
+
+
+    
 }

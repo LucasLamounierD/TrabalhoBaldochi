@@ -6,6 +6,12 @@
 package limit;
 
 import control.ControlePrincipal;
+import java.util.ArrayList;
+import java.util.Vector;
+import javax.swing.table.DefaultTableModel;
+import model.Comissionado;
+import model.Contratado;
+import model.Corretor;
 import util.Util;
 
 /**
@@ -14,15 +20,16 @@ import util.Util;
  */
 public class MainWindow extends javax.swing.JFrame {
     private ControlePrincipal ctrPrincipal;
+    private DefaultTableModel tableCorretoresModel;
     /**
      * Creates new form MainWindow
      */
     public MainWindow(ControlePrincipal pCtrPrincipal) {
         ctrPrincipal = pCtrPrincipal;
         initComponents();        
-        try {
+       /* try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
+                if ("".equals(info.getName())) {
                     javax.swing.UIManager.setLookAndFeel(info.getClassName());
                     break;
                 }
@@ -35,7 +42,36 @@ public class MainWindow extends javax.swing.JFrame {
             java.util.logging.Logger.getLogger(MainWindow.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
             java.util.logging.Logger.getLogger(MainWindow.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        }*/
+                
+        preencheTabelaCorretores();
+        /*tableCorretoresModels.addColumn("Nome");
+        tableCorretoresModels.addColumn("Crecic");
+        tableCorretoresModels.addColumn("Tipo");
+       
+        tableCorretoresModels.addRow(new Object[]{"Rodrigo Aparecido Silva Maia","12-987-41","Corretor"});*/
+        
+    }
+    
+    public void preencheTabelaCorretores(){
+        tableCorretores.removeAll();
+        Vector<Corretor> listCorretor =  ctrPrincipal.getObjControleCorretor().getVecCorretor();
+        
+        tableCorretoresModel = new DefaultTableModel();
+        tableCorretoresModel.addColumn("Corretor");
+        tableCorretoresModel.addColumn("CRECIC");
+        tableCorretoresModel.addColumn("TIPO");
+        
+        for(Corretor c : listCorretor ){
+            if(c  instanceof Comissionado){
+                tableCorretoresModel.addRow(new Object[]{c.getNome(),c.getCrecic(),"Comissionado"});
+            }else if(c  instanceof Contratado){
+                tableCorretoresModel.addRow(new Object[]{c.getNome(),c.getCrecic(),"Contratado"});
+            }
+            System.out.println("foi");
         }
+        
+        tableCorretores.setModel(tableCorretoresModel);
     }
 
     /**
@@ -47,6 +83,8 @@ public class MainWindow extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jScrollPane1 = new javax.swing.JScrollPane();
+        tableCorretores = new javax.swing.JTable();
         jMenuBarMainWindow = new javax.swing.JMenuBar();
         jMenuCadastros = new javax.swing.JMenu();
         menuItemComissionado = new javax.swing.JMenuItem();
@@ -66,6 +104,19 @@ public class MainWindow extends javax.swing.JFrame {
         setModalExclusionType(null);
         setPreferredSize(new java.awt.Dimension(1024, 720));
         setSize(new java.awt.Dimension(1024, 720));
+
+        tableCorretores.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ));
+        jScrollPane1.setViewportView(tableCorretores);
 
         jMenuCadastros.setText("Cadastrar");
 
@@ -122,11 +173,13 @@ public class MainWindow extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 576, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGap(0, 495, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 416, Short.MAX_VALUE)
+            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 458, Short.MAX_VALUE)
         );
 
         pack();
@@ -155,7 +208,9 @@ public class MainWindow extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuItem9;
     private javax.swing.JMenu jMenuRelatorios;
     private javax.swing.JMenu jMenuVendas;
+    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JMenuItem menuItemComissionado;
     private javax.swing.JMenuItem menuItemContratado;
+    private javax.swing.JTable tableCorretores;
     // End of variables declaration//GEN-END:variables
 }

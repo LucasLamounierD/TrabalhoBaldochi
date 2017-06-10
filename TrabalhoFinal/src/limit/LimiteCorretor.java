@@ -17,6 +17,7 @@ public class LimiteCorretor extends javax.swing.JFrame {
     public LimiteCorretor(ControleCorretor pCtrCorretor) {
         ctrCorretor = pCtrCorretor;
         initComponents();
+        
     }
     
     public void setSelectedComboTipoCorretor(int ent){
@@ -176,7 +177,7 @@ public class LimiteCorretor extends javax.swing.JFrame {
     }//GEN-LAST:event_formWindowClosed
 
     private void jBtnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnCancelarActionPerformed
-
+       
         this.dispose();
     }//GEN-LAST:event_jBtnCancelarActionPerformed
 
@@ -192,14 +193,14 @@ public class LimiteCorretor extends javax.swing.JFrame {
                                     );
             
             JOptionPane.showMessageDialog(rootPane, "Corretor cadastrado com sucesso",
-            "SUCESSO",JOptionPane.INFORMATION_MESSAGE);
+            "SUCESSO",JOptionPane.INFORMATION_MESSAGE);            
             this.dispose();
             
         } catch (Exception ex) {//Mensagem de erro.
             JOptionPane.showMessageDialog(rootPane, "Erro ao cadastrar corretor\n\n"
             + ex.getMessage(),"ERRO", JOptionPane.ERROR_MESSAGE);
-            
         }   
+         
     }//GEN-LAST:event_jBtnSubmitActionPerformed
 
     private void jComboTipoCorretorItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jComboTipoCorretorItemStateChanged
