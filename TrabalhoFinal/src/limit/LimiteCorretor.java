@@ -2,12 +2,10 @@ package limit;
 
 
 import control.ControleCorretor;
-import java.text.NumberFormat;
-import java.text.ParseException;
-import java.util.Locale;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import javax.swing.JOptionPane;
+import java.text.*;
+import java.util.*;
+import java.util.logging.*;
+import javax.swing.*;
 
 
 public class LimiteCorretor extends javax.swing.JFrame {

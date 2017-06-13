@@ -89,6 +89,7 @@ public class MainWindow extends javax.swing.JFrame {
         jMenuCadastros = new javax.swing.JMenu();
         menuItemComissionado = new javax.swing.JMenuItem();
         menuItemContratado = new javax.swing.JMenuItem();
+        menuItemImovel = new javax.swing.JMenuItem();
         jMenuVendas = new javax.swing.JMenu();
         jMenuRelatorios = new javax.swing.JMenu();
         jMenuItem4 = new javax.swing.JMenuItem();
@@ -136,6 +137,14 @@ public class MainWindow extends javax.swing.JFrame {
             }
         });
         jMenuCadastros.add(menuItemContratado);
+
+        menuItemImovel.setText("Imóvel");
+        menuItemImovel.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                menuItemImovelActionPerformed(evt);
+            }
+        });
+        jMenuCadastros.add(menuItemImovel);
 
         jMenuBarMainWindow.add(jMenuCadastros);
 
@@ -195,6 +204,12 @@ public class MainWindow extends javax.swing.JFrame {
         ctrPrincipal.abrirJanelaCadastro(Util.CADASTRO_CONTRATADO);
     }//GEN-LAST:event_menuItemContratadoActionPerformed
 
+    private void menuItemImovelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuItemImovelActionPerformed
+        
+        ctrPrincipal.abrirJanelaCadastroImovel();
+        
+    }//GEN-LAST:event_menuItemImovelActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenuBar jMenuBarMainWindow;
@@ -211,6 +226,7 @@ public class MainWindow extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JMenuItem menuItemComissionado;
     private javax.swing.JMenuItem menuItemContratado;
+    private javax.swing.JMenuItem menuItemImovel;
     private javax.swing.JTable tableCorretores;
     // End of variables declaration//GEN-END:variables
 }

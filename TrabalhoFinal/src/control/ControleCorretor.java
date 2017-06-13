@@ -4,13 +4,10 @@ package control;
 import limit.LimiteCorretor;
 import model.Comissionado;
 import java.io.*;
-import java.text.NumberFormat;
-import java.text.ParseException;
+import java.text.*;
 import java.util.*;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import model.Contratado;
-import model.Corretor;
+import java.util.logging.*;
+import model.*;
 import util.Util;
 
 public class ControleCorretor {
