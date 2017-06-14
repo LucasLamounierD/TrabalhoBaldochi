@@ -10,16 +10,16 @@ import javax.swing.JOptionPane;
 public class ControleImovel {
 
     //Declaração das variavéis
-    private ArrayList<Imovel> vecImovel;
+    private Vector<Imovel> vecImovel = new Vector<>();
     private LimiteImovel limImovel;
     private ControlePrincipal ctrPrincipal;
 
     //Construtor do controle de Imovel
-    public ControleImovel(ControlePrincipal pCtrPrincipal) {
+    public ControleImovel(ControlePrincipal pCtrPrincipal)throws Exception{
         //Passa o controle recebido para a variável ctrPrincipal
-        vecImovel = new ArrayList<Imovel>();
         ctrPrincipal = pCtrPrincipal;
         limImovel = new LimiteImovel(this);//Instacia uma janela para o cadastro
+        desserializaImovel();
     }
 
     //Serializa o Array de Imovel, o passando para o arquivo imoveis.dat
@@ -37,7 +37,7 @@ public class ControleImovel {
         if (objFile.exists()) {
             FileInputStream objFileIS = new FileInputStream("imoveis.dat");
             ObjectInputStream objIS = new ObjectInputStream(objFileIS);
-            vecImovel = (ArrayList) objIS.readObject();
+            vecImovel = (Vector) objIS.readObject();
             objIS.close();
         }
     }
@@ -86,6 +86,7 @@ public class ControleImovel {
         }
 
         vecImovel.add(new Imovel(pCod, pTipo, pDescrição, pNomeProp, preço, new Date(pData)));
+        salva();
 
     }
 
@@ -98,10 +99,9 @@ public class ControleImovel {
         }
 
     }
-
-    //Metodo get do ArrayList 
-    public ArrayList getVecImovel() {
-        return vecImovel;
+    
+    public void finalize()throws Exception{
+        serializaImovel();
     }
 
 }

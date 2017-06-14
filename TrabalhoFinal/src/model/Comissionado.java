@@ -4,7 +4,7 @@ package model;
 import java.io.*;
 
 
-public class Comissionado extends Corretor implements Serializable{
+public class Comissionado extends Corretor {
 
     private float comissao;
 

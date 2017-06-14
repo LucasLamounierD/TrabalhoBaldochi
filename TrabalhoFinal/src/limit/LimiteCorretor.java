@@ -197,7 +197,13 @@ public class LimiteCorretor extends javax.swing.JFrame {
         } catch (Exception ex) {//Mensagem de erro.
             JOptionPane.showMessageDialog(rootPane, "Erro ao cadastrar corretor\n\n"
             + ex.getMessage(),"ERRO", JOptionPane.ERROR_MESSAGE);
-        }   
+        }
+         
+         jTextNome.setText("");
+         jTextCrecic.setText("");
+         jTextComissao.setText("");
+         TextData.setText("");
+         fieldValorSalario.setText("");
          
     }//GEN-LAST:event_jBtnSubmitActionPerformed
 

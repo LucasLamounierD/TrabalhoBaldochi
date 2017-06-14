@@ -1,14 +1,15 @@
 package model;
 
+import java.io.Serializable;
 
-public class Corretor {
+public class Corretor implements Serializable {
 
     private String nome;
     private String crecic;
 
-    public Corretor(String pNome,String pCrecic) {
+    public Corretor(String pNome, String pCrecic) {
         nome = pNome;
-        crecic = pCrecic;        
+        crecic = pCrecic;
     }
 
     public String getNome() {

@@ -181,6 +181,13 @@ public class LimiteImovel extends javax.swing.JFrame {
             + ex.getMessage(),"ERRO", JOptionPane.ERROR_MESSAGE);
         }
         
+        jTextFieldPreço.setText("");
+        jTextFieldNomeProp.setText("");
+        jTextFieldCodigo.setText("");
+        jComboBoxTipo.setSelectedIndex(0);
+        jTextAreaDescrição.setText("");
+        JFormattedData.setText("");
+        
     }//GEN-LAST:event_jButtonCadastrarActionPerformed
     
     

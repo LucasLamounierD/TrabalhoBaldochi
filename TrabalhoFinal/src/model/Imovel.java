@@ -1,8 +1,9 @@
 package model;
 
+import java.io.*;
 import java.util.*;
 
-public class Imovel {
+public class Imovel implements Serializable{
 
     private String codigo;
     private String tipo;

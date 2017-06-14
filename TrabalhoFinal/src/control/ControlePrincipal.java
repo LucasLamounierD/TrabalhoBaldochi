@@ -12,16 +12,10 @@ public class ControlePrincipal {
     private ControleVendas objControleVendas;
 
     public ControlePrincipal() {   
-        try{
-         objControleCorretor = new ControleCorretor(this);
-         objControleImovel = new ControleImovel(this);
-        }catch (Exception e) {
-            System.out.println("Erro na abertura de arquivo");
-        }
         try {//Instacia Controles
-         //   objControleCorretor = new ControleCorretor();
-            //objControleImovel = new ControleImovel();
-            //objControleVendas = new ControleVendas();
+            objControleCorretor = new ControleCorretor(this);
+            objControleImovel = new ControleImovel(this);
+            objControleVendas = new ControleVendas();
         } catch (Exception e) {
             System.out.println("Erro na abertura de arquivo");
         }
@@ -42,6 +36,7 @@ public class ControlePrincipal {
     public void finalize() {
         try {
             objControleCorretor.finalize();
+            objControleImovel.finalize();
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "ERRO", "ERRO", JOptionPane.ERROR_MESSAGE);
         }
@@ -68,8 +63,5 @@ public class ControlePrincipal {
     public ControleVendas getObjControleVendas() {
         return objControleVendas;
     }
-
-    
-    
 
 }
