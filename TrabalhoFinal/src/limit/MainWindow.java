@@ -48,6 +48,11 @@ public class MainWindow extends javax.swing.JFrame {
         tableCorretores.setModel(pTableModel);
     }
 
+    public void setModelTableImoveis(DefaultTableModel pTableModel){
+        tableImoveis.removeAll();
+        tableImoveis.setModel(pTableModel);
+    }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always

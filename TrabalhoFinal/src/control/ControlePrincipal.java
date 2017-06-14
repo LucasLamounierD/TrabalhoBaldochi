@@ -23,7 +23,16 @@ public class ControlePrincipal {
         
         objLimPrincipal = new MainWindow(this);//Instacia a janela(limite)
         initTableCorretores();
+        initTableImoveis();
         objLimPrincipal.setVisible(true);//Deixa janela visivel
+    }
+    
+    public void initTableImoveis(){
+        //Recebe do controller imovel a model da tabela
+        DefaultTableModel tableImoveisModel = objControleImovel.getTableCorretoresModel();
+        objLimPrincipal.setModelTableImoveis(tableImoveisModel);
+        //defini como model da tabela a model recebida do controller imovel.
+        
     }
     
     //Gerencia qual opção de menu o usuario acionou e chama o controle responsavel 

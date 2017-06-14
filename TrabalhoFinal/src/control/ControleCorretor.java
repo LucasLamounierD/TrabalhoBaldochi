@@ -77,6 +77,7 @@ public class ControleCorretor {
             else{//Se todos dados corretos cadastra Comissionados
                Contratado c =new Contratado(pNome,pCrecic,salario,new Date(pData));
                vecCorretor.add(c); 
+               salva();
                //Adiciona na tabela da janela principal o corretor.
                tableCorretoresModel.addRow(new Object[]{c.getNome(),c.getCrecic(),"Contratado"});
             } 

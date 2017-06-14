@@ -3,9 +3,10 @@ package control;
 import model.Imovel;
 import limit.*;
 import java.io.*;
-import java.text.SimpleDateFormat;
+import java.text.*;
 import java.util.*;
-import javax.swing.JOptionPane;
+import javax.swing.*;
+import javax.swing.table.*;
 
 public class ControleImovel {
 
@@ -13,13 +14,15 @@ public class ControleImovel {
     private Vector<Imovel> vecImovel = new Vector<>();
     private LimiteImovel limImovel;
     private ControlePrincipal ctrPrincipal;
+    private DefaultTableModel tableImoveisModel;
 
     //Construtor do controle de Imovel
-    public ControleImovel(ControlePrincipal pCtrPrincipal)throws Exception{
+    public ControleImovel(ControlePrincipal pCtrPrincipal) throws Exception {
         //Passa o controle recebido para a variável ctrPrincipal
         ctrPrincipal = pCtrPrincipal;
         limImovel = new LimiteImovel(this);//Instacia uma janela para o cadastro
         desserializaImovel();
+        instTableCorretoresModel();
     }
 
     //Serializa o Array de Imovel, o passando para o arquivo imoveis.dat
@@ -86,6 +89,7 @@ public class ControleImovel {
         }
 
         vecImovel.add(new Imovel(pCod, pTipo, pDescrição, pNomeProp, preço, new Date(pData)));
+        tableImoveisModel.addRow(new Object[]{pCod, pTipo, pPreço, pNomeProp});
         salva();
 
     }
@@ -99,8 +103,31 @@ public class ControleImovel {
         }
 
     }
-    
-    public void finalize()throws Exception{
+
+    public void instTableCorretoresModel() {
+
+        tableImoveisModel = new DefaultTableModel() {
+            @Override
+            public boolean isCellEditable(int row, int colunm) {
+                return false;
+            }
+        };
+
+        tableImoveisModel.addColumn("CODIGO");
+        tableImoveisModel.addColumn("TIPO");
+        tableImoveisModel.addColumn("PREÇO");
+        tableImoveisModel.addColumn("PROPRIETÁRIO");
+
+        for (Imovel i : vecImovel) {
+            tableImoveisModel.addRow(new Object[]{i.getCodigo(), i.getTipo(), String.valueOf(i.getPreço()), i.getNomePropietario()});
+        }
+    }
+
+    public DefaultTableModel getTableCorretoresModel() {
+        return tableImoveisModel;
+    }
+
+    public void finalize() throws Exception {
         serializaImovel();
     }
 
