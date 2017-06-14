@@ -2,6 +2,7 @@ package control;
 
 import control.ControleCorretor;
 import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
 import limit.MainWindow;
 import util.Util;
 
@@ -21,6 +22,7 @@ public class ControlePrincipal {
         }
         
         objLimPrincipal = new MainWindow(this);//Instacia a janela(limite)
+        initTableCorretores();
         objLimPrincipal.setVisible(true);//Deixa janela visivel
     }
     
@@ -29,8 +31,11 @@ public class ControlePrincipal {
         objControleCorretor.abrirJanelaCadastro(janela);        
     }
 
-    public void updateTableCorretores() {//Metodo que atualiza a tabela de corrretores
-        objLimPrincipal.preencheTabelaCorretores();
+    public void initTableCorretores() {
+        //Recebe do controller corretor a model da tabela
+        DefaultTableModel tableCorretoresModel = objControleCorretor.getTableCorretoresModel();
+        objLimPrincipal.setModelTableCorretores(tableCorretoresModel);
+        //defini como model da tabela a model recebida do controller corretor.
     }
 
     public void finalize() {

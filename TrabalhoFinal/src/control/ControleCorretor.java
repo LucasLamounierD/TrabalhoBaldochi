@@ -6,6 +6,7 @@ import java.io.*;
 import java.text.*;
 import java.util.*;
 import java.util.logging.*;
+import javax.swing.table.DefaultTableModel;
 import model.*;
 import util.Util;
 
@@ -14,6 +15,7 @@ public class ControleCorretor {
     private LimiteCorretor lmtCorretor;
     private Vector<Corretor> vecCorretor = new Vector();
     private ControlePrincipal ctrPrincipal;
+    private DefaultTableModel tableCorretoresModel;
     //Constantes
     public final static int OP_CONTRATADO = 0;
     public final static int OP_COMISSIONADO = 1;
@@ -22,6 +24,7 @@ public class ControleCorretor {
         ctrPrincipal = pCtrPrincipal;
         lmtCorretor = new LimiteCorretor(this);//Instacia uma janela para o cadastro
         desserializaCorretor();
+        instTableCorretoresModel();
     }
 
     //Função recebe o menu selecionado e decidi qual tipo de Corretor vai ser cadastrado
@@ -30,19 +33,19 @@ public class ControleCorretor {
         lmtCorretor.setVisible(true);
     }
 
+    
     //Função de cadastro de comissionado
-    public void cadCorretor(int pTipoCorr, String pNome, String pCrecic,
-            String pComissao, String pData, String pVlrSalario)
-            throws Exception {
+    public void cadCorretor(int pTipoCorr,String pNome, String pCrecic,
+                            String pComissao,String pData,String pVlrSalario) 
+                                                            throws Exception {
         //Fazendo conversões das variaveis
         float comissao = 0;
-        if (!pComissao.isEmpty())//Verificando se a string não e vazia
-        {
-            comissao = Float.parseFloat(pComissao);//Convertendo
-        }
-        float salario = 0;
+        if(!pComissao.isEmpty())//Verificando se a string não e vazia
+               comissao = Float.parseFloat(pComissao);//Convertendo
+        
+        float salario=0;
         //Convertendo salario
-        if (!pVlrSalario.isEmpty()) {//Verificando se a string não é vazia
+        if(!pVlrSalario.isEmpty()){//Verificando se a string não é vazia
             //Instaciando classe que possibilitará fazer conversões de String com virgula
             NumberFormat nf = NumberFormat.getNumberInstance(new Locale("pt", "BR"));
             try {
@@ -52,26 +55,52 @@ public class ControleCorretor {
             }
         }
 
-        if (pNome.equals("")) {//Validação dos campos, caso estiver incorreto lança um Exception
-            throw new Exception("Campo nome não foi preechido!");
-        } else if (pCrecic.equals("")) {
-            throw new Exception("Campo CRECIC não foi preechido!");
-        } else if (OP_COMISSIONADO == pTipoCorr) {//Validando campos mais especificos e chamando construtor do comissionado
-            if (comissao < 1 || comissao > 3) {
-                throw new Exception("Valor Invalido no campo Comissão!");
-            } else {//Se todos dados corretos cadastra Comissionados
-                vecCorretor.add(new Comissionado(pNome, pCrecic, comissao));
-                ctrPrincipal.updateTableCorretores();
+         if(pNome.equals("")){//Validação dos campos, caso estiver incorreto lança um Exception
+            throw new Exception("Campo nome não foi preechido!");  
+         }else if(pCrecic.equals("")){
+            throw new Exception("Campo CRECIC não foi preechido!"); 
+         }else if(OP_COMISSIONADO==pTipoCorr){//Validando campos mais especificos e chamando construtor do comissionado
+            if (comissao<1 || comissao>3){
+              throw new Exception("Valor Invalido no campo Comissão!"); 
+            }else{//Se todos dados corretos cadastra Comissionados
+               Comissionado c = new Comissionado(pNome,pCrecic,comissao);
+               vecCorretor.add(c);
+               //Adiciona na tabela da janela principal o corretor. 
+               tableCorretoresModel.addRow(new Object[]{c.getNome(),c.getCrecic(),"Comissionado"});
             }
-        } else {//Validando campos mais especificos e chamando construtor do contratado
-            if (pData.isEmpty()) {
-                throw new Exception("Preecha campo Data de admissão com um valor valido!");
-            } else if (salario < 900) {
-                throw new Exception("Preecha campo Valor Salario com um valor valido!");
-            } else {//Se todos dados corretos cadastra Comissionados
-                vecCorretor.add(new Contratado(pNome, pCrecic, salario, new Date(pData)));
-                ctrPrincipal.updateTableCorretores();
-                salva();
+         }else{//Validando campos mais especificos e chamando construtor do contratado
+            if (pData.isEmpty()){
+                throw new Exception("Preecha campo Data de admissão com um valor valido!"); 
+            }else if(salario<900){
+                throw new Exception("Preecha campo Valor Salario com um valor valido!"); 
+            }
+            else{//Se todos dados corretos cadastra Comissionados
+               Contratado c =new Contratado(pNome,pCrecic,salario,new Date(pData));
+               vecCorretor.add(c); 
+               //Adiciona na tabela da janela principal o corretor.
+               tableCorretoresModel.addRow(new Object[]{c.getNome(),c.getCrecic(),"Contratado"});
+            } 
+         }
+    }    
+
+    public void instTableCorretoresModel(){
+        
+        tableCorretoresModel = new DefaultTableModel(){
+            @Override
+            public boolean isCellEditable(int row,int colunm){
+                return false;
+            }
+        };
+        
+        tableCorretoresModel.addColumn("Corretor");
+        tableCorretoresModel.addColumn("CRECIC");
+        tableCorretoresModel.addColumn("TIPO");
+        
+        for(Corretor c : vecCorretor ){
+            if(c  instanceof Comissionado){
+                tableCorretoresModel.addRow(new Object[]{c.getNome(),c.getCrecic(),"Comissionado"});
+            }else if(c  instanceof Contratado){
+                tableCorretoresModel.addRow(new Object[]{c.getNome(),c.getCrecic(),"Contratado"});
             }
         }
     }
@@ -114,4 +143,9 @@ public class ControleCorretor {
         serializaCorretor();
     }
 
+    public DefaultTableModel getTableCorretoresModel() {
+        return tableCorretoresModel;
+    }
+
+    
 }

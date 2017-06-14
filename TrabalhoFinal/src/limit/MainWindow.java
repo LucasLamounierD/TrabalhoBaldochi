@@ -6,12 +6,7 @@
 package limit;
 
 import control.ControlePrincipal;
-import java.util.ArrayList;
-import java.util.Vector;
 import javax.swing.table.DefaultTableModel;
-import model.Comissionado;
-import model.Contratado;
-import model.Corretor;
 import util.Util;
 
 /**
@@ -20,36 +15,36 @@ import util.Util;
  */
 public class MainWindow extends javax.swing.JFrame {
     private ControlePrincipal ctrPrincipal;
-    private DefaultTableModel tableCorretoresModel;
+    
     /**
      * Creates new form MainWindow
      */
     public MainWindow(ControlePrincipal pCtrPrincipal) {
         ctrPrincipal = pCtrPrincipal;
-        initComponents();                        
-        preencheTabelaCorretores();
+        initComponents();        
+       /* try {
+            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
+                if ("".equals(info.getName())) {
+                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
+                    break;
+                }
+            }
+        } catch (ClassNotFoundException ex) {
+            java.util.logging.Logger.getLogger(MainWindow.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (InstantiationException ex) {
+            java.util.logging.Logger.getLogger(MainWindow.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (IllegalAccessException ex) {
+            java.util.logging.Logger.getLogger(MainWindow.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
+            java.util.logging.Logger.getLogger(MainWindow.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        }*/
         
     }
     
-    public void preencheTabelaCorretores(){
+    //Defini uma model para a tabela corretores
+    public void setModelTableCorretores(DefaultTableModel pTableModel){
         tableCorretores.removeAll();
-        Vector<Corretor> listCorretor =  ctrPrincipal.getObjControleCorretor().getVecCorretor();
-        
-        tableCorretoresModel = new DefaultTableModel();
-        tableCorretoresModel.addColumn("Corretor");
-        tableCorretoresModel.addColumn("CRECIC");
-        tableCorretoresModel.addColumn("TIPO");
-        
-        for(Corretor c : listCorretor ){
-            if(c  instanceof Comissionado){
-                tableCorretoresModel.addRow(new Object[]{c.getNome(),c.getCrecic(),"Comissionado"});
-            }else if(c  instanceof Contratado){
-                tableCorretoresModel.addRow(new Object[]{c.getNome(),c.getCrecic(),"Contratado"});
-            }
-            System.out.println("foi");
-        }
-        
-        tableCorretores.setModel(tableCorretoresModel);
+        tableCorretores.setModel(pTableModel);
     }
 
     /**
@@ -63,6 +58,11 @@ public class MainWindow extends javax.swing.JFrame {
 
         jScrollPane1 = new javax.swing.JScrollPane();
         tableCorretores = new javax.swing.JTable();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        tableImoveis = new javax.swing.JTable();
+        filtroImoveis = new javax.swing.JComboBox<>();
+        btnExcluir = new javax.swing.JButton();
+        btnEditar = new javax.swing.JButton();
         jMenuBarMainWindow = new javax.swing.JMenuBar();
         jMenuCadastros = new javax.swing.JMenu();
         menuItemComissionado = new javax.swing.JMenuItem();
@@ -83,11 +83,6 @@ public class MainWindow extends javax.swing.JFrame {
         setModalExclusionType(null);
         setPreferredSize(new java.awt.Dimension(1024, 720));
         setSize(new java.awt.Dimension(1024, 720));
-        addWindowListener(new java.awt.event.WindowAdapter() {
-            public void windowClosed(java.awt.event.WindowEvent evt) {
-                formWindowClosed(evt);
-            }
-        });
 
         tableCorretores.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -100,7 +95,28 @@ public class MainWindow extends javax.swing.JFrame {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
+        tableCorretores.setShowVerticalLines(false);
+        tableCorretores.setSurrendersFocusOnKeystroke(true);
         jScrollPane1.setViewportView(tableCorretores);
+
+        tableImoveis.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ));
+        jScrollPane2.setViewportView(tableImoveis);
+
+        filtroImoveis.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+
+        btnExcluir.setText("Excluir");
+
+        btnEditar.setText("Editar");
 
         jMenuCadastros.setText("Cadastrar");
 
@@ -166,12 +182,31 @@ public class MainWindow extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(0, 495, Short.MAX_VALUE)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 549, Short.MAX_VALUE)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(filtroImoveis, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addComponent(btnEditar)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(btnExcluir)))))
+                .addGap(18, 18, 18)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 358, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 458, Short.MAX_VALUE)
+            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 665, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(filtroImoveis, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 577, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnExcluir)
+                    .addComponent(btnEditar))
+                .addGap(0, 0, Short.MAX_VALUE))
         );
 
         pack();
@@ -193,14 +228,11 @@ public class MainWindow extends javax.swing.JFrame {
         
     }//GEN-LAST:event_menuItemImovelActionPerformed
 
-    private void formWindowClosed(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosed
-        
-        ctrPrincipal.finalize();
-        
-    }//GEN-LAST:event_formWindowClosed
-
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnEditar;
+    private javax.swing.JButton btnExcluir;
+    private javax.swing.JComboBox<String> filtroImoveis;
     private javax.swing.JMenuBar jMenuBarMainWindow;
     private javax.swing.JMenu jMenuCadastros;
     private javax.swing.JMenuItem jMenuItem3;
@@ -213,9 +245,11 @@ public class MainWindow extends javax.swing.JFrame {
     private javax.swing.JMenu jMenuRelatorios;
     private javax.swing.JMenu jMenuVendas;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JMenuItem menuItemComissionado;
     private javax.swing.JMenuItem menuItemContratado;
     private javax.swing.JMenuItem menuItemImovel;
     private javax.swing.JTable tableCorretores;
+    private javax.swing.JTable tableImoveis;
     // End of variables declaration//GEN-END:variables
 }
