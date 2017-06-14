@@ -14,15 +14,16 @@ import util.Util;
  * @author Rodrigo Maia
  */
 public class MainWindow extends javax.swing.JFrame {
+
     private ControlePrincipal ctrPrincipal;
-    
+
     /**
      * Creates new form MainWindow
      */
     public MainWindow(ControlePrincipal pCtrPrincipal) {
         ctrPrincipal = pCtrPrincipal;
-        initComponents();        
-       /* try {
+        initComponents();
+        /* try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
                 if ("".equals(info.getName())) {
                     javax.swing.UIManager.setLookAndFeel(info.getClassName());
@@ -38,11 +39,11 @@ public class MainWindow extends javax.swing.JFrame {
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
             java.util.logging.Logger.getLogger(MainWindow.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }*/
-        
+
     }
-    
+
     //Defini uma model para a tabela corretores
-    public void setModelTableCorretores(DefaultTableModel pTableModel){
+    public void setModelTableCorretores(DefaultTableModel pTableModel) {
         tableCorretores.removeAll();
         tableCorretores.setModel(pTableModel);
     }
@@ -83,6 +84,11 @@ public class MainWindow extends javax.swing.JFrame {
         setModalExclusionType(null);
         setPreferredSize(new java.awt.Dimension(1024, 720));
         setSize(new java.awt.Dimension(1024, 720));
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowClosing(java.awt.event.WindowEvent evt) {
+                formWindowClosing(evt);
+            }
+        });
 
         tableCorretores.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -213,20 +219,26 @@ public class MainWindow extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void menuItemComissionadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuItemComissionadoActionPerformed
-       
+
         ctrPrincipal.abrirJanelaCadastro(Util.CADASTRO_COMISSIONADO);
     }//GEN-LAST:event_menuItemComissionadoActionPerformed
 
     private void menuItemContratadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuItemContratadoActionPerformed
-        
+
         ctrPrincipal.abrirJanelaCadastro(Util.CADASTRO_CONTRATADO);
     }//GEN-LAST:event_menuItemContratadoActionPerformed
 
     private void menuItemImovelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuItemImovelActionPerformed
-        
+
         ctrPrincipal.abrirJanelaCadastroImovel();
-        
+
     }//GEN-LAST:event_menuItemImovelActionPerformed
+
+    private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
+
+        ctrPrincipal.finalize();
+
+    }//GEN-LAST:event_formWindowClosing
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
