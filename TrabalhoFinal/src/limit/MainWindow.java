@@ -75,6 +75,7 @@ public class MainWindow extends javax.swing.JFrame {
         menuItemContratado = new javax.swing.JMenuItem();
         menuItemImovel = new javax.swing.JMenuItem();
         jMenuVendas = new javax.swing.JMenu();
+        jMenuCadVenda = new javax.swing.JMenuItem();
         jMenuRelatorios = new javax.swing.JMenu();
         jMenuItem4 = new javax.swing.JMenuItem();
         jMenuItem5 = new javax.swing.JMenuItem();
@@ -159,6 +160,15 @@ public class MainWindow extends javax.swing.JFrame {
         jMenuBarMainWindow.add(jMenuCadastros);
 
         jMenuVendas.setText("Realizar vendas");
+
+        jMenuCadVenda.setText("Cadastrar Vendas");
+        jMenuCadVenda.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuCadVendaActionPerformed(evt);
+            }
+        });
+        jMenuVendas.add(jMenuCadVenda);
+
         jMenuBarMainWindow.add(jMenuVendas);
 
         jMenuRelatorios.setText("Relatorios");
@@ -245,12 +255,18 @@ public class MainWindow extends javax.swing.JFrame {
 
     }//GEN-LAST:event_formWindowClosing
 
+    //Caso seja escolhido a opção de cadastro de vendas, o programa irá abrir a janela para que mesmo cadastre a venda
+    private void jMenuCadVendaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuCadVendaActionPerformed
+        ctrPrincipal.abrirJanelaCasdastroVenda();
+    }//GEN-LAST:event_jMenuCadVendaActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnEditar;
     private javax.swing.JButton btnExcluir;
     private javax.swing.JComboBox<String> filtroImoveis;
     private javax.swing.JMenuBar jMenuBarMainWindow;
+    private javax.swing.JMenuItem jMenuCadVenda;
     private javax.swing.JMenu jMenuCadastros;
     private javax.swing.JMenuItem jMenuItem3;
     private javax.swing.JMenuItem jMenuItem4;

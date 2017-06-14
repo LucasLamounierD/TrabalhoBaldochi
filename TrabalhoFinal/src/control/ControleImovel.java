@@ -129,5 +129,13 @@ public class ControleImovel {
     public void finalize() throws Exception {
         serializaImovel();
     }
+    
+     public Vector getVecImovel() {
+        return vecImovel;
+    }
+
+    public ControlePrincipal getCtrPrincipal() {
+        return ctrPrincipal;
+    }
 
 }

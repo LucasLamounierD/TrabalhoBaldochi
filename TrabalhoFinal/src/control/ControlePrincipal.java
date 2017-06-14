@@ -16,7 +16,7 @@ public class ControlePrincipal {
         try {//Instacia Controles
             objControleCorretor = new ControleCorretor(this);
             objControleImovel = new ControleImovel(this);
-            objControleVendas = new ControleVendas();
+            objControleVendas = new ControleVendas(this);
         } catch (Exception e) {
             System.out.println("Erro na abertura de arquivo");
         }
@@ -57,9 +57,11 @@ public class ControlePrincipal {
     }
     
     public void abrirJanelaCadastroImovel(){
-        
         objControleImovel.abrirJanelaCadastroImovel();
-        
+    }
+    
+    public void abrirJanelaCasdastroVenda(){
+        objControleVendas.abrirJanelaVenda();
     }
     
     public static void main (String [] args){
