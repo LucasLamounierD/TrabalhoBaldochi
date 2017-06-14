@@ -70,7 +70,7 @@ public class ControleCorretor {
                 throw new Exception("Preecha campo Valor Salario com um valor valido!"); 
             }
             else{//Se todos dados corretos cadastra Comissionados
-               vecCorretor.add( new Contratado(pNome,pCrecic,comissao,new Date((long)salario))); 
+               vecCorretor.add( new Contratado(pNome,pCrecic,salario,new Date(pData))); 
                ctrPrincipal.updateTableCorretores();
             } 
          }

@@ -11,7 +11,7 @@ public class ControleVendas {
     private Vector vecVenda = new Vector();
 
     public ControleVendas() {
-
+        
     }
 
     private void serializaVenda() throws Exception {

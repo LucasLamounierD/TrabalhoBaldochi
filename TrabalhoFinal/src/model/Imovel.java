@@ -1,7 +1,5 @@
 package model;
 
-
-import java.text.*;
 import java.util.*;
 
 public class Imovel {
@@ -11,9 +9,9 @@ public class Imovel {
     private String descricao;
     private String nomePropietario;
     private float preço;
-    private SimpleDateFormat dataCad;
+    private Date dataCad;
 
-    public Imovel(String pCod, String pTipo, String pDescricao, String pNomePropietario, float pPreço, SimpleDateFormat pDataCad) {
+    public Imovel(String pCod, String pTipo, String pDescricao, String pNomePropietario, float pPreço, Date pDataCad) {
         codigo = pCod;
         tipo = pTipo;
         descricao = pDescricao;
@@ -62,11 +60,11 @@ public class Imovel {
         this.preço = preço;
     }
 
-    public SimpleDateFormat getDataCad() {
+    public Date getDataCad() {
         return dataCad;
     }
 
-    public void setDataCad(SimpleDateFormat dataCad) {
+    public void setDataCad(Date dataCad) {
         this.dataCad = dataCad;
     }
 
