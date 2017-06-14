@@ -45,11 +45,11 @@
                                   <Component id="jLabel4" min="-2" max="-2" attributes="0"/>
                                   <Group type="102" attributes="0">
                                       <EmptySpace min="2" pref="2" max="-2" attributes="0"/>
-                                      <Group type="103" groupAlignment="0" attributes="0">
+                                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
                                           <Group type="102" alignment="0" attributes="0">
                                               <Component id="jLabel6" min="-2" max="-2" attributes="0"/>
                                               <EmptySpace max="-2" attributes="0"/>
-                                              <Component id="jTextFieldPreço" min="-2" pref="104" max="-2" attributes="0"/>
+                                              <Component id="jTextFieldPreco" max="32767" attributes="0"/>
                                           </Group>
                                           <Component id="jButtonCadastrar" alignment="0" min="-2" pref="151" max="-2" attributes="0"/>
                                       </Group>
@@ -102,8 +102,8 @@
                           <Group type="102" alignment="0" attributes="0">
                               <EmptySpace min="-2" pref="24" max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="3" attributes="0">
-                                  <Component id="jTextFieldPreço" alignment="3" min="-2" max="-2" attributes="0"/>
                                   <Component id="jLabel6" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="jTextFieldPreco" alignment="3" min="-2" max="-2" attributes="0"/>
                               </Group>
                           </Group>
                           <Group type="102" alignment="0" attributes="0">
@@ -194,8 +194,6 @@
         <Property name="text" type="java.lang.String" value="R$"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JTextField" name="jTextFieldPre&#xe7;o">
-    </Component>
     <Component class="javax.swing.JLabel" name="jLabel7">
       <Properties>
         <Property name="text" type="java.lang.String" value="Data:"/>
@@ -218,6 +216,14 @@
       </Events>
     </Component>
     <Component class="javax.swing.JFormattedTextField" name="JFormattedData">
+    </Component>
+    <Component class="javax.swing.JFormattedTextField" name="jTextFieldPreco">
+      <Properties>
+        <Property name="formatterFactory" type="javax.swing.JFormattedTextField$AbstractFormatterFactory" editor="org.netbeans.modules.form.editors.AbstractFormatterFactoryEditor">
+          <Format format="#0.00" subtype="-1" type="0"/>
+        </Property>
+        <Property name="toolTipText" type="java.lang.String" value=""/>
+      </Properties>
     </Component>
   </SubComponents>
 </Form>

@@ -22,7 +22,7 @@ public class ControleImovel {
         ctrPrincipal = pCtrPrincipal;
         limImovel = new LimiteImovel(this);//Instacia uma janela para o cadastro
         desserializaImovel();
-        instTableCorretoresModel();
+        instTableImoveisModel();
     }
 
     //Serializa o Array de Imovel, o passando para o arquivo imoveis.dat
@@ -53,13 +53,13 @@ public class ControleImovel {
 
     //Metodo que será responsável pelo recebimento dos dados informados no limite
     public void cadImovel(String pCod, String pTipo, String pDescrição, String pNomeProp, String pPreço, String pData) throws Exception {
-
         //declarando variaveis auxiliares para conversao e cadastro
         float preço = 0;
 
         //fazendo a conversão das variaveis      
         if (!pPreço.isEmpty()) {
-            preço = Float.parseFloat(pPreço);
+            NumberFormat nf = NumberFormat.getNumberInstance(new Locale("pt", "BR"));
+            preço = nf.parse(pPreço).floatValue();
             if (preço < 2000) {
                 throw new Exception("Informe um valor realista.");
             }
@@ -91,7 +91,6 @@ public class ControleImovel {
         vecImovel.add(new Imovel(pCod, pTipo, pDescrição, pNomeProp, preço, new Date(pData)));
         tableImoveisModel.addRow(new Object[]{pCod, pTipo, pPreço, pNomeProp});
         salva();
-
     }
 
     //Metodo que tentara o salvar os dados no arquivo, caso não consiga irá mostrar uma mensagem de erro 
@@ -104,7 +103,7 @@ public class ControleImovel {
 
     }
 
-    public void instTableCorretoresModel() {
+    public void instTableImoveisModel() {
 
         tableImoveisModel = new DefaultTableModel() {
             @Override

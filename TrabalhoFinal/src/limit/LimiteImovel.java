@@ -33,11 +33,11 @@ public class LimiteImovel extends javax.swing.JFrame {
         jTextFieldNomeProp = new javax.swing.JTextField();
         jLabel5 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
-        jTextFieldPreço = new javax.swing.JTextField();
         jLabel7 = new javax.swing.JLabel();
         jButtonCadastrar = new javax.swing.JButton();
         jButtonCancelar = new javax.swing.JButton();
         JFormattedData = new javax.swing.JFormattedTextField();
+        jTextFieldPreco = new javax.swing.JFormattedTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Cadastro de imóvel");
@@ -77,6 +77,9 @@ public class LimiteImovel extends javax.swing.JFrame {
             }
         });
 
+        jTextFieldPreco.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#0.00"))));
+        jTextFieldPreco.setToolTipText("");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -101,11 +104,11 @@ public class LimiteImovel extends javax.swing.JFrame {
                                     .addComponent(jLabel4)
                                     .addGroup(layout.createSequentialGroup()
                                         .addGap(2, 2, 2)
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                             .addGroup(layout.createSequentialGroup()
                                                 .addComponent(jLabel6)
                                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                                .addComponent(jTextFieldPreço, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                                .addComponent(jTextFieldPreco))
                                             .addComponent(jButtonCadastrar, javax.swing.GroupLayout.PREFERRED_SIZE, 151, javax.swing.GroupLayout.PREFERRED_SIZE))))
                                 .addGap(57, 57, 57)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
@@ -143,8 +146,8 @@ public class LimiteImovel extends javax.swing.JFrame {
                             .addGroup(layout.createSequentialGroup()
                                 .addGap(24, 24, 24)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                    .addComponent(jTextFieldPreço, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jLabel6)))
+                                    .addComponent(jLabel6)
+                                    .addComponent(jTextFieldPreco, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jLabel7)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -168,25 +171,27 @@ public class LimiteImovel extends javax.swing.JFrame {
                                 jComboBoxTipo.getSelectedItem().toString(),
                                 jTextAreaDescrição.getText(),
                                 jTextFieldNomeProp.getText(),
-                                jTextFieldPreço.getText(),
+                                jTextFieldPreco.getText(),
                                 JFormattedData.getText()
                                 );
             
             JOptionPane.showMessageDialog(rootPane, "Imóvel cadastrado com sucesso",
-            "SUCESSO",JOptionPane.INFORMATION_MESSAGE);            
-            this.dispose();
+            "SUCESSO",JOptionPane.INFORMATION_MESSAGE);
             
+            jTextFieldPreco.setText("");//Após o cadastro limpa os campos da janela.
+            jTextFieldNomeProp.setText("");
+            jTextFieldCodigo.setText("");
+            jComboBoxTipo.setSelectedIndex(0);
+            jTextAreaDescrição.setText("");
+            JFormattedData.setText("");
+            
+            this.dispose();            
         } catch (Exception ex) {//Mensagem de erro.
             JOptionPane.showMessageDialog(rootPane, "Erro ao cadastrar imóvel\n\n"
             + ex.getMessage(),"ERRO", JOptionPane.ERROR_MESSAGE);
         }
         
-        jTextFieldPreço.setText("");
-        jTextFieldNomeProp.setText("");
-        jTextFieldCodigo.setText("");
-        jComboBoxTipo.setSelectedIndex(0);
-        jTextAreaDescrição.setText("");
-        JFormattedData.setText("");
+
         
     }//GEN-LAST:event_jButtonCadastrarActionPerformed
     
@@ -212,6 +217,6 @@ public class LimiteImovel extends javax.swing.JFrame {
     private javax.swing.JTextArea jTextAreaDescrição;
     private javax.swing.JTextField jTextFieldCodigo;
     private javax.swing.JTextField jTextFieldNomeProp;
-    private javax.swing.JTextField jTextFieldPreço;
+    private javax.swing.JFormattedTextField jTextFieldPreco;
     // End of variables declaration//GEN-END:variables
 }
