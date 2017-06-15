@@ -39,7 +39,7 @@ public class LimiteImovel extends javax.swing.JFrame {
         JFormattedData = new javax.swing.JFormattedTextField();
         jTextFieldPreco = new javax.swing.JFormattedTextField();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Cadastro de imóvel");
 
         jLabel1.setText("Tipo:");
