@@ -1,10 +1,11 @@
 package model;
 
 
+import java.io.Serializable;
 import model.Corretor;
 import java.util.*;
 
-public class Venda {
+public class Venda implements Serializable{
 
     private float valorReal;
     private String nomeComprador;

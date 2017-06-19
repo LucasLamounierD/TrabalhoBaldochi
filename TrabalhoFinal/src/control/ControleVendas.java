@@ -90,6 +90,10 @@ public class ControleVendas {
 
     }
     
+    public void finalize()throws Exception{
+        serializaVenda();
+    }
+    
     //Metodo get de venda
     public Venda getEntVenda() {
         return entVenda;

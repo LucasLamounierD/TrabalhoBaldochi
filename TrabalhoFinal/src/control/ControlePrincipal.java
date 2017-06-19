@@ -48,6 +48,7 @@ public class ControlePrincipal {
         try {
             objControleCorretor.finalize();
             objControleImovel.finalize();
+            objControleVendas.finalize();
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "ERRO", "ERRO", JOptionPane.ERROR_MESSAGE);
         }
