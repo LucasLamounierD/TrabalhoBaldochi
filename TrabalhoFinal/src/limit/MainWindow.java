@@ -42,16 +42,20 @@ public class MainWindow extends javax.swing.JFrame {
 
     }
 
-    //Defini uma model para a tabela corretores
+    //Defini uma modelTable para a tabela corretores
     public void setModelTableCorretores(DefaultTableModel pTableModel) {
         tableCorretores.removeAll();
         tableCorretores.setModel(pTableModel);
     }
 
+    //Defini uma modelTable para a tabela Imoveis
     public void setModelTableImoveis(DefaultTableModel pTableModel){
         tableImoveis.removeAll();
         tableImoveis.setModel(pTableModel);
     }
+    
+    //
+    
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -109,6 +113,11 @@ public class MainWindow extends javax.swing.JFrame {
         ));
         tableCorretores.setShowVerticalLines(false);
         tableCorretores.setSurrendersFocusOnKeystroke(true);
+        tableCorretores.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tableCorretoresMouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(tableCorretores);
 
         tableImoveis.setModel(new javax.swing.table.DefaultTableModel(
@@ -235,12 +244,12 @@ public class MainWindow extends javax.swing.JFrame {
 
     private void menuItemComissionadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuItemComissionadoActionPerformed
 
-        ctrPrincipal.abrirJanelaCadastro(Util.CADASTRO_COMISSIONADO);
+        ctrPrincipal.abrirJanelaCadastroCorretor(Util.CADASTRO_COMISSIONADO);
     }//GEN-LAST:event_menuItemComissionadoActionPerformed
 
     private void menuItemContratadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuItemContratadoActionPerformed
 
-        ctrPrincipal.abrirJanelaCadastro(Util.CADASTRO_CONTRATADO);
+        ctrPrincipal.abrirJanelaCadastroCorretor(Util.CADASTRO_CONTRATADO);
     }//GEN-LAST:event_menuItemContratadoActionPerformed
 
     private void menuItemImovelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuItemImovelActionPerformed
@@ -257,8 +266,14 @@ public class MainWindow extends javax.swing.JFrame {
 
     //Caso seja escolhido a opção de cadastro de vendas, o programa irá abrir a janela para que mesmo cadastre a venda
     private void jMenuCadVendaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuCadVendaActionPerformed
-        ctrPrincipal.abrirJanelaCasdastroVenda();
+        ctrPrincipal.abrirJanelaCadastroVenda();
     }//GEN-LAST:event_jMenuCadVendaActionPerformed
+
+    private void tableCorretoresMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tableCorretoresMouseClicked
+        if(evt.getClickCount()==2){
+            ctrPrincipal.abrirJanelaEditorCorretor(tableCorretores.getSelectedRow());
+        }
+    }//GEN-LAST:event_tableCorretoresMouseClicked
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

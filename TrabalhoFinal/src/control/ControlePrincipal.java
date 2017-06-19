@@ -35,10 +35,7 @@ public class ControlePrincipal {
         
     }
     
-    //Gerencia qual opção de menu o usuario acionou e chama o controle responsavel 
-    public void abrirJanelaCadastro(int janela){
-        objControleCorretor.abrirJanelaCadastro(janela);        
-    }
+
 
     public void initTableCorretores() {
         //Recebe do controller corretor a model da tabela
@@ -56,13 +53,24 @@ public class ControlePrincipal {
         }
     }
     
+        //Gerencia qual opção de menu o usuario acionou e chama o controle responsavel 
+    public void abrirJanelaCadastroCorretor(int janela){
+        objControleCorretor.abrirJanelaCadastro(janela);        
+    }
+    
     public void abrirJanelaCadastroImovel(){
         objControleImovel.abrirJanelaCadastroImovel();
     }
     
-    public void abrirJanelaCasdastroVenda(){
+    public void abrirJanelaCadastroVenda(){
         objControleVendas.abrirJanelaVenda();
     }
+    
+    //Gerencia qual opção de menu o usuario acionou e chama o controle responsavel 
+    public void abrirJanelaEditorCorretor(int linhaIndex){
+        objControleCorretor.abrirJanelaEditar(linhaIndex);        
+    }
+    
     
     public static void main (String [] args){
         ControlePrincipal main = new ControlePrincipal();

@@ -27,9 +27,36 @@ public class ControleCorretor {
         instTableCorretoresModel();
     }
 
-    //Função recebe o menu selecionado e decidi qual tipo de Corretor vai ser cadastrado
+    //Metodo recebe o menu selecionado e decidi qual tipo de Corretor vai ser cadastrado
     void abrirJanelaCadastro(int ent) {
+        lmtCorretor.cleanFields();
+        lmtCorretor.setEnabledField(true, true, true, true, true, true);
         lmtCorretor.setSelectedComboTipoCorretor(ent);
+        lmtCorretor.setVisible(true);
+    }
+    
+    /*Metodo Chama a mesma janela do cadastro e preeche o formulario como valores validos
+    para que haja a edição dos campos autotizado
+    */
+    void abrirJanelaEditar(int linhaIndex) {
+        Corretor tempCorr = vecCorretor.get(linhaIndex);
+        if(tempCorr instanceof Comissionado ){//Se for comissionado            
+            lmtCorretor.setValueField(OP_COMISSIONADO,tempCorr.getNome()
+                                                     ,tempCorr.getCrecic()
+                                                     ,""+((Comissionado) tempCorr).getComissao()
+                                                     , "", "");            
+            //Desabilita edição de todos os campos, exceto o campo de valor de comissao
+            lmtCorretor.setEnabledField(false,false,false,true,false,false);
+            
+        }else if(tempCorr instanceof Contratado ){//Se for contratado
+            lmtCorretor.setValueField(OP_CONTRATADO,tempCorr.getNome()
+                                                   ,tempCorr.getCrecic()
+                                                   ,"1"
+                                                   ,((Contratado) tempCorr).getDataAdmissao().toString()
+                                                   ,""+((Contratado) tempCorr).getSalarioFixo());
+            //Desabilita edição de todos os campos, exceto o campo de valor de salario
+            lmtCorretor.setEnabledField(false,false,false,false,false,true);
+        }        
         lmtCorretor.setVisible(true);
     }
 
@@ -147,6 +174,8 @@ public class ControleCorretor {
     public DefaultTableModel getTableCorretoresModel() {
         return tableCorretoresModel;
     }
+
+
 
     
 }

@@ -21,7 +21,36 @@ public class LimiteCorretor extends javax.swing.JFrame {
     public void setSelectedComboTipoCorretor(int ent){
         jComboTipoCorretor.setSelectedIndex(ent);
     }
-
+    
+    //Defini valores para cada do formulario
+    public void setValueField(int tipoCorretor, String nome, String CRECIC,
+                                 String comissao, String dataAdmissao, String salario){
+       
+        this.setSelectedComboTipoCorretor(tipoCorretor);
+        jTextNome.setText(nome);
+        jTextCrecic.setText(CRECIC);
+        jTextComissao.setText(comissao);
+        TextData.setText(dataAdmissao);
+        fieldValorSalario.setText(salario);        
+    }
+    
+    //Defini quais campo estarão disponiveis para edição
+    public void setEnabledField(boolean tipoCorretor, boolean nome, boolean CRECIC,
+                                 boolean comissao, boolean dataAdmissao, boolean salario){
+       
+        jComboTipoCorretor.setEnabled(tipoCorretor);
+        jTextNome.setEditable(nome);
+        jTextCrecic.setEditable(CRECIC);
+        jTextComissao.setEditable(comissao);
+        TextData.setEditable(dataAdmissao);
+        fieldValorSalario.setEditable(salario);        
+    }
+    
+     
+    public void cleanFields(){
+        this.setValueField(0, "", "","","","");
+    }
+ 
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -181,7 +210,7 @@ public class LimiteCorretor extends javax.swing.JFrame {
 
     private void jBtnSubmitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnSubmitActionPerformed
    
-         try {//Passando ao controle os valores dos campos para o cadastro e tratado uma evetual exception
+         try {//Passando ao controle os valores dos campos para o cadastro e tratando uma evetual exception
             ctrCorretor.cadCorretor(jComboTipoCorretor.getSelectedIndex(),
                                     jTextNome.getText(),
                                     jTextCrecic.getText(),
@@ -197,14 +226,7 @@ public class LimiteCorretor extends javax.swing.JFrame {
         } catch (Exception ex) {//Mensagem de erro.
             JOptionPane.showMessageDialog(rootPane, "Erro ao cadastrar corretor\n\n"
             + ex.getMessage(),"ERRO", JOptionPane.ERROR_MESSAGE);
-        }
-         
-         jTextNome.setText("");
-         jTextCrecic.setText("");
-         jTextComissao.setText("");
-         TextData.setText("");
-         fieldValorSalario.setText("");
-         
+        }      
     }//GEN-LAST:event_jBtnSubmitActionPerformed
 
     private void jComboTipoCorretorItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jComboTipoCorretorItemStateChanged
