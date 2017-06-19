@@ -11,12 +11,14 @@ public class Venda implements Serializable{
     private String nomeComprador;
     private Date dataVenda;
     private Corretor nomeCorretor;
+    private Imovel imovelVendido;
 
-    public Venda(Corretor pNomeCorretor, String pNomeComprador, Date pDataVenda, float pValorReal) {
+    public Venda(Imovel pImovelVendido,Corretor pNomeCorretor, String pNomeComprador, Date pDataVenda, float pValorReal) {
         valorReal = pValorReal;
         nomeComprador = pNomeComprador;
         dataVenda = pDataVenda;
         nomeCorretor = pNomeCorretor;
+        imovelVendido = pImovelVendido;
     }
 
     public float getValorReal() {
@@ -33,6 +35,10 @@ public class Venda implements Serializable{
 
     public Corretor getNomeCorretor() {
         return nomeCorretor;
+    }
+    
+    public Imovel getImovelVendido() {
+        return imovelVendido;
     }
 
 }

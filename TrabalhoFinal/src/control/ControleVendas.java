@@ -8,6 +8,7 @@ import java.util.*;
 import javax.swing.JOptionPane;
 import limit.LimiteVendas;
 import model.Corretor;
+import model.Imovel;
 
 public class ControleVendas {
     //Declaração das variavéis 
@@ -21,7 +22,7 @@ public class ControleVendas {
         listaVenda = new ArrayList<Venda>();
         ctrPrincipal = pCtrPrincipal;
         limVendas = new LimiteVendas(this);
-        //desserializaVenda();
+        desserializaVenda();
     }
     
     //Metodo que deixará a view visível
@@ -54,9 +55,10 @@ public class ControleVendas {
         }
         
         Corretor corretor = (Corretor) ctrPrincipal.getObjControleCorretor().getVecCorretor().elementAt(pIndexCorretor);
+        Imovel imovel = (Imovel) ctrPrincipal.getObjControleImovel().getVecImovel().elementAt(pIndexCodVenda);
         
-        listaVenda.add(new Venda(corretor,pNome,new Date(pData), preco));
-        //salva();
+        listaVenda.add(new Venda(imovel,corretor,pNome,new Date(pData), preco));
+        salva();
     }
     
     //Metodo que irá serializar os dados de venda e irá coloca-los no arquivo vendas.dat 
@@ -75,7 +77,7 @@ public class ControleVendas {
         if (objFile.exists()) {
             FileInputStream objFileIS = new FileInputStream("vendas.dat");
             ObjectInputStream objIS = new ObjectInputStream(objFileIS);
-            listaVenda = (ArrayList) objIS.readObject();
+            listaVenda = (ArrayList<Venda>) objIS.readObject();
             objIS.close();
         }
     }
