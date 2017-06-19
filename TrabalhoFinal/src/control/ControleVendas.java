@@ -6,6 +6,7 @@ import java.io.*;
 import java.text.NumberFormat;
 import java.util.*;
 import javax.swing.JOptionPane;
+import limit.LimitePagamento;
 import limit.LimiteVendas;
 import model.Corretor;
 import model.Imovel;
@@ -16,23 +17,28 @@ public class ControleVendas {
     private ArrayList<Venda> listaVenda;
     private LimiteVendas limVendas;
     private ControlePrincipal ctrPrincipal;
+    private LimitePagamento limPag;
     
     //Controle de Vendas
     public ControleVendas(ControlePrincipal pCtrPrincipal) throws Exception {
         listaVenda = new ArrayList<Venda>();
         ctrPrincipal = pCtrPrincipal;
         limVendas = new LimiteVendas(this);
+        limPag = new LimitePagamento(this);
         desserializaVenda();
     }
     
     //Metodo que deixará a view visível
     public void abrirJanelaVenda(){
-        limVendas.setVisible(true);
-        
+        limVendas.setVisible(true); 
+    }
+    
+    public void abrirJanelaPagamento(){
+        limPag.setVisible(true);
     }
     
     //Metodo que será o responsável por pegar os dados recebidos na view e fazer a verificação dos mesmos, e coloca-los no arraylist de vendas, que posteriormente será serializado
-    public void cadVenda(int pIndexCodVenda, int pIndexCorretor, String pNome, String pData, String pPreco) throws Exception{
+    public void cadVenda(int pIndexCodImovel, int pIndexCorretor, String pNome, String pData, String pPreco) throws Exception{
         //declarando variaveis auxiliares para conversao e cadastro
         float preco = 0;
         
@@ -55,9 +61,10 @@ public class ControleVendas {
         }
         
         Corretor corretor = (Corretor) ctrPrincipal.getObjControleCorretor().getVecCorretor().elementAt(pIndexCorretor);
-        Imovel imovel = (Imovel) ctrPrincipal.getObjControleImovel().getVecImovel().elementAt(pIndexCodVenda);
+        Imovel imovel = (Imovel) ctrPrincipal.getObjControleImovel().getVecImovel().elementAt(pIndexCodImovel);
         
         listaVenda.add(new Venda(imovel,corretor,pNome,new Date(pData), preco));
+        ctrPrincipal.getObjControleImovel().removeImovel(pIndexCodImovel);
         salva();
     }
     

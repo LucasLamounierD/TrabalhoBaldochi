@@ -47,8 +47,12 @@ public class ControleImovel {
 
     //Metodo que será o responsavél por deixar visível a janela
     void abrirJanelaCadastroImovel() {
-
         limImovel.setVisible(true);
+    }
+    //Metodo que irá remover um imóvel
+    void removeImovel(int pIndex){
+        vecImovel.remove(pIndex);
+        salva();
     }
 
     //Metodo que será responsável pelo recebimento dos dados informados no limite
