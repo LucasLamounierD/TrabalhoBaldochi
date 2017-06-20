@@ -118,7 +118,7 @@
             </Property>
           </Properties>
           <AuxValues>
-            <AuxValue name="JavaCodeGenerator_InitCodePre" type="java.lang.String" value="Vector&lt;Corretor&gt; vec = ctrVenda.getCtrPrincipal().getObjControleCorretor().getVecCorretor();&#xa;String[] str = new String[vec.size()];&#xa;int cont = 0;&#xa;for(Corretor ct: vec){&#xa;    str[cont] = ct.getNome();&#xa;    cont++;&#xa;}"/>
+            <AuxValue name="JavaCodeGenerator_InitCodePre" type="java.lang.String" value="String[] str = new String[vec.size()];&#xa;int cont = 0;&#xa;for(Corretor ct: vec){&#xa;    str[cont] = ct.getNome();&#xa;    cont++;&#xa;}"/>
             <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
           </AuxValues>
         </Component>

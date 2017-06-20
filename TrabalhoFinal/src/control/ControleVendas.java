@@ -23,13 +23,13 @@ public class ControleVendas {
     public ControleVendas(ControlePrincipal pCtrPrincipal) throws Exception {
         listaVenda = new ArrayList<Venda>();
         ctrPrincipal = pCtrPrincipal;
-        limVendas = new LimiteVendas(this);
         limPag = new LimitePagamento(this);
         desserializaVenda();
     }
     
     //Metodo que deixará a view visível
     public void abrirJanelaVenda(){
+        limVendas = new LimiteVendas(this);
         limVendas.setVisible(true); 
     }
     
@@ -62,7 +62,7 @@ public class ControleVendas {
         
         Corretor corretor = (Corretor) ctrPrincipal.getObjControleCorretor().getVecCorretor().elementAt(pIndexCorretor);
         Imovel imovel = (Imovel) ctrPrincipal.getObjControleImovel().getVecImovel().elementAt(pIndexCodImovel);
-        
+        //No momento em que cadastrar uma venda automaticamente irá retirar da lista de imóveis o imóvel vendido
         listaVenda.add(new Venda(imovel,corretor,pNome,new Date(pData), preco));
         ctrPrincipal.getObjControleImovel().removeImovel(pIndexCodImovel);
         salva();
