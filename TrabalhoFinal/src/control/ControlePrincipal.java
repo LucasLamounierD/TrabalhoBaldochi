@@ -34,8 +34,6 @@ public class ControlePrincipal {
         //defini como model da tabela a model recebida do controller imovel.
         
     }
-    
-
 
     public void initTableCorretores() {
         //Recebe do controller corretor a model da tabela
@@ -54,7 +52,7 @@ public class ControlePrincipal {
         }
     }
     
-        //Gerencia qual opção de menu o usuario acionou e chama o controle responsavel 
+    //Gerencia qual opção de menu o usuario acionou e chama o controle responsavel 
     public void abrirJanelaCadastroCorretor(int janela){
         objControleCorretor.abrirJanelaCadastro(janela);        
     }
@@ -65,6 +63,10 @@ public class ControlePrincipal {
     
     public void abrirJanelaCadastroVenda(){
         objControleVendas.abrirJanelaVenda();
+    }
+    
+    public void abrirJanelaEditorImoveis(int selectedRow) {
+        objControleImovel.abrirJanelaCadastroImovel();
     }
     
     //Gerencia qual opção de menu o usuario acionou e chama o controle responsavel 
@@ -88,5 +90,6 @@ public class ControlePrincipal {
     public ControleVendas getObjControleVendas() {
         return objControleVendas;
     }
+
 
 }
