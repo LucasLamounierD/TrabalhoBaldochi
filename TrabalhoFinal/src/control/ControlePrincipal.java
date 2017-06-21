@@ -69,6 +69,10 @@ public class ControlePrincipal {
         objControleImovel.abrirJanelaCadastroImovel();
     }
     
+    public void abrirJanelaRealizarPagamento(){
+        objControleVendas.abrirJanelaPagamento();
+    }
+    
     //Gerencia qual opção de menu o usuario acionou e chama o controle responsavel 
     public void abrirJanelaEditorCorretor(int linhaIndex){
         objControleCorretor.abrirJanelaEditar(linhaIndex);        

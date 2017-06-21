@@ -6,8 +6,10 @@ import java.io.*;
 import java.text.NumberFormat;
 import java.util.*;
 import javax.swing.JOptionPane;
+import limit.LimitePagamento;
 import limit.LimiteVendas;
 import model.Corretor;
+import model.Imovel;
 
 public class ControleVendas {
     //Declaração das variavéis 
@@ -15,23 +17,28 @@ public class ControleVendas {
     private ArrayList<Venda> listaVenda;
     private LimiteVendas limVendas;
     private ControlePrincipal ctrPrincipal;
+    private LimitePagamento limPag;
     
     //Controle de Vendas
     public ControleVendas(ControlePrincipal pCtrPrincipal) throws Exception {
         listaVenda = new ArrayList<Venda>();
         ctrPrincipal = pCtrPrincipal;
-        limVendas = new LimiteVendas(this);
-        //desserializaVenda();
+        limPag = new LimitePagamento(this);
+        desserializaVenda();
     }
     
     //Metodo que deixará a view visível
     public void abrirJanelaVenda(){
-        limVendas.setVisible(true);
-        
+        limVendas = new LimiteVendas(this);
+        limVendas.setVisible(true); 
+    }
+    
+    public void abrirJanelaPagamento(){
+        limPag.setVisible(true);
     }
     
     //Metodo que será o responsável por pegar os dados recebidos na view e fazer a verificação dos mesmos, e coloca-los no arraylist de vendas, que posteriormente será serializado
-    public void cadVenda(int pIndexCodVenda, int pIndexCorretor, String pNome, String pData, String pPreco) throws Exception{
+    public void cadVenda(int pIndexCodImovel, int pIndexCorretor, String pNome, String pData, String pPreco) throws Exception{
         //declarando variaveis auxiliares para conversao e cadastro
         float preco = 0;
         
@@ -54,9 +61,11 @@ public class ControleVendas {
         }
         
         Corretor corretor = (Corretor) ctrPrincipal.getObjControleCorretor().getVecCorretor().elementAt(pIndexCorretor);
-        
-        listaVenda.add(new Venda(corretor,pNome,new Date(pData), preco));
-        //salva();
+        Imovel imovel = (Imovel) ctrPrincipal.getObjControleImovel().getVecImovel().elementAt(pIndexCodImovel);
+        //No momento em que cadastrar uma venda automaticamente irá retirar da lista de imóveis o imóvel vendido
+        listaVenda.add(new Venda(imovel,corretor,pNome,new Date(pData), preco));
+        ctrPrincipal.getObjControleImovel().removeImovel(pIndexCodImovel);
+        salva();
     }
     
     //Metodo que irá serializar os dados de venda e irá coloca-los no arquivo vendas.dat 
@@ -75,7 +84,7 @@ public class ControleVendas {
         if (objFile.exists()) {
             FileInputStream objFileIS = new FileInputStream("vendas.dat");
             ObjectInputStream objIS = new ObjectInputStream(objFileIS);
-            listaVenda = (ArrayList) objIS.readObject();
+            listaVenda = (ArrayList<Venda>) objIS.readObject();
             objIS.close();
         }
     }
