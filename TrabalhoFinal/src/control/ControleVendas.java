@@ -6,16 +6,15 @@ import java.io.*;
 import java.text.NumberFormat;
 import java.util.*;
 import javax.swing.JOptionPane;
-import limit.LimitePagamento;
-import limit.LimiteVendas;
-import model.Corretor;
-import model.Imovel;
+import limit.*;
+import model.*;
 
 public class ControleVendas {
     //Declaração das variavéis 
     private Venda entVenda;
     private ArrayList<Venda> listaVenda;
     private LimiteVendas limVendas;
+    private LimiteFormularios objLimiteFormulario;
     private ControlePrincipal ctrPrincipal;
     private LimitePagamento limPag;
     
@@ -97,6 +96,20 @@ public class ControleVendas {
             JOptionPane.showMessageDialog(null, "Falha na serialização", "ERRO", JOptionPane.INFORMATION_MESSAGE);
         }
 
+    }
+    
+    public void calculaFaturamento(){
+        
+        float faturamento = 0;
+        
+        for(Venda v : listaVenda){
+            
+            faturamento += ((v.getValorReal()/100)*5);
+            
+        }
+        
+        objLimiteFormulario = new LimiteFormularios(faturamento,"Faturamento");
+        
     }
     
     public void finalize()throws Exception{

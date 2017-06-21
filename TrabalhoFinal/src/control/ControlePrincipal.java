@@ -73,6 +73,10 @@ public class ControlePrincipal {
         objControleVendas.abrirJanelaPagamento();
     }
     
+    public void abrirJanelaFormFaturamento(){
+        objControleVendas.calculaFaturamento();
+    }
+    
     //Gerencia qual opção de menu o usuario acionou e chama o controle responsavel 
     public void abrirJanelaEditorCorretor(int linhaIndex){
         objControleCorretor.abrirJanelaEditar(linhaIndex);        
