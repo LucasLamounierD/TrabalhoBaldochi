@@ -11,12 +11,8 @@ public class Contratado extends Corretor {
 
     public Contratado(String pNome,String pCrecic, float pSalarioFixo, Date pDataAdmissao) throws Exception{
         super(pNome,pCrecic);
-        
-        if(pSalarioFixo<900){
-            throw new Exception("Preecha campo Valor Salario com um valor valido!"); 
-        }       
-        
-        salarioFixo = pSalarioFixo;
+ 
+        this.setSalarioFixo(pSalarioFixo);
         dataAdmissao = pDataAdmissao;        
     }
 
@@ -24,7 +20,10 @@ public class Contratado extends Corretor {
         return salarioFixo;
     }
 
-    public void setSalarioFixo(float salarioFixo) {
+    public void setSalarioFixo(float salarioFixo) throws Exception {
+        if(salarioFixo<900){
+            throw new Exception("Preecha campo Valor Salario com um valor valido!"); 
+        }       
         this.salarioFixo = salarioFixo;
     }
 
@@ -35,5 +34,6 @@ public class Contratado extends Corretor {
     public void setDataAdmissao(Date dataAdmissao) {
         this.dataAdmissao = dataAdmissao;
     }
-
+    
+    
 }

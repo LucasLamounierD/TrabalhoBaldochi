@@ -106,7 +106,7 @@ public class ControleCorretor {
          }
     } 
     
-    public void editCorretor(String comissao, String salario) {
+    public void editCorretor(String comissao, String salario) throws Exception {
        
         float vlrSalario=0;
         if(!salario.isEmpty()){//Verificando se a string não é vazia
@@ -126,9 +126,9 @@ public class ControleCorretor {
         Corretor c = vecCorretor.get(IndexBeingEditedNow);
         
         if(c instanceof Contratado){
-            
+           ((Contratado) c).setSalarioFixo(vlrSalario);
         }else if(c instanceof Comissionado){
-            
+            ((Comissionado) c).setComissao(vlrComissao);
         }
         
     }
