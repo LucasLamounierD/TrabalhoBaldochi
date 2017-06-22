@@ -18,7 +18,7 @@ public class ControlePrincipal {
             objControleImovel = new ControleImovel(this);
             objControleVendas = new ControleVendas(this);
         } catch (Exception e) {
-            System.out.println("Erro na abertura de arquivo");
+            System.out.println("Erro na abertura de arquivo!");
         }
         
         objLimPrincipal = new MainWindow(this);//Instacia a janela(limite)

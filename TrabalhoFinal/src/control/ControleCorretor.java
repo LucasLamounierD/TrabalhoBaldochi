@@ -88,32 +88,21 @@ public class ControleCorretor {
             }
         }
 
-         if(pNome.equals("")){//Validação dos campos, caso estiver incorreto lança um Exception
-            throw new Exception("Campo nome não foi preechido!");  
-         }else if(pCrecic.equals("")){
-            throw new Exception("Campo CRECIC não foi preechido!"); 
-         }else if(OP_COMISSIONADO==pTipoCorr){//Validando campos mais especificos e chamando construtor do comissionado
-            if (comissao<1 || comissao>3){
-              throw new Exception("Valor Invalido no campo Comissão!"); 
-            }else{//Se todos dados corretos cadastra Comissionados
-               Comissionado c = new Comissionado(pNome,pCrecic,comissao);
-               vecCorretor.add(c);
-               //Adiciona na tabela da janela principal o corretor. 
-               tableCorretoresModel.addRow(new Object[]{c.getNome(),c.getCrecic(),"Comissionado"});
-            }
+         if(OP_COMISSIONADO==pTipoCorr){//Validando campos mais especificos e chamando construtor do comissionado
+            
+            Comissionado c = new Comissionado(pNome,pCrecic,comissao);
+            vecCorretor.add(c);
+            //Adiciona na tabela da janela principal o corretor. 
+            tableCorretoresModel.addRow(new Object[]{c.getNome(),c.getCrecic(),"Comissionado"});
+            
          }else{//Validando campos mais especificos e chamando construtor do contratado
-            if (pData.isEmpty()){
-                throw new Exception("Preecha campo Data de admissão com um valor valido!"); 
-            }else if(salario<900){
-                throw new Exception("Preecha campo Valor Salario com um valor valido!"); 
-            }
-            else{//Se todos dados corretos cadastra Comissionados
-               Contratado c =new Contratado(pNome,pCrecic,salario,new Date(pData));
-               vecCorretor.add(c); 
-               salva();
-               //Adiciona na tabela da janela principal o corretor.
-               tableCorretoresModel.addRow(new Object[]{c.getNome(),c.getCrecic(),"Contratado"});
-            } 
+            
+            Contratado c =new Contratado(pNome,pCrecic,salario,pData);
+            vecCorretor.add(c); 
+            salva();
+            //Adiciona na tabela da janela principal o corretor.
+            tableCorretoresModel.addRow(new Object[]{c.getNome(),c.getCrecic(),"Contratado"});
+            
          }
     } 
     
