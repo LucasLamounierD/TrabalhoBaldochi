@@ -11,7 +11,7 @@ public class Comissionado extends Corretor {
     public Comissionado(String pNome, String pCrecic,float pComissao) throws Exception {
         super(pNome, pCrecic);
         
-        if (comissao<1 || comissao>3){
+        if (pComissao<1 || pComissao>3){
             throw new Exception("Valor Invalido no campo Comissão!"); 
         }
 

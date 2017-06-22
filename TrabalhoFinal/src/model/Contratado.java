@@ -9,18 +9,15 @@ public class Contratado extends Corretor {
     private Date dataAdmissao;
     private static float comissao = 1 / 100;
 
-    public Contratado(String pNome,String pCrecic, float pSalarioFixo, String pDataAdmissao) throws Exception{
+    public Contratado(String pNome,String pCrecic, float pSalarioFixo, Date pDataAdmissao) throws Exception{
         super(pNome,pCrecic);
         
-        if (pDataAdmissao.isEmpty()){
-            throw new Exception("Preecha campo Data de admissão com um valor valido!"); 
-        }else if(pSalarioFixo<900){
+        if(pSalarioFixo<900){
             throw new Exception("Preecha campo Valor Salario com um valor valido!"); 
-        }
-        
+        }       
         
         salarioFixo = pSalarioFixo;
-        dataAdmissao = new Date(pDataAdmissao);        
+        dataAdmissao = pDataAdmissao;        
     }
 
     public float getSalarioFixo() {
