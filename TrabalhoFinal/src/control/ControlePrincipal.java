@@ -27,6 +27,7 @@ public class ControlePrincipal {
         objLimPrincipal.setVisible(true);//Deixa janela visivel
     }
     
+    //Inicializa campos da yabela de Imoveis
     public void initTableImoveis(){
         //Recebe do controller imovel a model da tabela
         DefaultTableModel tableImoveisModel = objControleImovel.getTableCorretoresModel();
@@ -35,6 +36,7 @@ public class ControlePrincipal {
         
     }
 
+    //Inicializa campos da tabela de Corretores
     public void initTableCorretores() {
         //Recebe do controller corretor a model da tabela
         DefaultTableModel tableCorretoresModel = objControleCorretor.getTableCorretoresModel();

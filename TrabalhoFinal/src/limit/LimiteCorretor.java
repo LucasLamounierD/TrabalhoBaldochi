@@ -2,9 +2,6 @@ package limit;
 
 
 import control.ControleCorretor;
-import java.text.*;
-import java.util.*;
-import java.util.logging.*;
 import javax.swing.*;
 
 
@@ -44,11 +41,20 @@ public class LimiteCorretor extends javax.swing.JFrame {
         jTextComissao.setEditable(comissao);
         TextData.setEditable(dataAdmissao);
         fieldValorSalario.setEditable(salario);        
-    }
-    
+    }    
      
     public void cleanFields(){
         this.setValueField(0, "", "","","","");
+    }
+    
+    public void setTypeOperation(int type) {
+        if(type == ControleCorretor.OP_CREATE){
+            jBtnSubmit.setText("Cadastrar");
+            jBtnSubmit.setActionCommand("create");
+        }else if(type == ControleCorretor.OP_EDIT){
+            jBtnSubmit.setText("Concluir");
+            jBtnSubmit.setActionCommand("edit");
+        }
     }
  
     @SuppressWarnings("unchecked")
@@ -209,24 +215,37 @@ public class LimiteCorretor extends javax.swing.JFrame {
     }//GEN-LAST:event_jBtnCancelarActionPerformed
 
     private void jBtnSubmitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnSubmitActionPerformed
-   
-         try {//Passando ao controle os valores dos campos para o cadastro e tratando uma evetual exception
-            ctrCorretor.cadCorretor(jComboTipoCorretor.getSelectedIndex(),
-                                    jTextNome.getText(),
-                                    jTextCrecic.getText(),
-                                    jTextComissao.getText(),
-                                    TextData.getText(),
-                                    fieldValorSalario.getText()
-                                    );
-            
-            JOptionPane.showMessageDialog(rootPane, "Corretor cadastrado com sucesso",
-            "SUCESSO",JOptionPane.INFORMATION_MESSAGE);            
-            this.dispose();
-            
-        } catch (Exception ex) {//Mensagem de erro.
-            JOptionPane.showMessageDialog(rootPane, "Erro ao cadastrar corretor\n\n"
-            + ex.getMessage(),"ERRO", JOptionPane.ERROR_MESSAGE);
-        }      
+        if(evt.getActionCommand().equals("create")){
+            try {//Passando ao controle os valores dos campos para o cadastro e tratando uma evetual exception
+               ctrCorretor.cadCorretor(jComboTipoCorretor.getSelectedIndex(),
+                                       jTextNome.getText(),
+                                       jTextCrecic.getText(),
+                                       jTextComissao.getText(),
+                                       TextData.getText(),
+                                       fieldValorSalario.getText()
+                                       );
+
+               JOptionPane.showMessageDialog(this, "Corretor cadastrado com sucesso",
+                                            "SUCESSO",JOptionPane.INFORMATION_MESSAGE);            
+               this.dispose();
+
+           } catch (Exception ex) {//Mensagem de erro.
+               JOptionPane.showMessageDialog(this, "Erro ao cadastrar corretor\n\n"
+                                            + ex.getMessage(),"ERRO", JOptionPane.ERROR_MESSAGE);
+           } 
+        }else{
+            try {//Passando ao controle os valores dos campos para o cadastro e tratando uma evetual exception
+               ctrCorretor.editCorretor(jTextComissao.getText(),fieldValorSalario.getText());
+
+               JOptionPane.showMessageDialog(this, "Corretor editado com sucesso",
+                                            "SUCESSO",JOptionPane.INFORMATION_MESSAGE);            
+               this.dispose();
+
+           } catch (Exception ex) {//Mensagem de erro.
+               JOptionPane.showMessageDialog(this, "Erro ao editar corretor\n\n"
+                                            + ex.getMessage(),"ERRO", JOptionPane.ERROR_MESSAGE);
+           } 
+        }
     }//GEN-LAST:event_jBtnSubmitActionPerformed
 
     private void jComboTipoCorretorItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jComboTipoCorretorItemStateChanged
@@ -259,4 +278,6 @@ public class LimiteCorretor extends javax.swing.JFrame {
     private javax.swing.JTextField jTextCrecic;
     private javax.swing.JTextField jTextNome;
     // End of variables declaration//GEN-END:variables
+
+ 
 }

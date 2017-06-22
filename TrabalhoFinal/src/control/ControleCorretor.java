@@ -16,9 +16,12 @@ public class ControleCorretor {
     private Vector<Corretor> vecCorretor = new Vector();
     private ControlePrincipal ctrPrincipal;
     private DefaultTableModel tableCorretoresModel;
+    private int IndexBeingEditedNow;
     //Constantes
     public final static int OP_CONTRATADO = 0;
-    public final static int OP_COMISSIONADO = 1;
+    public final static int OP_COMISSIONADO = 1;    
+    public final static int OP_CREATE = 0;
+    public final static int OP_EDIT = 1;
 
     public ControleCorretor(ControlePrincipal pCtrPrincipal) throws Exception{//Construtor do ControleCorretor
         ctrPrincipal = pCtrPrincipal;
@@ -32,14 +35,16 @@ public class ControleCorretor {
         lmtCorretor.cleanFields();
         lmtCorretor.setEnabledField(true, true, true, true, true, true);
         lmtCorretor.setSelectedComboTipoCorretor(ent);
+        lmtCorretor.setTypeOperation(OP_CREATE);
         lmtCorretor.setVisible(true);
     }
     
     /*Metodo Chama a mesma janela do cadastro e preeche o formulario como valores validos
     para que haja a edição dos campos autotizado
     */
-    void abrirJanelaEditar(int linhaIndex) {
-        Corretor tempCorr = vecCorretor.get(linhaIndex);
+    void abrirJanelaEditar(int IndexRow) {
+        IndexBeingEditedNow = IndexRow;
+        Corretor tempCorr = vecCorretor.get(IndexRow);
         if(tempCorr instanceof Comissionado ){//Se for comissionado            
             lmtCorretor.setValueField(OP_COMISSIONADO,tempCorr.getNome()
                                                      ,tempCorr.getCrecic()
@@ -57,6 +62,7 @@ public class ControleCorretor {
             //Desabilita edição de todos os campos, exceto o campo de valor de salario
             lmtCorretor.setEnabledField(false,false,false,false,false,true);
         }        
+        lmtCorretor.setTypeOperation(OP_EDIT);
         lmtCorretor.setVisible(true);
     }
 
@@ -109,7 +115,34 @@ public class ControleCorretor {
                tableCorretoresModel.addRow(new Object[]{c.getNome(),c.getCrecic(),"Contratado"});
             } 
          }
-    }    
+    } 
+    
+    public void editCorretor(String comissao, String salario) {
+       
+        float vlrSalario=0;
+        if(!salario.isEmpty()){//Verificando se a string não é vazia
+            //Instaciando classe que possibilitará fazer conversões de String com virgula
+            NumberFormat nf = NumberFormat.getNumberInstance(new Locale("pt", "BR"));
+            try {
+                vlrSalario = nf.parse(salario).floatValue();//realizando conversão
+            } catch (ParseException ex) {
+                Logger.getLogger(LimiteCorretor.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+        
+        float vlrComissao = 0;
+        if(!comissao.isEmpty())//Verificando se a string não e vazia
+               vlrComissao = Float.parseFloat(comissao);//Convertendo
+        
+        Corretor c = vecCorretor.get(IndexBeingEditedNow);
+        
+        if(c instanceof Contratado){
+            
+        }else if(c instanceof Comissionado){
+            
+        }
+        
+    }
 
     public void instTableCorretoresModel(){
         
@@ -174,8 +207,5 @@ public class ControleCorretor {
     public DefaultTableModel getTableCorretoresModel() {
         return tableCorretoresModel;
     }
-
-
-
     
 }
