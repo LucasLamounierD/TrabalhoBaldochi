@@ -134,17 +134,17 @@
     <Component class="javax.swing.JComboBox" name="jComboBoxTipo">
       <Properties>
         <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-          <StringArray count="7">
-            <StringItem index="0" value="Casa"/>
-            <StringItem index="1" value="Apartamento"/>
-            <StringItem index="2" value="Sala comercial"/>
-            <StringItem index="3" value="Lote"/>
-            <StringItem index="4" value="Ch&#xe1;cara"/>
-            <StringItem index="5" value="S&#xed;tio"/>
-            <StringItem index="6" value="Fazenda"/>
+          <StringArray count="8">
+            <StringItem index="0" value=" "/>
+            <StringItem index="1" value="Casa"/>
+            <StringItem index="2" value="Apartamento"/>
+            <StringItem index="3" value="Sala comercial"/>
+            <StringItem index="4" value="Lote"/>
+            <StringItem index="5" value="Ch&#xe1;cara"/>
+            <StringItem index="6" value="S&#xed;tio"/>
+            <StringItem index="7" value="Fazenda"/>
           </StringArray>
         </Property>
-        <Property name="selectedIndex" type="int" value="-1"/>
       </Properties>
       <AuxValues>
         <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>

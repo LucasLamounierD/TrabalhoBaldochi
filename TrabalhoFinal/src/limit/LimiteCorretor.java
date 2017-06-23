@@ -3,6 +3,7 @@ package limit;
 
 import control.ControleCorretor;
 import javax.swing.*;
+import util.Util;
 
 
 public class LimiteCorretor extends javax.swing.JFrame {
@@ -48,10 +49,10 @@ public class LimiteCorretor extends javax.swing.JFrame {
     }
     
     public void setTypeOperation(int type) {
-        if(type == ControleCorretor.OP_CREATE){
+        if(type == Util.OP_CREATE){
             jBtnSubmit.setText("Cadastrar");
             jBtnSubmit.setActionCommand("create");
-        }else if(type == ControleCorretor.OP_EDIT){
+        }else if(type == Util.OP_EDIT){
             jBtnSubmit.setText("Concluir");
             jBtnSubmit.setActionCommand("edit");
         }

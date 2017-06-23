@@ -98,16 +98,12 @@ public class ControleVendas {
 
     }
     
-    public void calculaFaturamento(){
-        
+    public void calculaFaturamento(){        
         float faturamento = 0;
         
-        for(Venda v : listaVenda){
-            
-            faturamento += ((v.getValorReal()/100)*5);
-            
-        }
-        
+        for(Venda v : listaVenda){            
+            faturamento += ((v.getValorReal()/100)*5);            
+        }        
         objLimiteFormulario = new LimiteFormularios(faturamento,"Faturamento");
         
     }

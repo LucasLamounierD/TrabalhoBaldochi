@@ -68,7 +68,7 @@ public class ControlePrincipal {
     }
     
     public void abrirJanelaEditorImoveis(int selectedRow) {
-        objControleImovel.abrirJanelaCadastroImovel();
+        objControleImovel.abrirJanelaEditorImovel(selectedRow);
     }
     
     public void abrirJanelaRealizarPagamento(){

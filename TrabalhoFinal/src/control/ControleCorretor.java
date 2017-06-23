@@ -19,9 +19,7 @@ public class ControleCorretor {
     private int IndexBeingEditedNow;
     //Constantes
     public final static int OP_CONTRATADO = 0;
-    public final static int OP_COMISSIONADO = 1;    
-    public final static int OP_CREATE = 0;
-    public final static int OP_EDIT = 1;
+    public final static int OP_COMISSIONADO = 1;        
 
     public ControleCorretor(ControlePrincipal pCtrPrincipal) throws Exception{//Construtor do ControleCorretor
         ctrPrincipal = pCtrPrincipal;
@@ -35,7 +33,7 @@ public class ControleCorretor {
         lmtCorretor.cleanFields();
         lmtCorretor.setEnabledField(true, true, true, true, true, true);
         lmtCorretor.setSelectedComboTipoCorretor(ent);
-        lmtCorretor.setTypeOperation(OP_CREATE);
+        lmtCorretor.setTypeOperation(Util.OP_CREATE);
         lmtCorretor.setVisible(true);
     }
     
@@ -62,7 +60,7 @@ public class ControleCorretor {
             //Desabilita edição de todos os campos, exceto o campo de valor de salario
             lmtCorretor.setEnabledField(false,false,false,false,false,true);
         }        
-        lmtCorretor.setTypeOperation(OP_EDIT);
+        lmtCorretor.setTypeOperation(Util.OP_EDIT);
         lmtCorretor.setVisible(true);
     }
 
@@ -130,7 +128,7 @@ public class ControleCorretor {
         }else if(c instanceof Comissionado){
             ((Comissionado) c).setComissao(vlrComissao);
         }
-        
+        salva();
     }
 
     public void instTableCorretoresModel(){
