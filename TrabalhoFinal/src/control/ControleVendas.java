@@ -125,7 +125,10 @@ public class ControleVendas {
         
         //SETA O MODELO DA TABELA PARA INSERÇÃO DAS VENDAS
         DefaultTableModel t = (DefaultTableModel) tabelaVenda.getModel();
-
+        
+        //LIMPA O QUE HAVIA NA TABELA PASSADA PARA RENOVAR OS VALORES
+        t.setNumRows(0);
+        
         //ADICIONA NA TABELA AS VENDAS DO MES QUE ESTAO NO ARRAY AUXILIAR
         for (Venda v : vendasMes) {
 
