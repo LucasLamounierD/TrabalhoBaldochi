@@ -45,6 +45,7 @@ public class LimiteImovel extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Cadastro de imóvel");
+        setResizable(false);
 
         jLabel1.setText("Tipo:");
 

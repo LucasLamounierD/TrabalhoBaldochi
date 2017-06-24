@@ -40,7 +40,7 @@ public class ControleCorretor {
     /*Metodo Chama a mesma janela do cadastro e preeche o formulario como valores validos
     para que haja a edição dos campos autotizado
     */
-    void abrirJanelaEditar(int IndexRow) {
+    void abrirJanelaEditar(int IndexRow){
         IndexBeingEditedNow = IndexRow;
         Corretor tempCorr = vecCorretor.get(IndexRow);
         if(tempCorr instanceof Comissionado ){//Se for comissionado            

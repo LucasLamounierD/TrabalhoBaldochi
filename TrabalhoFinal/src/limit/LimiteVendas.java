@@ -47,6 +47,7 @@ public class LimiteVendas extends javax.swing.JFrame {
         jComboCorretor = new javax.swing.JComboBox<>();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setResizable(false);
 
         Vector<Imovel> vecImovel = ctrVendas.getCtrPrincipal().getObjControleImovel().getVecImovel();
         String[] str = new String[vecImovel.size()];

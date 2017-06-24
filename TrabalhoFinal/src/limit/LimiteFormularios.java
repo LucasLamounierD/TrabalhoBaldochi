@@ -55,6 +55,12 @@ public class LimiteFormularios extends javax.swing.JFrame {
         jPanel2 = new javax.swing.JPanel();
         jLabel3 = new javax.swing.JLabel();
         jLabelValorFinal = new javax.swing.JLabel();
+        jPanelLucroTotal = new javax.swing.JPanel();
+        jPanelRelImoveisVendidos = new javax.swing.JPanel();
+        jPanelRelImoveisEncalhados = new javax.swing.JPanel();
+        jPanelFatCorretores = new javax.swing.JPanel();
+        jPanelValorPagoCorretor = new javax.swing.JPanel();
+        jPanelCorretorDoMes = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -130,7 +136,7 @@ public class LimiteFormularios extends javax.swing.JFrame {
                     .addComponent(jLabel2)
                     .addComponent(jComboBoxAno, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButtonGerarRelatorio))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(117, Short.MAX_VALUE))
         );
 
         jPanel2.setBorder(javax.swing.BorderFactory.createEtchedBorder());
@@ -189,6 +195,84 @@ public class LimiteFormularios extends javax.swing.JFrame {
 
         jPanelCardLayout.add(jPanelFaturamentoTotal, "card2");
 
+        javax.swing.GroupLayout jPanelLucroTotalLayout = new javax.swing.GroupLayout(jPanelLucroTotal);
+        jPanelLucroTotal.setLayout(jPanelLucroTotalLayout);
+        jPanelLucroTotalLayout.setHorizontalGroup(
+            jPanelLucroTotalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 485, Short.MAX_VALUE)
+        );
+        jPanelLucroTotalLayout.setVerticalGroup(
+            jPanelLucroTotalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 673, Short.MAX_VALUE)
+        );
+
+        jPanelCardLayout.add(jPanelLucroTotal, "card3");
+
+        javax.swing.GroupLayout jPanelRelImoveisVendidosLayout = new javax.swing.GroupLayout(jPanelRelImoveisVendidos);
+        jPanelRelImoveisVendidos.setLayout(jPanelRelImoveisVendidosLayout);
+        jPanelRelImoveisVendidosLayout.setHorizontalGroup(
+            jPanelRelImoveisVendidosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 485, Short.MAX_VALUE)
+        );
+        jPanelRelImoveisVendidosLayout.setVerticalGroup(
+            jPanelRelImoveisVendidosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 673, Short.MAX_VALUE)
+        );
+
+        jPanelCardLayout.add(jPanelRelImoveisVendidos, "card4");
+
+        javax.swing.GroupLayout jPanelRelImoveisEncalhadosLayout = new javax.swing.GroupLayout(jPanelRelImoveisEncalhados);
+        jPanelRelImoveisEncalhados.setLayout(jPanelRelImoveisEncalhadosLayout);
+        jPanelRelImoveisEncalhadosLayout.setHorizontalGroup(
+            jPanelRelImoveisEncalhadosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 485, Short.MAX_VALUE)
+        );
+        jPanelRelImoveisEncalhadosLayout.setVerticalGroup(
+            jPanelRelImoveisEncalhadosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 673, Short.MAX_VALUE)
+        );
+
+        jPanelCardLayout.add(jPanelRelImoveisEncalhados, "card5");
+
+        javax.swing.GroupLayout jPanelFatCorretoresLayout = new javax.swing.GroupLayout(jPanelFatCorretores);
+        jPanelFatCorretores.setLayout(jPanelFatCorretoresLayout);
+        jPanelFatCorretoresLayout.setHorizontalGroup(
+            jPanelFatCorretoresLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 485, Short.MAX_VALUE)
+        );
+        jPanelFatCorretoresLayout.setVerticalGroup(
+            jPanelFatCorretoresLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 673, Short.MAX_VALUE)
+        );
+
+        jPanelCardLayout.add(jPanelFatCorretores, "card6");
+
+        javax.swing.GroupLayout jPanelValorPagoCorretorLayout = new javax.swing.GroupLayout(jPanelValorPagoCorretor);
+        jPanelValorPagoCorretor.setLayout(jPanelValorPagoCorretorLayout);
+        jPanelValorPagoCorretorLayout.setHorizontalGroup(
+            jPanelValorPagoCorretorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 485, Short.MAX_VALUE)
+        );
+        jPanelValorPagoCorretorLayout.setVerticalGroup(
+            jPanelValorPagoCorretorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 673, Short.MAX_VALUE)
+        );
+
+        jPanelCardLayout.add(jPanelValorPagoCorretor, "card7");
+
+        javax.swing.GroupLayout jPanelCorretorDoMesLayout = new javax.swing.GroupLayout(jPanelCorretorDoMes);
+        jPanelCorretorDoMes.setLayout(jPanelCorretorDoMesLayout);
+        jPanelCorretorDoMesLayout.setHorizontalGroup(
+            jPanelCorretorDoMesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 485, Short.MAX_VALUE)
+        );
+        jPanelCorretorDoMesLayout.setVerticalGroup(
+            jPanelCorretorDoMesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 673, Short.MAX_VALUE)
+        );
+
+        jPanelCardLayout.add(jPanelCorretorDoMes, "card8");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -203,7 +287,7 @@ public class LimiteFormularios extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jPanelCardLayout, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(38, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
@@ -235,7 +319,13 @@ public class LimiteFormularios extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanelCardLayout;
+    private javax.swing.JPanel jPanelCorretorDoMes;
+    private javax.swing.JPanel jPanelFatCorretores;
     private javax.swing.JPanel jPanelFaturamentoTotal;
+    private javax.swing.JPanel jPanelLucroTotal;
+    private javax.swing.JPanel jPanelRelImoveisEncalhados;
+    private javax.swing.JPanel jPanelRelImoveisVendidos;
+    private javax.swing.JPanel jPanelValorPagoCorretor;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTable jTableVendasDoMes;
     // End of variables declaration//GEN-END:variables
