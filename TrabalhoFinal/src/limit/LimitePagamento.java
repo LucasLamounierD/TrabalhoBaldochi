@@ -159,69 +159,23 @@ public class LimitePagamento extends javax.swing.JFrame {
 
     //Caso seja precionado o botão pagar, o programa pegará a data e o corretor e calculará o salário dele
     private void jButtonPagarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonPagarActionPerformed
-        ArrayList<Venda> listaVenda = ctrVenda.getArrayListVenda();
         double ganhoMes = 0, ganhoAno = 0;
 
         Corretor cor = vec.elementAt(jComboBoxCorretor.getSelectedIndex());
         //Separa a data recebida, para poder comparar seu mês e ano
         String str = jTextFieldData.getText();
         String[] split = str.split("/");
-        //Cria uma array para poder calcular a quantidade de mês que o corretor contratado deve ter recebido durante um ano
-        ArrayList<Integer> contMes = new ArrayList<>();
+
         //Coloca os valores do mês e ano nas sequintes variáveis
         int mesEscolhido = Integer.parseInt(split[0]);
         int anoEscolhido = Integer.parseInt(split[1]);
-        //Vai percorrer a lista de vendas
-        for (Venda v : listaVenda) {
-            //Recebe a data da venda e a transforma em int para poder realizar a comparação
-            Date data = v.getDataVenda();
-            Calendar cal = Calendar.getInstance();
-            cal.setTime(new Date(data.getTime()));
-            int ano = cal.get(Calendar.YEAR);
-            //O campo date da venda armazenou os dados no formato MM/dd/YYYY,
-            //Usuando calendar para pegar o mes e ano, ele usa o formato dd//MM/YYYY, por isso é para pegar o mês é necessário pegar o dia do calendar
-            int mes = cal.get(Calendar.DAY_OF_MONTH);
-            
-            //Se o corretor e o ano forem iguais irá calcular os ganhos anuais e mensais consequentemente
-            if (ano == anoEscolhido || cor.getNome().equals(v.getNomeCorretor().getNome())) {
-                //Caso o mes seja igual ao da venda calcula para comissionado e para contratado
-                if (mes == mesEscolhido) {
-                    if (cor instanceof Comissionado) {
-                        ganhoMes += v.getValorReal() * ((Comissionado) cor).getComissao();
-                    } else {
-                        ganhoMes += v.getValorReal() * (0.01);
-                    }
-                }
-                //Aqui realizará a contação dos meses que o corretor vendou meses para caso ele seja um contratado haja seu pagamento
-                int i = 0;
-                for (int x : contMes) {
-                    if (x == mes) {
-                        i++;
-                    }
-                }
-                //Se o mês não tiver no array de meses, insere ele no array, caso já esteja simplemesmente ignora o mês em questão
-                if (i == 0) {
-                    contMes.add(mes);
-                }
-                
-                //Aqui realiza a soma do vendor para saber seus ganhos anuais
-                if (cor instanceof Comissionado) {
-                    ganhoAno += v.getValorReal() * ((Comissionado) cor).getComissao();
-                } else {
-                    ganhoAno += v.getValorReal() * (0.01);
-                }
-            }
-        }
-        //Adiciona o salário fixo caso o corretor seja contratado
-        if (cor instanceof Contratado) {
-            ganhoMes += ((Contratado) cor).getSalarioFixo();
-            ganhoAno += contMes.size() * ((Contratado) cor).getSalarioFixo();
-
-        }
+        
+        ganhoMes = ctrVenda.pagCorretorMes(mesEscolhido, anoEscolhido, cor);
+        ganhoAno = ctrVenda.pagCorretorAnual(mesEscolhido, anoEscolhido, cor);
+        
         //Mostra o valor do salário
         jTextFieldGanhoMes.setText("R$" + ganhoMes);
         jTextFieldGanhoAno.setText("R$" + ganhoAno);
-
 
     }//GEN-LAST:event_jButtonPagarActionPerformed
 

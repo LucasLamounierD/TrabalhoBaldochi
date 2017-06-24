@@ -69,6 +69,72 @@ public class ControleVendas {
         salva();
     }
 
+    //Metodo que calcula o salário mensal de um corretor
+    public double pagCorretorMes(int pMes, int pAno, Corretor pCorretor) {
+        double salarioMensal = 0;
+        //Vai percorrer a lista de vendas
+        for (Venda v : listaVenda) {
+            //Recebe a data da venda e a transforma em int para poder realizar a comparação
+            Date data = v.getDataVenda();
+            Calendar cal = Calendar.getInstance();
+            cal.setTime(new Date(data.getTime()));
+            int ano = cal.get(Calendar.YEAR);
+            //O campo date da venda armazenou os dados no formato MM/dd/YYYY,
+            //Usuando calendar para pegar o mes e ano, ele usa o formato dd//MM/YYYY, por isso é para pegar o mês é necessário pegar o dia do calendar
+            int mes = cal.get(Calendar.DAY_OF_MONTH);
+
+            if (ano == pAno && pCorretor.getNome().equals(v.getNomeCorretor().getNome())) {
+                //Caso o mes seja igual ao da venda calcula para comissionado e para contratado
+                if (mes == pMes) {
+                    if (pCorretor instanceof Comissionado) {
+                        salarioMensal += v.getValorReal() * ((Comissionado) pCorretor).getComissao();
+                    } else {
+                        salarioMensal += v.getValorReal() * (0.01);
+                    }
+                }
+            }
+        }
+
+        //Adiciona o salário fixo caso o corretor seja contratado
+        if (pCorretor instanceof Contratado) {
+            salarioMensal += ((Contratado) pCorretor).getSalarioFixo();
+        }
+
+        return salarioMensal;
+    }
+
+    //Metodo que calcula o salário anual de um corretor
+    public double pagCorretorAnual(int pMes, int pAno, Corretor pCorretor) {
+        double salarioAnual = 0;
+        
+        //Vai percorrer a lista de vendas
+        for (Venda v : listaVenda) {
+            //Recebe a data da venda e a transforma em int para poder realizar a comparação
+            Date data = v.getDataVenda();
+            Calendar cal = Calendar.getInstance();
+            cal.setTime(new Date(data.getTime()));
+            int ano = cal.get(Calendar.YEAR);
+            //O campo date da venda armazenou os dados no formato MM/dd/YYYY,
+            //Usuando calendar para pegar o mes e ano, ele usa o formato dd//MM/YYYY, por isso é para pegar o mês é necessário pegar o dia do calendar
+            int mes = cal.get(Calendar.DAY_OF_MONTH);
+            if (ano == pAno && pCorretor.getNome().equals(v.getNomeCorretor().getNome())) {
+                 //Aqui realiza a soma do vendedor para saber seus ganhos anuais
+                if (pCorretor instanceof Comissionado) {
+                    salarioAnual += v.getValorReal() * ((Comissionado) pCorretor).getComissao();
+                } else {
+                    salarioAnual += v.getValorReal() * (0.01);
+                }
+            }
+        }
+        
+         //Adiciona o salário fixo caso o corretor seja contratado
+        if (pCorretor instanceof Contratado) {
+            salarioAnual += pMes * ((Contratado) pCorretor).getSalarioFixo();
+        }
+        
+        return salarioAnual;
+    }
+
     //Metodo que irá serializar os dados de venda e irá coloca-los no arquivo vendas.dat 
     private void serializaVenda() throws Exception {
         //Vai realizar as conversões necessárias para conseguir escrever os dados que estão na listaVenda
@@ -122,20 +188,20 @@ public class ControleVendas {
             }
 
         }
-        
+
         //SETA O MODELO DA TABELA PARA INSERÇÃO DAS VENDAS
         DefaultTableModel t = (DefaultTableModel) tabelaVenda.getModel();
-        
+
         //LIMPA O QUE HAVIA NA TABELA PASSADA PARA RENOVAR OS VALORES
         t.setNumRows(0);
-        
+
         //ADICIONA NA TABELA AS VENDAS DO MES QUE ESTAO NO ARRAY AUXILIAR
         for (Venda v : vendasMes) {
 
-            t.addRow(new Object[]{v.getImovelVendido().getCodigo(),v.getNomeCorretor().getNome(),v.getValorReal()});
-            
+            t.addRow(new Object[]{v.getImovelVendido().getCodigo(), v.getNomeCorretor().getNome(), v.getValorReal()});
+
         }
-        
+
         return valorVendas;//RETORNA O VALOR TOTAL DAS VENDAS PARA EXIBIR COMO TOTAL NO PAINEL
 
     }
