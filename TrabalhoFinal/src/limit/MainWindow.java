@@ -20,6 +20,8 @@ import util.Util;
 public class MainWindow extends javax.swing.JFrame {
 
     private ControlePrincipal ctrPrincipal;
+    
+    private boolean activeEventChangeTypeImoveis = true;
 
     /**
      * Creates new form MainWindow
@@ -355,7 +357,7 @@ public class MainWindow extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenuItem4ActionPerformed
 
     private void filtroImoveisItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_filtroImoveisItemStateChanged
-        if(filtroImoveis.getSelectedIndex()!=-1){
+        if(activeEventChangeTypeImoveis && filtroImoveis.getSelectedIndex()!=-1){
             ctrPrincipal.getObjControleImovel().updateTableImoveis(filtroImoveis.getSelectedItem().toString(),false);
         }
     }//GEN-LAST:event_filtroImoveisItemStateChanged
@@ -399,11 +401,7 @@ public class MainWindow extends javax.swing.JFrame {
     public void setModelTableImoveis(DefaultTableModel pTableModel){
         tableImoveis.removeAll();
         tableImoveis.setModel(pTableModel);
-    }
-    
-    public String getFiltroTipoDeImovel() {
-        return filtroImoveis.getSelectedItem().toString();    
-    }
+    }        
     
     public void setTipoDeImoveis(DefaultComboBoxModel modelTipo) {        
         filtroImoveis.setModel( modelTipo);
@@ -411,7 +409,21 @@ public class MainWindow extends javax.swing.JFrame {
     
     public void msgDeNaoSelecao(){
         JOptionPane.showMessageDialog(rootPane,"Nenhum Elemento Selecionado!","Erro na Seleção",JOptionPane.ERROR_MESSAGE);
+    } 
+    
+    public void setActiveEventChangeFiltroTipoDeImovel(boolean  activeEventChangeTypeImoveis) {
+        this.activeEventChangeTypeImoveis = activeEventChangeTypeImoveis;
+    }
+    
+    public boolean isActiveEventChangeTypeImoveis() {
+        return activeEventChangeTypeImoveis;
+    }
+    
+    public void setSelectedFiltroTipoImoveis(String type){
+        filtroImoveis.setSelectedItem(type);
     }
 
 
+
+    
 }

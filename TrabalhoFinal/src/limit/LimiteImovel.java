@@ -57,6 +57,8 @@ public class LimiteImovel extends javax.swing.JFrame {
         jTextAreaDescrição.setColumns(20);
         jTextAreaDescrição.setLineWrap(true);
         jTextAreaDescrição.setRows(5);
+        jTextAreaDescrição.setWrapStyleWord(true);
+        jTextAreaDescrição.setCursor(new java.awt.Cursor(java.awt.Cursor.TEXT_CURSOR));
         jScrollPane1.setViewportView(jTextAreaDescrição);
 
         jLabel4.setText("Nome do proprietário:");
@@ -80,6 +82,8 @@ public class LimiteImovel extends javax.swing.JFrame {
                 jButtonCancelarActionPerformed(evt);
             }
         });
+
+        JFormattedData.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.DateFormatter()));
 
         jTextFieldPreco.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#0.00"))));
         jTextFieldPreco.setToolTipText("");
@@ -169,6 +173,7 @@ public class LimiteImovel extends javax.swing.JFrame {
 
     //Caso seja apertado o botão Cadastrar será pego as informações que estão nos Jtext, e irá passa-las para o controle e será validado lá
     private void jButtonCadastrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCadastrarActionPerformed
+        System.out.println("Clicado");
         String msg="";
         try {
             if(jButtonCadastrar.getActionCommand().equals("Create")){

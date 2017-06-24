@@ -64,10 +64,11 @@ public class ControleImovel {
         if(i>-1){
             vecImovel.remove(i);
             salva();
-            updateTableImoveis(ctrPrincipal.getObjLimPrincipal().getFiltroTipoDeImovel(),true);
+            updateTableImoveis(comboBoxTipoImoveisDispModel.getSelectedItem().toString(),true);            
             return;
         } 
     }
+
 
     //Metodo que será responsável pelo recebimento dos dados informados no limite
     public void cadImovel(String pCod, String pTipo, String pDescricao, String pNomeProp, String pPreco, String pData) throws Exception {
@@ -81,10 +82,8 @@ public class ControleImovel {
         //Instanciado Objeto e adicionando ao vetor
         Imovel i = new Imovel(pCod, pTipo, pDescricao, pNomeProp, preço, pData);
         vecImovel.add(i);
-        tableImoveisModel.addRow(new Object[]{i.getCodigo(),i.getTipo(),i.getPreco(),i.getNomePropietario()});
         salva();
-        updateTableImoveis(ctrPrincipal.getObjLimPrincipal().getFiltroTipoDeImovel(),true);
-      //  ctrPrincipal.updateFiltroImoveis(comboBoxTipoImoveisDispModel);
+        updateTableImoveis(comboBoxTipoImoveisDispModel.getSelectedItem().toString(),true);
     }
 
     //Metodo que será responsavel por editar o imovel selecionado
@@ -96,7 +95,7 @@ public class ControleImovel {
         i.setPreco(preco);
         i.setDescricao(descricao);
         salva();
-        updateTableImoveis(ctrPrincipal.getObjLimPrincipal().getFiltroTipoDeImovel(),false);
+        updateTableImoveis(comboBoxTipoImoveisDispModel.getSelectedItem().toString(),false);
     }
     
     //Serializa o Array de Imovel, o passando para o arquivo imoveis.dat
@@ -154,24 +153,33 @@ public class ControleImovel {
         }
     }
     
-    public void updateTableImoveis(String filterType,boolean updateModelTypeToo){               
-        tableImoveisModel.setRowCount(0);
- 
+    public void updateTableImoveis(String filterType,boolean updateModelTypeToo){             
+        
+        tableImoveisModel.setRowCount(0);  
+        
         if(updateModelTypeToo){
+            ctrPrincipal.getObjLimPrincipal().setActiveEventChangeFiltroTipoDeImovel(false);
             comboBoxTipoImoveisDispModel.removeAllElements();
-             comboBoxTipoImoveisDispModel.addElement("Todos");
-        }
+            comboBoxTipoImoveisDispModel.addElement("Todos");
+        }       
+        
         for(Imovel i: vecImovel){            
             if(updateModelTypeToo && comboBoxTipoImoveisDispModel.getIndexOf(i.getTipo())==-1){
                 comboBoxTipoImoveisDispModel.addElement(i.getTipo());
-            } 
+            }
             
            if(filterType.equals("Todos")){
                tableImoveisModel.addRow(new Object[]{i.getCodigo(), i.getTipo(), String.valueOf(i.getPreco()), i.getNomePropietario()});
-           }else if(i.getTipo().equals(filterType)){
+           } if(i.getTipo().equals(filterType)){
                tableImoveisModel.addRow(new Object[]{i.getCodigo(), i.getTipo(), String.valueOf(i.getPreco()), i.getNomePropietario()});
            } 
         }
+        
+        if(updateModelTypeToo){
+            ctrPrincipal.getObjLimPrincipal().setActiveEventChangeFiltroTipoDeImovel(true);
+            ctrPrincipal.getObjLimPrincipal().setSelectedFiltroTipoImoveis(filterType);
+        }
+        
     }
     
     public void finalize() throws Exception {
