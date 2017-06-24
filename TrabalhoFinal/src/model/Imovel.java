@@ -1,8 +1,10 @@
 package model;
 
 import java.io.*;
+import java.text.DateFormat;
 import java.text.NumberFormat;
 import java.util.*;
+
 
 public class Imovel implements Serializable{
 

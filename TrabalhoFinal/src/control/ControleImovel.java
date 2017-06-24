@@ -12,14 +12,18 @@ import util.Util;
 public class ControleImovel {
 
     //Declaração das variavéis
-    private Vector<Imovel> vecImovel = new Vector<>();
+    private Vector<Imovel> vecImovel;
     private LimiteImovel limImovel;
     private ControlePrincipal ctrPrincipal;
+    
     private DefaultTableModel tableImoveisModel;
+    private DefaultComboBoxModel comboBoxTipoImoveisDispModel;
     private int IndexBeingEditedNow;
 
     //Construtor do controle de Imovel
     public ControleImovel(ControlePrincipal pCtrPrincipal) throws Exception {
+        vecImovel = new Vector();
+        comboBoxTipoImoveisDispModel = new DefaultComboBoxModel ();
         //Passa o controle recebido para a variável ctrPrincipal
         ctrPrincipal = pCtrPrincipal;
         limImovel = new LimiteImovel(this);//Instacia uma janela para o cadastro
@@ -33,22 +37,36 @@ public class ControleImovel {
         limImovel.setTypeOperation(Util.OP_CREATE);
         limImovel.setVisible(true);
     }
+    
     //Metodo que será o responsavél por deixar visível a janela
-    void abrirJanelaEditorImovel(int index){
-        IndexBeingEditedNow = index;
-        Imovel i = vecImovel.get(index);
+    void abrirJanelaEditorImovel(String chave){
+        IndexBeingEditedNow = buscaIndiceListaImovel(chave);
+        Imovel i = vecImovel.get(IndexBeingEditedNow);
         
         limImovel.setValueField(i.getCodigo(),i.getTipo(),i.getNomePropietario(),
                                 i.getPreco(),i.getDataCad(),i.getDescricao());
         limImovel.setTypeOperation(Util.OP_EDIT);
         limImovel.setVisible(true);
     }
+    //Metodo recebe um codigo e usa como chave de busca
+    public int buscaIndiceListaImovel(String chaveCodigo){
+        for(int i=0;i<vecImovel.size();i++){
+            if(vecImovel.get(i).getCodigo().equals(chaveCodigo)){
+                return i;
+            }
+        }
+        return -1;
+    }
     
     //Metodo que irá remover um imóvel
-    void removeImovel(int pIndex){
-        vecImovel.remove(pIndex);
-        tableImoveisModel.removeRow(pIndex);
-        salva();
+    void removeImovel(String chave){
+        int i= buscaIndiceListaImovel(chave);
+        if(i>-1){
+            vecImovel.remove(i);
+            salva();
+            updateTableImoveis(ctrPrincipal.getObjLimPrincipal().getFiltroTipoDeImovel(),true);
+            return;
+        } 
     }
 
     //Metodo que será responsável pelo recebimento dos dados informados no limite
@@ -65,6 +83,8 @@ public class ControleImovel {
         vecImovel.add(i);
         tableImoveisModel.addRow(new Object[]{i.getCodigo(),i.getTipo(),i.getPreco(),i.getNomePropietario()});
         salva();
+        updateTableImoveis(ctrPrincipal.getObjLimPrincipal().getFiltroTipoDeImovel(),true);
+      //  ctrPrincipal.updateFiltroImoveis(comboBoxTipoImoveisDispModel);
     }
 
     //Metodo que será responsavel por editar o imovel selecionado
@@ -76,6 +96,7 @@ public class ControleImovel {
         i.setPreco(preco);
         i.setDescricao(descricao);
         salva();
+        updateTableImoveis(ctrPrincipal.getObjLimPrincipal().getFiltroTipoDeImovel(),false);
     }
     
     //Serializa o Array de Imovel, o passando para o arquivo imoveis.dat
@@ -108,34 +129,60 @@ public class ControleImovel {
 
     }
 
-    public void instTableImoveisModel() {
-
+    //Cria a model da tabela e analisa quais tipos de imoveis estão disponiveis
+    public void instTableImoveisModel() {         
+        //Desabilita a edição dos campos da tabela
         tableImoveisModel = new DefaultTableModel() {
             @Override
             public boolean isCellEditable(int row, int colunm) {
                 return false;
             }
         };
-
+        //Adiciona as colunas
         tableImoveisModel.addColumn("CODIGO");
         tableImoveisModel.addColumn("TIPO");
         tableImoveisModel.addColumn("PREÇO");
         tableImoveisModel.addColumn("PROPRIETÁRIO");
 
-        for (Imovel i : vecImovel) {
+        //Analisa imoveis disponiveis
+        comboBoxTipoImoveisDispModel.addElement("Todos");
+        for (Imovel i : vecImovel) {            
+            if(comboBoxTipoImoveisDispModel.getIndexOf(i.getTipo())==-1){
+                comboBoxTipoImoveisDispModel.addElement(i.getTipo());
+            }            
             tableImoveisModel.addRow(new Object[]{i.getCodigo(), i.getTipo(), String.valueOf(i.getPreco()), i.getNomePropietario()});
         }
+    }
+    
+    public void updateTableImoveis(String filterType,boolean updateModelTypeToo){               
+        tableImoveisModel.setRowCount(0);
+ 
+        if(updateModelTypeToo){
+            comboBoxTipoImoveisDispModel.removeAllElements();
+             comboBoxTipoImoveisDispModel.addElement("Todos");
+        }
+        for(Imovel i: vecImovel){            
+            if(updateModelTypeToo && comboBoxTipoImoveisDispModel.getIndexOf(i.getTipo())==-1){
+                comboBoxTipoImoveisDispModel.addElement(i.getTipo());
+            } 
+            
+           if(filterType.equals("Todos")){
+               tableImoveisModel.addRow(new Object[]{i.getCodigo(), i.getTipo(), String.valueOf(i.getPreco()), i.getNomePropietario()});
+           }else if(i.getTipo().equals(filterType)){
+               tableImoveisModel.addRow(new Object[]{i.getCodigo(), i.getTipo(), String.valueOf(i.getPreco()), i.getNomePropietario()});
+           } 
+        }
+    }
+    
+    public void finalize() throws Exception {
+        serializaImovel();
     }
 
     public DefaultTableModel getTableCorretoresModel() {
         return tableImoveisModel;
     }
 
-    public void finalize() throws Exception {
-        serializaImovel();
-    }
-    
-     public Vector getVecImovel() {
+    public Vector getVecImovel() {
         return vecImovel;
     }
 
@@ -143,4 +190,9 @@ public class ControleImovel {
         return ctrPrincipal;
     }
 
+    public DefaultComboBoxModel getComboBoxTipoImoveisDispModel() {
+        return comboBoxTipoImoveisDispModel;
+    }
+
+    
 }

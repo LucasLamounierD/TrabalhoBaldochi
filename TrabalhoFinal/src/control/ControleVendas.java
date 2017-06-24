@@ -63,7 +63,7 @@ public class ControleVendas {
         Imovel imovel = (Imovel) ctrPrincipal.getObjControleImovel().getVecImovel().elementAt(pIndexCodImovel);
         //No momento em que cadastrar uma venda automaticamente irá retirar da lista de imóveis o imóvel vendido
         listaVenda.add(new Venda(imovel,corretor,pNome,new Date(pData), preco));
-        ctrPrincipal.getObjControleImovel().removeImovel(pIndexCodImovel);
+        ctrPrincipal.getObjControleImovel().removeImovel(imovel.getCodigo());
         salva();
     }
     

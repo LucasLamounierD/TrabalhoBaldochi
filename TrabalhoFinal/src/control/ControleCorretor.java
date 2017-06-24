@@ -52,10 +52,14 @@ public class ControleCorretor {
             lmtCorretor.setEnabledField(false,false,false,true,false,false);
             
         }else if(tempCorr instanceof Contratado ){//Se for contratado
+              
+            Locale local = new Locale("pt","Br");
+            DateFormat df = DateFormat.getDateInstance(DateFormat.MEDIUM, local);
+            
             lmtCorretor.setValueField(OP_CONTRATADO,tempCorr.getNome()
                                                    ,tempCorr.getCrecic()
                                                    ,"1"
-                                                   ,((Contratado) tempCorr).getDataAdmissao().toString()
+                                                   ,df.format(((Contratado) tempCorr).getDataAdmissao())
                                                    ,""+((Contratado) tempCorr).getSalarioFixo());
             //Desabilita edição de todos os campos, exceto o campo de valor de salario
             lmtCorretor.setEnabledField(false,false,false,false,false,true);

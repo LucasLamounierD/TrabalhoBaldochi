@@ -6,6 +6,9 @@
 package limit;
 
 import control.ControlePrincipal;
+import java.util.Vector;
+import javax.swing.ComboBoxModel;
+import javax.swing.DefaultComboBoxModel;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import util.Util;
@@ -41,18 +44,6 @@ public class MainWindow extends javax.swing.JFrame {
             java.util.logging.Logger.getLogger(MainWindow.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }*/
 
-    }
-
-    //Defini uma modelTable para a tabela corretores
-    public void setModelTableCorretores(DefaultTableModel pTableModel) {
-        tableCorretores.removeAll();
-        tableCorretores.setModel(pTableModel);
-    }
-
-    //Defini uma modelTable para a tabela Imoveis
-    public void setModelTableImoveis(DefaultTableModel pTableModel){
-        tableImoveis.removeAll();
-        tableImoveis.setModel(pTableModel);
     }
     
  /**
@@ -149,7 +140,12 @@ public class MainWindow extends javax.swing.JFrame {
             }
         });
 
-        filtroImoveis.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        filtroImoveis.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Todos" }));
+        filtroImoveis.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                filtroImoveisItemStateChanged(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -326,7 +322,10 @@ public class MainWindow extends javax.swing.JFrame {
 
     private void btnEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditarActionPerformed
        if(tableImoveis.getSelectedRow()!=-1){
-            ctrPrincipal.abrirJanelaEditorImoveis(tableImoveis.getSelectedRow());
+           int ind = tableImoveis.getSelectedRow();                 
+           ctrPrincipal.abrirJanelaEditorImoveis(tableImoveis.getValueAt(ind,0).toString());            
+       }else{
+            msgDeNaoSelecao();
        }
     }//GEN-LAST:event_btnEditarActionPerformed
 
@@ -334,9 +333,13 @@ public class MainWindow extends javax.swing.JFrame {
         if(tableImoveis.getSelectedRow()!=-1){
             int resp = JOptionPane.showConfirmDialog(this,"Você tem certeza que deseja excluir a linha selecionada?",
                                           "Operação de Exclusão",0);
-            System.out.println(resp);
-           // ctrPrincipal.deleteImovelIndex(tableImoveis.getSelectedRow());
-       }
+            if(resp==0){
+                 int ind = tableImoveis.getSelectedRow();
+                 ctrPrincipal.removeImovel(tableImoveis.getValueAt(ind,0).toString());
+            }
+       }else{
+            msgDeNaoSelecao();
+        }
     }//GEN-LAST:event_btnExcluirActionPerformed
     private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
         
@@ -350,6 +353,12 @@ public class MainWindow extends javax.swing.JFrame {
         ctrPrincipal.abrirJanelaFormFaturamento();
         
     }//GEN-LAST:event_jMenuItem4ActionPerformed
+
+    private void filtroImoveisItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_filtroImoveisItemStateChanged
+        if(filtroImoveis.getSelectedIndex()!=-1){
+            ctrPrincipal.getObjControleImovel().updateTableImoveis(filtroImoveis.getSelectedItem().toString(),false);
+        }
+    }//GEN-LAST:event_filtroImoveisItemStateChanged
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -379,4 +388,30 @@ public class MainWindow extends javax.swing.JFrame {
     private javax.swing.JTable tableCorretores;
     private javax.swing.JTable tableImoveis;
     // End of variables declaration//GEN-END:variables
+
+    //Defini uma modelTable para a tabela corretores
+    public void setModelTableCorretores(DefaultTableModel pTableModel) {
+        tableCorretores.removeAll();
+        tableCorretores.setModel(pTableModel);
+    }
+
+    //Defini uma modelTable para a tabela Imoveis
+    public void setModelTableImoveis(DefaultTableModel pTableModel){
+        tableImoveis.removeAll();
+        tableImoveis.setModel(pTableModel);
+    }
+    
+    public String getFiltroTipoDeImovel() {
+        return filtroImoveis.getSelectedItem().toString();    
+    }
+    
+    public void setTipoDeImoveis(DefaultComboBoxModel modelTipo) {        
+        filtroImoveis.setModel( modelTipo);
+    }
+    
+    public void msgDeNaoSelecao(){
+        JOptionPane.showMessageDialog(rootPane,"Nenhum Elemento Selecionado!","Erro na Seleção",JOptionPane.ERROR_MESSAGE);
+    }
+
+
 }

@@ -1,7 +1,9 @@
 package limit;
 
 import control.ControleImovel;
+import java.text.DateFormat;
 import java.util.Date;
+import java.util.Locale;
 import javax.swing.JOptionPane;
 import util.Util;
 
@@ -53,6 +55,7 @@ public class LimiteImovel extends javax.swing.JFrame {
         jLabel3.setText("Descrição:");
 
         jTextAreaDescrição.setColumns(20);
+        jTextAreaDescrição.setLineWrap(true);
         jTextAreaDescrição.setRows(5);
         jScrollPane1.setViewportView(jTextAreaDescrição);
 
@@ -222,11 +225,17 @@ public class LimiteImovel extends javax.swing.JFrame {
 
      public void setValueField(String pCodigo,String pTipo,String pNomeProp,
                                 float pPreco,Date pData,String descricao ) {
+         
+                
+        Locale local = new Locale("pt","Br");
+        DateFormat df = DateFormat.getDateInstance(DateFormat.MEDIUM, local);
+         
+         
         jTextFieldCodigo.setText(pCodigo);
         jComboBoxTipo.setSelectedItem(pTipo);
         jTextFieldNomeProp.setText(pNomeProp);
         jTextFieldPreco.setText(""+pPreco);        
-        JFormattedData.setText(pData.toString());
+        JFormattedData.setText(df.format(pData));         
         jTextAreaDescrição.setText(descricao);
     }
    

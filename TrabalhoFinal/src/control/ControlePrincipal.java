@@ -1,6 +1,7 @@
 package control;
 
 import control.ControleCorretor;
+import java.util.Vector;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import limit.MainWindow;
@@ -31,18 +32,24 @@ public class ControlePrincipal {
     public void initTableImoveis(){
         //Recebe do controller imovel a model da tabela
         DefaultTableModel tableImoveisModel = objControleImovel.getTableCorretoresModel();
+       //defini como model da tabela a model recebida do controle imovel.
         objLimPrincipal.setModelTableImoveis(tableImoveisModel);
-        //defini como model da tabela a model recebida do controller imovel.
-        
+        //Carregando tipos de Imoveis
+        objLimPrincipal.setTipoDeImoveis(objControleImovel.getComboBoxTipoImoveisDispModel());
+    }
+    
+    public void removeImovel(String valueAt) {
+        objControleImovel.removeImovel(valueAt);
     }
 
     //Inicializa campos da tabela de Corretores
     public void initTableCorretores() {
         //Recebe do controller corretor a model da tabela
         DefaultTableModel tableCorretoresModel = objControleCorretor.getTableCorretoresModel();
-        objLimPrincipal.setModelTableCorretores(tableCorretoresModel);
         //defini como model da tabela a model recebida do controller corretor.
+        objLimPrincipal.setModelTableCorretores(tableCorretoresModel);
     }
+    
 
     public void finalize() {
         try {
@@ -67,7 +74,7 @@ public class ControlePrincipal {
         objControleVendas.abrirJanelaVenda();
     }
     
-    public void abrirJanelaEditorImoveis(int selectedRow) {
+    public void abrirJanelaEditorImoveis(String selectedRow) {
         objControleImovel.abrirJanelaEditorImovel(selectedRow);
     }
     
@@ -84,11 +91,6 @@ public class ControlePrincipal {
         objControleCorretor.abrirJanelaEditar(linhaIndex);        
     }
     
-    
-    public static void main (String [] args){
-        ControlePrincipal main = new ControlePrincipal();
-    }
-
     public ControleCorretor getObjControleCorretor() {
         return objControleCorretor;
     }
@@ -100,6 +102,21 @@ public class ControlePrincipal {
     public ControleVendas getObjControleVendas() {
         return objControleVendas;
     }
+
+    public MainWindow getObjLimPrincipal() {
+        return objLimPrincipal;
+    }    
+    
+    
+    public static void main (String [] args){
+        ControlePrincipal main = new ControlePrincipal();
+    }
+
+    
+
+    
+
+    
 
 
 }

@@ -2,6 +2,8 @@ package limit;
 
 
 import control.ControleCorretor;
+import java.text.DateFormat;
+import java.util.Locale;
 import javax.swing.*;
 import util.Util;
 
@@ -23,7 +25,7 @@ public class LimiteCorretor extends javax.swing.JFrame {
     //Defini valores para cada do formulario
     public void setValueField(int tipoCorretor, String nome, String CRECIC,
                                  String comissao, String dataAdmissao, String salario){
-       
+        
         this.setSelectedComboTipoCorretor(tipoCorretor);
         jTextNome.setText(nome);
         jTextCrecic.setText(CRECIC);
