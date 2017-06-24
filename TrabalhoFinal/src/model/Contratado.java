@@ -1,7 +1,11 @@
 package model;
 
 
+import java.text.DateFormat;
+import java.text.ParseException;
 import java.util.*;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class Contratado extends Corretor {
 
@@ -9,11 +13,11 @@ public class Contratado extends Corretor {
     private Date dataAdmissao;
     private static float comissao = 1 / 100;
 
-    public Contratado(String pNome,String pCrecic, float pSalarioFixo, Date pDataAdmissao) throws Exception{
+    public Contratado(String pNome,String pCrecic, float pSalarioFixo, String pDataAdmissao) throws Exception{
         super(pNome,pCrecic);
  
         this.setSalarioFixo(pSalarioFixo);
-        dataAdmissao = pDataAdmissao;        
+        this.setDataAdmissao(pDataAdmissao);
     }
 
     public float getSalarioFixo() {
@@ -31,8 +35,15 @@ public class Contratado extends Corretor {
         return dataAdmissao;
     }
 
-    public void setDataAdmissao(Date dataAdmissao) {
-        this.dataAdmissao = dataAdmissao;
+    public void setDataAdmissao(String pDataAdmissao) {
+        Locale local = new Locale("pt","Br");
+        DateFormat df = DateFormat.getDateInstance(DateFormat.MEDIUM, local);
+        
+        try {
+            this.dataAdmissao = df.parse(pDataAdmissao);
+        } catch (ParseException ex) {
+            Logger.getLogger(Contratado.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
     
     

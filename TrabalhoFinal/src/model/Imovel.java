@@ -3,7 +3,11 @@ package model;
 import java.io.*;
 import java.text.DateFormat;
 import java.text.NumberFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.*;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 
 public class Imovel implements Serializable{
@@ -32,7 +36,7 @@ public class Imovel implements Serializable{
         this.setNomePropietario(pNomePropietario);
         this.setDescricao(pDescricao);        
         this.setPreco(pPreco);
-        dataCad = new Date(pDataCad);
+        this.setDataCad(pDataCad);
     }
 
     public String getCodigo() {
@@ -83,8 +87,14 @@ public class Imovel implements Serializable{
         return dataCad;
     }
 
-    public void setDataCad(Date dataCad) {
-        this.dataCad = dataCad;
+    public void setDataCad(String dataCad) {
+        Locale local = new Locale("pt","Br");
+        DateFormat df = DateFormat.getDateInstance(DateFormat.MEDIUM, local);
+        try {
+            this.dataCad = df.parse(dataCad);
+        } catch (ParseException ex) {
+            Logger.getLogger(Imovel.class.getName()).log(Level.SEVERE, null, ex);
+        }         
     }
 
 }

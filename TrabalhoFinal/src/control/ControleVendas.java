@@ -64,6 +64,7 @@ public class ControleVendas {
         Corretor corretor = (Corretor) ctrPrincipal.getObjControleCorretor().getVecCorretor().elementAt(pIndexCorretor);
         Imovel imovel = (Imovel) ctrPrincipal.getObjControleImovel().getVecImovel().elementAt(pIndexCodImovel);
         //No momento em que cadastrar uma venda automaticamente irá retirar da lista de imóveis o imóvel vendido
+        
         listaVenda.add(new Venda(imovel,corretor,pNome,new Date(pData), preco));
         ctrPrincipal.getObjControleImovel().removeImovel(imovel.getCodigo());
         salva();
@@ -179,9 +180,9 @@ public class ControleVendas {
 
         //ADICIONA AS VENDAS QUE SÃO DO MES E ANO INFORMADO A UM ARRAY TEMPORARIO
         for (Venda v : listaVenda) {
-
+            System.out.println(v.getDataVenda());
             if (((v.getDataVenda().getYear() + 1900) == pAno) && ((v.getDataVenda().getMonth()) == pMes)) {
-
+                System.out.println("+"+v.getValorReal());
                 vendasMes.add(v);
                 valorVendas += v.getValorReal();//FAZ O CALCULO DO VALOR TOTAL DE VENDAS PARA EXIBIÇÃO
 
@@ -197,11 +198,9 @@ public class ControleVendas {
 
         //ADICIONA NA TABELA AS VENDAS DO MES QUE ESTAO NO ARRAY AUXILIAR
         for (Venda v : vendasMes) {
-
             t.addRow(new Object[]{v.getImovelVendido().getCodigo(), v.getNomeCorretor().getNome(), v.getValorReal()});
-
         }
-
+        //t.addRow(new Object[]{"foi", "foi", "foi"});
         return valorVendas;//RETORNA O VALOR TOTAL DAS VENDAS PARA EXIBIR COMO TOTAL NO PAINEL
 
     }

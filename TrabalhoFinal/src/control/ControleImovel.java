@@ -69,16 +69,12 @@ public class ControleImovel {
         } 
     }
 
-
     //Metodo que será responsável pelo recebimento dos dados informados no limite
     public void cadImovel(String pCod, String pTipo, String pDescricao, String pNomeProp, String pPreco, String pData) throws Exception {
         //declarando variaveis auxiliares para conversao e cadastro
         float preço = 0;
         //fazendo a conversão das preco   
-        if (!pPreco.isEmpty()) {
-            NumberFormat nf = NumberFormat.getNumberInstance(new Locale("pt", "BR"));
-            preço = nf.parse(pPreco).floatValue();
-        }  
+        preço = Util.convFloatComVirgula(pPreco);
         //Instanciado Objeto e adicionando ao vetor
         Imovel i = new Imovel(pCod, pTipo, pDescricao, pNomeProp, preço, pData);
         vecImovel.add(i);
@@ -87,13 +83,14 @@ public class ControleImovel {
     }
 
     //Metodo que será responsavel por editar o imovel selecionado
-    public void editImovel(String pNomeProp,String pPreco,Date pData,String descricao) throws Exception{
+    public void editImovel(String pNomeProp,String pPreco,String pData,String descricao) throws Exception{
         Imovel i = vecImovel.get(IndexBeingEditedNow);
         float preco = Util.convFloatComVirgula(pPreco);        
         
         i.setNomePropietario(pNomeProp);        
         i.setPreco(preco);
         i.setDescricao(descricao);
+        i.setDataCad(pData);
         salva();
         updateTableImoveis(comboBoxTipoImoveisDispModel.getSelectedItem().toString(),false);
     }

@@ -99,7 +99,7 @@ public class ControleCorretor {
             
          }else{//Validando campos mais especificos e chamando construtor do contratado
             
-            Contratado c =new Contratado(pNome,pCrecic,salario,new Date(pData));
+            Contratado c =new Contratado(pNome,pCrecic,salario,pData);
             vecCorretor.add(c); 
             salva();
             //Adiciona na tabela da janela principal o corretor.

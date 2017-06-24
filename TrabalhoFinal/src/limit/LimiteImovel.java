@@ -192,7 +192,7 @@ public class LimiteImovel extends javax.swing.JFrame {
             }else if(jButtonCadastrar.getActionCommand().equals("Edit")){
                 ctrImovel.editImovel(jTextFieldNomeProp.getText(),
                                      jTextFieldPreco.getText(),
-                                     new Date(JFormattedData.getText()),
+                                     JFormattedData.getText(),
                                      jTextAreaDescrição.getText());
                 JOptionPane.showMessageDialog(rootPane, "Imóvel Editado com sucesso",
                 "SUCESSO",JOptionPane.INFORMATION_MESSAGE);
