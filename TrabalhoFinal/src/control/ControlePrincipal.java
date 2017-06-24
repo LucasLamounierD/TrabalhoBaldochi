@@ -83,7 +83,9 @@ public class ControlePrincipal {
     }
     
     public void abrirJanelaFormFaturamento(){
-        objControleVendas.calculaFaturamento();
+        //ABRE A JANELA PARA MOSTRAR O FATURAMENTO DE UM MES
+        objControleVendas.janelaFaturamento(1);//O NUMERO 1 É UTILIZADO PARA SELEÇÃO
+                                               //DA JANELA NO LIMITE
     }
     
     //Gerencia qual opção de menu o usuario acionou e chama o controle responsavel 
