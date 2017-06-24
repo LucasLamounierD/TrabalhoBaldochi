@@ -87,7 +87,7 @@ public class ControleVendas {
                 //Caso o mes seja igual ao da venda calcula para comissionado e para contratado
                 if (mes == pMes) {
                     if (pCorretor instanceof Comissionado) {
-                        salarioMensal += v.getValorReal() * ((Comissionado) pCorretor).getComissao();
+                        salarioMensal += v.getValorReal() * ((Comissionado) pCorretor).getComissao()/100;
                     } else {
                         salarioMensal += v.getValorReal() * (0.01);
                     }
@@ -120,7 +120,7 @@ public class ControleVendas {
             if (ano == pAno && pCorretor.getNome().equals(v.getNomeCorretor().getNome())) {
                  //Aqui realiza a soma do vendedor para saber seus ganhos anuais
                 if (pCorretor instanceof Comissionado) {
-                    salarioAnual += v.getValorReal() * ((Comissionado) pCorretor).getComissao();
+                    salarioAnual += v.getValorReal() * ((Comissionado) pCorretor).getComissao()/100;
                 } else {
                     salarioAnual += v.getValorReal() * (0.01);
                 }
