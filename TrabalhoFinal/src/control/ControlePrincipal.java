@@ -4,11 +4,13 @@ import control.ControleCorretor;
 import java.util.Vector;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
+import limit.LimiteFormularios;
 import limit.MainWindow;
 import util.Util;
 
 public class ControlePrincipal {
-    private MainWindow objLimPrincipal;    
+    private MainWindow objLimPrincipal;   
+    private LimiteFormularios objLimRel;
     private ControleCorretor objControleCorretor;
     private ControleImovel objControleImovel;
     private ControleVendas objControleVendas;
@@ -80,12 +82,16 @@ public class ControlePrincipal {
     
     public void abrirJanelaRealizarPagamento(){
         objControleVendas.abrirJanelaPagamento();
-    }
+    }    
     
-    public void abrirJanelaFormFaturamento(){
-        //ABRE A JANELA PARA MOSTRAR O FATURAMENTO DE UM MES
-        objControleVendas.janelaFaturamento(Util.REL_FATURAMENTO_TOTAL);//O NUMERO 1 É UTILIZADO PARA SELEÇÃO
-                                               //DA JANELA NO LIMITE
+    //Abri janela de relatorio
+    public void abrirJanelaRelatorio(String relatorioEscolhido) {
+        if(objLimRel==null){//Se a janela não estiver instaciada, instacia ela
+            objLimRel = new LimiteFormularios(this);
+            //isso garante que ela so será carregada na memoria quando utilizada pelo menos uma vez
+        }
+        objLimRel.setWhichReportView(relatorioEscolhido);//Setando o relatorio que será utilizado
+        objLimRel.setVisible(true);
     }
     
     //Gerencia qual opção de menu o usuario acionou e chama o controle responsavel 
@@ -113,6 +119,8 @@ public class ControlePrincipal {
     public static void main (String [] args){
         ControlePrincipal main = new ControlePrincipal();
     }
+
+
 
     
 

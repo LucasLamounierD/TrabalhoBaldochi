@@ -17,6 +17,11 @@ public class Util {
     
     public final static String REL_FATURAMENTO_TOTAL = "Faturamento Total";
     public final static String REL_LUCRO_TOTAL = "Lucro Total";
+    public final static String REL_RELACAO_DE_IMOVEIS_VENDIDOS = "Relação de Imoveis Vendidos";
+    public final static String REL_RELACAO_DE_IMOVEIS_ENCALHADOS = "Relação de Imoveis Encalhados";
+    public final static String REL_FATURAMENTO_POR_CORRETOR = "Faturamento por Corretor";
+    public final static String REL_VALOR_PAGO_PARA_CADA_CORRETOR = "O valor pago a cada corretor";
+    public final static String REL_CORRETOR_DO_MES = "Corretor do Mês";
     
     //Metodo para converter String com virgula em float;
     public static float convFloatComVirgula(String valorText){

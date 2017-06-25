@@ -19,10 +19,10 @@ public class LimiteFormularios extends javax.swing.JFrame {
      * Creates new form LimiteFormularios
      */
     String selectionForm;
-    ControleVendas objControleVendas;
+    ControlePrincipal objControlePrin;
 
-    public LimiteFormularios(ControleVendas pCtr) {
-        objControleVendas = pCtr;
+    public LimiteFormularios(ControlePrincipal pCtr) {
+        objControlePrin = pCtr;
         this.setVisible(true);
         initComponents();
     }
@@ -55,6 +55,7 @@ public class LimiteFormularios extends javax.swing.JFrame {
         painelResultadoTotal = new javax.swing.JPanel();
         jLabel3 = new javax.swing.JLabel();
         jLabelValorFinal = new javax.swing.JLabel();
+        faturamentoCadaCorretor = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -91,14 +92,14 @@ public class LimiteFormularios extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(jLabel1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jLabel2)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jComboBoxAno, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(26, 26, 26)
+                .addComponent(jComboBoxAno, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
                 .addComponent(jButtonGerarRelatorio, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
         );
         MenuLayout.setVerticalGroup(
             MenuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -171,11 +172,11 @@ public class LimiteFormularios extends javax.swing.JFrame {
             .addGroup(relatorioFaturamentoLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(painelResultadoTotal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(528, Short.MAX_VALUE))
             .addGroup(relatorioFaturamentoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(relatorioFaturamentoLayout.createSequentialGroup()
                     .addContainerGap()
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 508, Short.MAX_VALUE)
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 735, Short.MAX_VALUE)
                     .addContainerGap()))
         );
         relatorioFaturamentoLayout.setVerticalGroup(
@@ -193,6 +194,19 @@ public class LimiteFormularios extends javax.swing.JFrame {
 
         panelExibicaoRel.add(relatorioFaturamento, "Faturamento Total");
 
+        javax.swing.GroupLayout faturamentoCadaCorretorLayout = new javax.swing.GroupLayout(faturamentoCadaCorretor);
+        faturamentoCadaCorretor.setLayout(faturamentoCadaCorretorLayout);
+        faturamentoCadaCorretorLayout.setHorizontalGroup(
+            faturamentoCadaCorretorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 759, Short.MAX_VALUE)
+        );
+        faturamentoCadaCorretorLayout.setVerticalGroup(
+            faturamentoCadaCorretorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 504, Short.MAX_VALUE)
+        );
+
+        panelExibicaoRel.add(faturamentoCadaCorretor, "Faturamento por Corretor");
+
         javax.swing.GroupLayout panelLayout = new javax.swing.GroupLayout(panel);
         panel.setLayout(panelLayout);
         panelLayout.setHorizontalGroup(
@@ -201,7 +215,7 @@ public class LimiteFormularios extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(Menu, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(panelExibicaoRel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(panelExibicaoRel, javax.swing.GroupLayout.DEFAULT_SIZE, 769, Short.MAX_VALUE))
                 .addContainerGap())
         );
         panelLayout.setVerticalGroup(
@@ -219,14 +233,14 @@ public class LimiteFormularios extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(11, 11, 11)
-                .addComponent(panel, javax.swing.GroupLayout.DEFAULT_SIZE, 564, Short.MAX_VALUE)
+                .addComponent(panel, javax.swing.GroupLayout.DEFAULT_SIZE, 797, Short.MAX_VALUE)
                 .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(12, 12, 12)
-                .addComponent(panel, javax.swing.GroupLayout.DEFAULT_SIZE, 636, Short.MAX_VALUE)
+                .addComponent(panel, javax.swing.GroupLayout.PREFERRED_SIZE, 636, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -239,25 +253,60 @@ public class LimiteFormularios extends javax.swing.JFrame {
         int mes = jComboBox1.getSelectedIndex();
         int ano = Integer.parseInt(jComboBoxAno.getItemAt(jComboBoxAno.getSelectedIndex()));
         
-        //Gerencia qual processamento será feito.
+        //Gerencia qual processamento será feito quando clicado o botão
         if(jButtonGerarRelatorio.getActionCommand().equals(Util.REL_FATURAMENTO_TOTAL)){//Faturamento total
             geraRelatorioFaturamento(mes,ano);            
         }else if(jButtonGerarRelatorio.getActionCommand().equals(Util.REL_LUCRO_TOTAL)){
-            
+            geraRelatorioLucro(mes,ano);
+        }else if(jButtonGerarRelatorio.getActionCommand().equals(Util.REL_RELACAO_DE_IMOVEIS_VENDIDOS)){
+            geraRelatorioImoveisVendidos(mes,ano);
+        }else if(jButtonGerarRelatorio.getActionCommand().equals(Util.REL_RELACAO_DE_IMOVEIS_ENCALHADOS)){
+            geraRelatorioImoveisEncalhados(mes,ano);
+        }else if(jButtonGerarRelatorio.getActionCommand().equals(Util.REL_FATURAMENTO_POR_CORRETOR)){
+            geraRelatorioFaturamentoPorCorretor(mes,ano);
+        }else if(jButtonGerarRelatorio.getActionCommand().equals(Util.REL_VALOR_PAGO_PARA_CADA_CORRETOR)){
+            geraRelatorioValorPagoCorretores(mes,ano);
+        }else if(jButtonGerarRelatorio.getActionCommand().equals(Util.REL_CORRETOR_DO_MES)){
+            geraRelatorioCorretorMes(mes,ano);
         }
     }//GEN-LAST:event_jButtonGerarRelatorioActionPerformed
 
     //Gera relatorio de faturamento
     private void geraRelatorioFaturamento(int mes, int ano){
         //RECEBE O VALOR TOTAL DAS VENDAS E FAZ O PREENCHIMENTO DA TABELA NA FUNÇÃO
-        float total = objControleVendas.buscaVendasMes(mes, ano, jTableVendasDoMes);
+        float total = objControlePrin.getObjControleVendas().buscaVendasMes(mes, ano, jTableVendasDoMes);
 
         //MOSTRA O VALOR TOTAL DAS VENDAS
          jLabelValorFinal.setText("" + total);
     }
+    
+    private void geraRelatorioLucro(int mes, int ano) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    private void geraRelatorioImoveisVendidos(int mes, int ano) {
+        objControlePrin.getObjControleVendas().buscaImoveisVendidos(mes, ano, jTableVendasDoMes);
+    }
+
+    private void geraRelatorioImoveisEncalhados(int mes, int ano) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    private void geraRelatorioFaturamentoPorCorretor(int mes, int ano) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    private void geraRelatorioValorPagoCorretores(int mes, int ano) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    private void geraRelatorioCorretorMes(int mes, int ano) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel Menu;
+    private javax.swing.JPanel faturamentoCadaCorretor;
     private javax.swing.JButton jButtonGerarRelatorio;
     private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JComboBox<String> jComboBoxAno;
@@ -279,8 +328,10 @@ public class LimiteFormularios extends javax.swing.JFrame {
         CardLayout cl = (CardLayout) panelExibicaoRel.getLayout();
         selectionForm = relView;
         //Avalia qual relatorio será exibido       
-        cl.show(panelExibicaoRel, relView);//Exibi o painel de visualização do relatorio escolhido
+     //   cl.show(panelExibicaoRel, relView);//Exibi o painel de visualização do relatorio escolhido
         jButtonGerarRelatorio.setActionCommand(relView);//defini qual processo vai ser executando quando botão gerar for apertado
     }
+
+
 
 }

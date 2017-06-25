@@ -73,11 +73,11 @@ public class MainWindow extends javax.swing.JFrame {
         jMenuVendas = new javax.swing.JMenu();
         jMenuCadVenda = new javax.swing.JMenuItem();
         jMenuRelatorios = new javax.swing.JMenu();
-        jMenuItem4 = new javax.swing.JMenuItem();
+        menuFaturamentoTotal = new javax.swing.JMenuItem();
         jMenuItem5 = new javax.swing.JMenuItem();
-        jMenuItem3 = new javax.swing.JMenuItem();
+        relatorioImoveisVendidos = new javax.swing.JMenuItem();
         jMenuItem6 = new javax.swing.JMenuItem();
-        jMenuItem7 = new javax.swing.JMenuItem();
+        faturamentoPorCorretor = new javax.swing.JMenuItem();
         jMenuItem8 = new javax.swing.JMenuItem();
         jMenuItem9 = new javax.swing.JMenuItem();
         jMenuRealizarPagamento = new javax.swing.JMenu();
@@ -224,25 +224,35 @@ public class MainWindow extends javax.swing.JFrame {
 
         jMenuRelatorios.setText("Relatorios");
 
-        jMenuItem4.setText("Faturamento Total");
-        jMenuItem4.addActionListener(new java.awt.event.ActionListener() {
+        menuFaturamentoTotal.setText("Faturamento Total");
+        menuFaturamentoTotal.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem4ActionPerformed(evt);
+                menuFaturamentoTotalActionPerformed(evt);
             }
         });
-        jMenuRelatorios.add(jMenuItem4);
+        jMenuRelatorios.add(menuFaturamentoTotal);
 
         jMenuItem5.setText("Lucro Total");
         jMenuRelatorios.add(jMenuItem5);
 
-        jMenuItem3.setText("Relação de Imóveis Vendidos");
-        jMenuRelatorios.add(jMenuItem3);
+        relatorioImoveisVendidos.setText("Relação de Imóveis Vendidos");
+        relatorioImoveisVendidos.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                relatorioImoveisVendidosActionPerformed(evt);
+            }
+        });
+        jMenuRelatorios.add(relatorioImoveisVendidos);
 
         jMenuItem6.setText("Relação de Imóveis Encalhados ");
         jMenuRelatorios.add(jMenuItem6);
 
-        jMenuItem7.setText("Faturamento de Cada Corretor");
-        jMenuRelatorios.add(jMenuItem7);
+        faturamentoPorCorretor.setText("Faturamento de Cada Corretor");
+        faturamentoPorCorretor.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                faturamentoPorCorretorActionPerformed(evt);
+            }
+        });
+        jMenuRelatorios.add(faturamentoPorCorretor);
 
         jMenuItem8.setText("Valor Pago a Cada Corretor");
         jMenuRelatorios.add(jMenuItem8);
@@ -348,13 +358,9 @@ public class MainWindow extends javax.swing.JFrame {
         ctrPrincipal.abrirJanelaRealizarPagamento();
     }//GEN-LAST:event_jMenuItem1ActionPerformed
 
-    private void jMenuItem4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem4ActionPerformed
-
-        //FATURAMENTO TOTAL DA IMOBILIARIA
-        
-        ctrPrincipal.abrirJanelaFormFaturamento();
-        
-    }//GEN-LAST:event_jMenuItem4ActionPerformed
+    private void menuFaturamentoTotalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuFaturamentoTotalActionPerformed
+       ctrPrincipal.abrirJanelaRelatorio(Util.REL_FATURAMENTO_TOTAL);
+    }//GEN-LAST:event_menuFaturamentoTotalActionPerformed
 
     private void filtroImoveisItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_filtroImoveisItemStateChanged
         if(activeEventChangeTypeImoveis && filtroImoveis.getSelectedIndex()!=-1){
@@ -362,20 +368,26 @@ public class MainWindow extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_filtroImoveisItemStateChanged
 
+    private void faturamentoPorCorretorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_faturamentoPorCorretorActionPerformed
+        ctrPrincipal.abrirJanelaRelatorio(Util.REL_FATURAMENTO_POR_CORRETOR);
+    }//GEN-LAST:event_faturamentoPorCorretorActionPerformed
+
+    private void relatorioImoveisVendidosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_relatorioImoveisVendidosActionPerformed
+        ctrPrincipal.abrirJanelaRelatorio(Util.REL_RELACAO_DE_IMOVEIS_VENDIDOS);
+    }//GEN-LAST:event_relatorioImoveisVendidosActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnEditar;
     private javax.swing.JButton btnExcluir;
+    private javax.swing.JMenuItem faturamentoPorCorretor;
     private javax.swing.JComboBox<String> filtroImoveis;
     private javax.swing.JMenuBar jMenuBarMainWindow;
     private javax.swing.JMenuItem jMenuCadVenda;
     private javax.swing.JMenu jMenuCadastros;
     private javax.swing.JMenuItem jMenuItem1;
-    private javax.swing.JMenuItem jMenuItem3;
-    private javax.swing.JMenuItem jMenuItem4;
     private javax.swing.JMenuItem jMenuItem5;
     private javax.swing.JMenuItem jMenuItem6;
-    private javax.swing.JMenuItem jMenuItem7;
     private javax.swing.JMenuItem jMenuItem8;
     private javax.swing.JMenuItem jMenuItem9;
     private javax.swing.JMenu jMenuRealizarPagamento;
@@ -384,9 +396,11 @@ public class MainWindow extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JMenuItem menuFaturamentoTotal;
     private javax.swing.JMenuItem menuItemComissionado;
     private javax.swing.JMenuItem menuItemContratado;
     private javax.swing.JMenuItem menuItemImovel;
+    private javax.swing.JMenuItem relatorioImoveisVendidos;
     private javax.swing.JTable tableCorretores;
     private javax.swing.JTable tableImoveis;
     // End of variables declaration//GEN-END:variables
@@ -423,7 +437,4 @@ public class MainWindow extends javax.swing.JFrame {
         filtroImoveis.setSelectedItem(type);
     }
 
-
-
-    
 }

@@ -166,30 +166,23 @@ public class ControleVendas {
         }
     }
 
-    public void janelaFaturamento(String pFrame) {
-        objLimiteFormulario = new LimiteFormularios(this);
-        objLimiteFormulario.setWhichReportView(Util.REL_FATURAMENTO_TOTAL);
-    }
-
     public float buscaVendasMes(int pMes, int pAno, JTable tabelaVenda) {
-
         ArrayList<Venda> vendasMes = new ArrayList();
         float valorVendas = 0;
-
         //ADICIONA AS VENDAS QUE SÃO DO MES E ANO INFORMADO A UM ARRAY TEMPORARIO
         for (Venda v : listaVenda) {
-            System.out.println(v.getDataVenda());
             if (((v.getDataVenda().getYear() + 1900) == pAno) && ((v.getDataVenda().getMonth()) == pMes)) {
-                System.out.println("+"+v.getValorReal());
                 vendasMes.add(v);
                 valorVendas += v.getValorReal();//FAZ O CALCULO DO VALOR TOTAL DE VENDAS PARA EXIBIÇÃO
-
             }
-
         }
 
-        //SETA O MODELO DA TABELA PARA INSERÇÃO DAS VENDAS
-        DefaultTableModel t = (DefaultTableModel) tabelaVenda.getModel();
+        //INSTANCIA UM MODELO DA TABELA PARA INSERÇÃO DAS VENDAS
+        DefaultTableModel t =  new DefaultTableModel();
+        
+        t.addColumn("Codigo Imovel");
+        t.addColumn("Nome do Corretor");
+        t.addColumn("Valor Real");
 
         //LIMPA O QUE HAVIA NA TABELA PASSADA PARA RENOVAR OS VALORES
         t.setNumRows(0);
@@ -198,9 +191,33 @@ public class ControleVendas {
         for (Venda v : vendasMes) {
             t.addRow(new Object[]{v.getImovelVendido().getCodigo(), v.getNomeCorretor().getNome(), v.getValorReal()});
         }
-        //t.addRow(new Object[]{"foi", "foi", "foi"});
+        tabelaVenda.setModel(t);
         return valorVendas;//RETORNA O VALOR TOTAL DAS VENDAS PARA EXIBIR COMO TOTAL NO PAINEL
-
+    }
+    
+    public void buscaImoveisVendidos(int pMes, int pAno, JTable tabelaVenda){        
+        DefaultTableModel modelTable = new DefaultTableModel();
+        
+        modelTable.addColumn("Codigo Imovel");
+        modelTable.addColumn("Tipo do Imovel");
+        modelTable.addColumn("Nome Prop.");
+        modelTable.addColumn("Valor Original");
+        modelTable.addColumn("Nome Comprador");
+        modelTable.addColumn("Nome do Corretor");
+        modelTable.addColumn("Valor Real");      
+        
+        for (Venda v : listaVenda) {
+            if (((v.getDataVenda().getYear() + 1900) == pAno) && ((v.getDataVenda().getMonth()) == pMes)) {
+                modelTable.addRow(new Object[]{v.getImovelVendido().getCodigo(),
+                                               v.getImovelVendido().getTipo(),
+                                               v.getImovelVendido().getNomePropietario(),
+                                               v.getImovelVendido().getPreco(),
+                                               v.getNomeComprador(),
+                                               v.getNomeCorretor().getNome(),
+                                               v.getValorReal()});
+            }
+        }
+        tabelaVenda.setModel(modelTable);
     }
 
     public void finalize() throws Exception {
