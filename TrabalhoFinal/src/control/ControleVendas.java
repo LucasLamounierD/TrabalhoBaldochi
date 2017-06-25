@@ -9,6 +9,7 @@ import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 import limit.*;
 import model.*;
+import util.Util;
 
 public class ControleVendas {
 
@@ -164,13 +165,11 @@ public class ControleVendas {
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "Falha na serialização", "ERRO", JOptionPane.INFORMATION_MESSAGE);
         }
-
     }
 
-    public void janelaFaturamento(int pFrame) {
-
-        objLimiteFormulario = new LimiteFormularios(this, pFrame);
-
+    public void janelaFaturamento(String pFrame) {
+        objLimiteFormulario = new LimiteFormularios(this);
+        objLimiteFormulario.setWhichReportView(Util.REL_FATURAMENTO_TOTAL);
     }
 
     public float buscaVendasMes(int pMes, int pAno, JTable tabelaVenda) {

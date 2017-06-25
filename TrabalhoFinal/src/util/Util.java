@@ -15,6 +15,9 @@ public class Util {
     public final static String LUCRO = "Lucro";
     public final static String FUNCIONARIO_DO_MES = "FunMes";
     
+    public final static String REL_FATURAMENTO_TOTAL = "Faturamento Total";
+    public final static String REL_LUCRO_TOTAL = "Lucro Total";
+    
     //Metodo para converter String com virgula em float;
     public static float convFloatComVirgula(String valorText){
         float valor=0;

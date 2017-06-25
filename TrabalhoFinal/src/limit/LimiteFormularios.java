@@ -7,6 +7,7 @@ package limit;
 
 import util.*;
 import control.*;
+import java.awt.CardLayout;
 import java.util.Date;
 
 /**
@@ -14,15 +15,13 @@ import java.util.Date;
  * @author linux
  */
 public class LimiteFormularios extends javax.swing.JFrame {
-
     /**
      * Creates new form LimiteFormularios
      */
-    int selectionForm;
+    String selectionForm;
     ControleVendas objControleVendas;
 
-    public LimiteFormularios(ControleVendas pCtr, int selForm) {
-        selectionForm = selForm;
+    public LimiteFormularios(ControleVendas pCtr) {
         objControleVendas = pCtr;
         this.setVisible(true);
         initComponents();
@@ -41,53 +40,28 @@ public class LimiteFormularios extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jPanelCardLayout = new javax.swing.JPanel();
-        jPanelFaturamentoTotal = new javax.swing.JPanel();
-        jScrollPane2 = new javax.swing.JScrollPane();
-
-        jTableVendasDoMes = new javax.swing.JTable();
-        jPanel1 = new javax.swing.JPanel();
+        panel = new javax.swing.JPanel();
+        Menu = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jComboBox1 = new javax.swing.JComboBox<>();
         jLabel2 = new javax.swing.JLabel();
         jComboBoxAno = new javax.swing.JComboBox<>();
         jButtonGerarRelatorio = new javax.swing.JButton();
-        jPanel2 = new javax.swing.JPanel();
+        panelExibicaoRel = new javax.swing.JPanel();
+        relatorioFaturamento = new javax.swing.JPanel();
+        jScrollPane2 = new javax.swing.JScrollPane();
+
+        jTableVendasDoMes = new javax.swing.JTable();
+        painelResultadoTotal = new javax.swing.JPanel();
         jLabel3 = new javax.swing.JLabel();
         jLabelValorFinal = new javax.swing.JLabel();
-        jPanelLucroTotal = new javax.swing.JPanel();
-        jPanelRelImoveisVendidos = new javax.swing.JPanel();
-        jPanelRelImoveisEncalhados = new javax.swing.JPanel();
-        jPanelFatCorretores = new javax.swing.JPanel();
-        jPanelValorPagoCorretor = new javax.swing.JPanel();
-        jPanelCorretorDoMes = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
-        jPanelCardLayout.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
-        jPanelCardLayout.setLayout(new java.awt.CardLayout());
+        panel.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        panel.setPreferredSize(new java.awt.Dimension(485, 400));
 
-        jPanelFaturamentoTotal.setBorder(javax.swing.BorderFactory.createEtchedBorder());
-
-        jTableVendasDoMes.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-
-            },
-            new String [] {
-                "Código", "Vendedor", "Valor da venda"
-            }
-        ) {
-            Class[] types = new Class [] {
-                java.lang.String.class, java.lang.Object.class, java.lang.Float.class
-            };
-
-            public Class getColumnClass(int columnIndex) {
-                return types [columnIndex];
-            }
-        });
-        jScrollPane2.setViewportView(jTableVendasDoMes);
-
-        jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder("Menu:"));
+        Menu.setBorder(javax.swing.BorderFactory.createTitledBorder("Menu:"));
 
         jLabel1.setText("Mês");
 
@@ -109,11 +83,11 @@ public class LimiteFormularios extends javax.swing.JFrame {
             }
         });
 
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
+        javax.swing.GroupLayout MenuLayout = new javax.swing.GroupLayout(Menu);
+        Menu.setLayout(MenuLayout);
+        MenuLayout.setHorizontalGroup(
+            MenuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(MenuLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -126,189 +100,164 @@ public class LimiteFormularios extends javax.swing.JFrame {
                 .addComponent(jButtonGerarRelatorio, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
+        MenuLayout.setVerticalGroup(
+            MenuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(MenuLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGroup(MenuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
                     .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel2)
                     .addComponent(jComboBoxAno, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButtonGerarRelatorio))
-                .addContainerGap(117, Short.MAX_VALUE))
+                .addContainerGap(40, Short.MAX_VALUE))
         );
 
-        jPanel2.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        panelExibicaoRel.setBorder(javax.swing.BorderFactory.createTitledBorder("Relatório:"));
+        panelExibicaoRel.setMaximumSize(new java.awt.Dimension(32767, 800));
+        panelExibicaoRel.setLayout(new java.awt.CardLayout());
+
+        jTableVendasDoMes.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "Código", "Vendedor", "Valor da venda"
+            }
+        ) {
+            Class[] types = new Class [] {
+                java.lang.String.class, java.lang.Object.class, java.lang.Float.class
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+        });
+        jScrollPane2.setViewportView(jTableVendasDoMes);
+
+        painelResultadoTotal.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
         jLabel3.setText("TOTAL:");
 
         jLabelValorFinal.setBackground(new java.awt.Color(183, 183, 183));
 
-        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
-        jPanel2.setLayout(jPanel2Layout);
-        jPanel2Layout.setHorizontalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel2Layout.createSequentialGroup()
+        javax.swing.GroupLayout painelResultadoTotalLayout = new javax.swing.GroupLayout(painelResultadoTotal);
+        painelResultadoTotal.setLayout(painelResultadoTotalLayout);
+        painelResultadoTotalLayout.setHorizontalGroup(
+            painelResultadoTotalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(painelResultadoTotalLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel3)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jLabelValorFinal, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(28, Short.MAX_VALUE))
         );
-        jPanel2Layout.setVerticalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel2Layout.createSequentialGroup()
+        painelResultadoTotalLayout.setVerticalGroup(
+            painelResultadoTotalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(painelResultadoTotalLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel2Layout.createSequentialGroup()
+                .addGroup(painelResultadoTotalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(painelResultadoTotalLayout.createSequentialGroup()
                         .addComponent(jLabel3)
                         .addGap(0, 0, Short.MAX_VALUE))
                     .addComponent(jLabelValorFinal, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
 
-        javax.swing.GroupLayout jPanelFaturamentoTotalLayout = new javax.swing.GroupLayout(jPanelFaturamentoTotal);
-        jPanelFaturamentoTotal.setLayout(jPanelFaturamentoTotalLayout);
-        jPanelFaturamentoTotalLayout.setHorizontalGroup(
-            jPanelFaturamentoTotalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanelFaturamentoTotalLayout.createSequentialGroup()
+        javax.swing.GroupLayout relatorioFaturamentoLayout = new javax.swing.GroupLayout(relatorioFaturamento);
+        relatorioFaturamento.setLayout(relatorioFaturamentoLayout);
+        relatorioFaturamentoLayout.setHorizontalGroup(
+            relatorioFaturamentoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(relatorioFaturamentoLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanelFaturamentoTotalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jScrollPane2)
-                    .addGroup(jPanelFaturamentoTotalLayout.createSequentialGroup()
-                        .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE)))
+                .addComponent(painelResultadoTotal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(relatorioFaturamentoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(relatorioFaturamentoLayout.createSequentialGroup()
+                    .addContainerGap()
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 508, Short.MAX_VALUE)
+                    .addContainerGap()))
+        );
+        relatorioFaturamentoLayout.setVerticalGroup(
+            relatorioFaturamentoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, relatorioFaturamentoLayout.createSequentialGroup()
+                .addContainerGap(449, Short.MAX_VALUE)
+                .addComponent(painelResultadoTotal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
+            .addGroup(relatorioFaturamentoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(relatorioFaturamentoLayout.createSequentialGroup()
+                    .addContainerGap()
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 416, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addContainerGap(73, Short.MAX_VALUE)))
+        );
+
+        panelExibicaoRel.add(relatorioFaturamento, "Faturamento Total");
+
+        javax.swing.GroupLayout panelLayout = new javax.swing.GroupLayout(panel);
+        panel.setLayout(panelLayout);
+        panelLayout.setHorizontalGroup(
+            panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(Menu, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(panelExibicaoRel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap())
         );
-        jPanelFaturamentoTotalLayout.setVerticalGroup(
-            jPanelFaturamentoTotalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelFaturamentoTotalLayout.createSequentialGroup()
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 348, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(90, Short.MAX_VALUE))
+        panelLayout.setVerticalGroup(
+            panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelLayout.createSequentialGroup()
+                .addComponent(Menu, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(1, 1, 1)
+                .addComponent(panelExibicaoRel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
-
-        jPanelCardLayout.add(jPanelFaturamentoTotal, "card2");
-
-        javax.swing.GroupLayout jPanelLucroTotalLayout = new javax.swing.GroupLayout(jPanelLucroTotal);
-        jPanelLucroTotal.setLayout(jPanelLucroTotalLayout);
-        jPanelLucroTotalLayout.setHorizontalGroup(
-            jPanelLucroTotalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 485, Short.MAX_VALUE)
-        );
-        jPanelLucroTotalLayout.setVerticalGroup(
-            jPanelLucroTotalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 673, Short.MAX_VALUE)
-        );
-
-        jPanelCardLayout.add(jPanelLucroTotal, "card3");
-
-        javax.swing.GroupLayout jPanelRelImoveisVendidosLayout = new javax.swing.GroupLayout(jPanelRelImoveisVendidos);
-        jPanelRelImoveisVendidos.setLayout(jPanelRelImoveisVendidosLayout);
-        jPanelRelImoveisVendidosLayout.setHorizontalGroup(
-            jPanelRelImoveisVendidosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 485, Short.MAX_VALUE)
-        );
-        jPanelRelImoveisVendidosLayout.setVerticalGroup(
-            jPanelRelImoveisVendidosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 673, Short.MAX_VALUE)
-        );
-
-        jPanelCardLayout.add(jPanelRelImoveisVendidos, "card4");
-
-        javax.swing.GroupLayout jPanelRelImoveisEncalhadosLayout = new javax.swing.GroupLayout(jPanelRelImoveisEncalhados);
-        jPanelRelImoveisEncalhados.setLayout(jPanelRelImoveisEncalhadosLayout);
-        jPanelRelImoveisEncalhadosLayout.setHorizontalGroup(
-            jPanelRelImoveisEncalhadosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 485, Short.MAX_VALUE)
-        );
-        jPanelRelImoveisEncalhadosLayout.setVerticalGroup(
-            jPanelRelImoveisEncalhadosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 673, Short.MAX_VALUE)
-        );
-
-        jPanelCardLayout.add(jPanelRelImoveisEncalhados, "card5");
-
-        javax.swing.GroupLayout jPanelFatCorretoresLayout = new javax.swing.GroupLayout(jPanelFatCorretores);
-        jPanelFatCorretores.setLayout(jPanelFatCorretoresLayout);
-        jPanelFatCorretoresLayout.setHorizontalGroup(
-            jPanelFatCorretoresLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 485, Short.MAX_VALUE)
-        );
-        jPanelFatCorretoresLayout.setVerticalGroup(
-            jPanelFatCorretoresLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 673, Short.MAX_VALUE)
-        );
-
-        jPanelCardLayout.add(jPanelFatCorretores, "card6");
-
-        javax.swing.GroupLayout jPanelValorPagoCorretorLayout = new javax.swing.GroupLayout(jPanelValorPagoCorretor);
-        jPanelValorPagoCorretor.setLayout(jPanelValorPagoCorretorLayout);
-        jPanelValorPagoCorretorLayout.setHorizontalGroup(
-            jPanelValorPagoCorretorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 485, Short.MAX_VALUE)
-        );
-        jPanelValorPagoCorretorLayout.setVerticalGroup(
-            jPanelValorPagoCorretorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 673, Short.MAX_VALUE)
-        );
-
-        jPanelCardLayout.add(jPanelValorPagoCorretor, "card7");
-
-        javax.swing.GroupLayout jPanelCorretorDoMesLayout = new javax.swing.GroupLayout(jPanelCorretorDoMes);
-        jPanelCorretorDoMes.setLayout(jPanelCorretorDoMesLayout);
-        jPanelCorretorDoMesLayout.setHorizontalGroup(
-            jPanelCorretorDoMesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 485, Short.MAX_VALUE)
-        );
-        jPanelCorretorDoMesLayout.setVerticalGroup(
-            jPanelCorretorDoMesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 673, Short.MAX_VALUE)
-        );
-
-        jPanelCardLayout.add(jPanelCorretorDoMes, "card8");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jPanelCardLayout, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(11, 11, 11)
+                .addComponent(panel, javax.swing.GroupLayout.DEFAULT_SIZE, 564, Short.MAX_VALUE)
                 .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jPanelCardLayout, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(12, 12, 12)
+                .addComponent(panel, javax.swing.GroupLayout.DEFAULT_SIZE, 636, Short.MAX_VALUE)
+                .addContainerGap())
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButtonGerarRelatorioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonGerarRelatorioActionPerformed
-
+        
         //PEGA OS VALORES DE MES E ANO PARA BUSCAR AS VENDAS
         int mes = jComboBox1.getSelectedIndex();
         int ano = Integer.parseInt(jComboBoxAno.getItemAt(jComboBoxAno.getSelectedIndex()));
+        
+        //Gerencia qual processamento será feito.
+        if(jButtonGerarRelatorio.getActionCommand().equals(Util.REL_FATURAMENTO_TOTAL)){//Faturamento total
+            geraRelatorioFaturamento(mes,ano);            
+        }else if(jButtonGerarRelatorio.getActionCommand().equals(Util.REL_LUCRO_TOTAL)){
+            
+        }
+    }//GEN-LAST:event_jButtonGerarRelatorioActionPerformed
 
+    //Gera relatorio de faturamento
+    private void geraRelatorioFaturamento(int mes, int ano){
         //RECEBE O VALOR TOTAL DAS VENDAS E FAZ O PREENCHIMENTO DA TABELA NA FUNÇÃO
         float total = objControleVendas.buscaVendasMes(mes, ano, jTableVendasDoMes);
 
         //MOSTRA O VALOR TOTAL DAS VENDAS
-        jLabelValorFinal.setText("" + total);
-
-    }//GEN-LAST:event_jButtonGerarRelatorioActionPerformed
-
+         jLabelValorFinal.setText("" + total);
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JPanel Menu;
     private javax.swing.JButton jButtonGerarRelatorio;
     private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JComboBox<String> jComboBoxAno;
@@ -316,17 +265,22 @@ public class LimiteFormularios extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabelValorFinal;
-    private javax.swing.JPanel jPanel1;
-    private javax.swing.JPanel jPanel2;
-    private javax.swing.JPanel jPanelCardLayout;
-    private javax.swing.JPanel jPanelCorretorDoMes;
-    private javax.swing.JPanel jPanelFatCorretores;
-    private javax.swing.JPanel jPanelFaturamentoTotal;
-    private javax.swing.JPanel jPanelLucroTotal;
-    private javax.swing.JPanel jPanelRelImoveisEncalhados;
-    private javax.swing.JPanel jPanelRelImoveisVendidos;
-    private javax.swing.JPanel jPanelValorPagoCorretor;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTable jTableVendasDoMes;
+    private javax.swing.JPanel painelResultadoTotal;
+    private javax.swing.JPanel panel;
+    private javax.swing.JPanel panelExibicaoRel;
+    private javax.swing.JPanel relatorioFaturamento;
     // End of variables declaration//GEN-END:variables
+
+    //Metodo que defini qual relatorio vai ser exibido. O relatorio vai ser escolhido atraves das constantes.
+    public void setWhichReportView(String relView){
+        this.setTitle(relView);//Defini Titulo da janela atraves do painel definido
+        CardLayout cl = (CardLayout) panelExibicaoRel.getLayout();
+        selectionForm = relView;
+        //Avalia qual relatorio será exibido       
+        cl.show(panelExibicaoRel, relView);//Exibi o painel de visualização do relatorio escolhido
+        jButtonGerarRelatorio.setActionCommand(relView);//defini qual processo vai ser executando quando botão gerar for apertado
+    }
+
 }
