@@ -30,7 +30,7 @@ public class ControleVendas {
         desserializaVenda();
     }
 
-      //Metodo que deixará a view visível
+    //Metodo que deixará a view visível
     public void abrirJanelaVenda() {
         limVendas.iniciaArrays(ctrPrincipal.getObjControleImovel().getVecImovel(), ctrPrincipal.getObjControleCorretor().getVecCorretor());
         limVendas.setVisible(true);
@@ -40,7 +40,6 @@ public class ControleVendas {
         limPag.iniciaArrays(ctrPrincipal.getObjControleCorretor().getVecCorretor());
         limPag.setVisible(true);
     }
-
 
     //Metodo que será o responsável por pegar os dados recebidos na view e fazer a verificação dos mesmos, e coloca-los no arraylist de vendas, que posteriormente será serializado
     public void cadVenda(int pIndexCodImovel, int pIndexCorretor, String pNome, String pData, String pPreco) throws Exception {
@@ -68,8 +67,8 @@ public class ControleVendas {
         Corretor corretor = (Corretor) ctrPrincipal.getObjControleCorretor().getVecCorretor().elementAt(pIndexCorretor);
         Imovel imovel = (Imovel) ctrPrincipal.getObjControleImovel().getVecImovel().elementAt(pIndexCodImovel);
         //No momento em que cadastrar uma venda automaticamente irá retirar da lista de imóveis o imóvel vendido
-        
-        listaVenda.add(new Venda(imovel,corretor,pNome,pData, preco));
+
+        listaVenda.add(new Venda(imovel, corretor, pNome, pData, preco));
         ctrPrincipal.getObjControleImovel().removeImovel(imovel.getCodigo());
         salva();
     }
@@ -84,13 +83,13 @@ public class ControleVendas {
             Calendar cal = Calendar.getInstance();
             cal.setTime(new Date(data.getTime()));
             int ano = cal.get(Calendar.YEAR);
-            int mes = cal.get(Calendar.MONTH)+1;
+            int mes = cal.get(Calendar.MONTH) + 1;
 
             if (ano == pAno && pCorretor.getNome().equals(v.getNomeCorretor().getNome())) {
                 //Caso o mes seja igual ao da venda calcula para comissionado e para contratado
                 if (mes == pMes) {
                     if (pCorretor instanceof Comissionado) {
-                        salarioMensal += v.getValorReal() * ((Comissionado) pCorretor).getComissao()/100;
+                        salarioMensal += v.getValorReal() * ((Comissionado) pCorretor).getComissao() / 100;
                     } else {
                         salarioMensal += v.getValorReal() * (0.01);
                     }
@@ -109,7 +108,7 @@ public class ControleVendas {
     //Metodo que calcula o salário anual de um corretor
     public double pagCorretorAnual(int pMes, int pAno, Corretor pCorretor) {
         double salarioAnual = 0;
-        
+
         //Vai percorrer a lista de vendas
         for (Venda v : listaVenda) {
             //Recebe a data da venda e a transforma em int para poder realizar a comparação
@@ -117,22 +116,22 @@ public class ControleVendas {
             Calendar cal = Calendar.getInstance();
             cal.setTime(new Date(data.getTime()));
             int ano = cal.get(Calendar.YEAR);
-            int mes = cal.get(Calendar.MONTH)+1;
+            int mes = cal.get(Calendar.MONTH) + 1;
             if (ano == pAno && pCorretor.getNome().equals(v.getNomeCorretor().getNome())) {
-                 //Aqui realiza a soma do vendedor para saber seus ganhos anuais
+                //Aqui realiza a soma do vendedor para saber seus ganhos anuais
                 if (pCorretor instanceof Comissionado) {
-                    salarioAnual += v.getValorReal() * ((Comissionado) pCorretor).getComissao()/100;
+                    salarioAnual += v.getValorReal() * ((Comissionado) pCorretor).getComissao() / 100;
                 } else {
                     salarioAnual += v.getValorReal() * (0.01);
                 }
             }
         }
-        
-         //Adiciona o salário fixo caso o corretor seja contratado
+
+        //Adiciona o salário fixo caso o corretor seja contratado
         if (pCorretor instanceof Contratado) {
             salarioAnual += pMes * ((Contratado) pCorretor).getSalarioFixo();
         }
-        
+
         return salarioAnual;
     }
 
@@ -178,8 +177,8 @@ public class ControleVendas {
         }
 
         //INSTANCIA UM MODELO DA TABELA PARA INSERÇÃO DAS VENDAS
-        DefaultTableModel t =  new DefaultTableModel();
-        
+        DefaultTableModel t = new DefaultTableModel();
+
         t.addColumn("Codigo Imovel");
         t.addColumn("Nome do Corretor");
         t.addColumn("Valor Real");
@@ -194,32 +193,86 @@ public class ControleVendas {
         tabelaVenda.setModel(t);
         return valorVendas;//RETORNA O VALOR TOTAL DAS VENDAS PARA EXIBIR COMO TOTAL NO PAINEL
     }
-    
-    public void buscaImoveisVendidos(int pMes, int pAno, JTable tabelaVenda){        
+
+    public void buscaImoveisVendidos(int pMes, int pAno, JTable tabelaVenda) {
         DefaultTableModel modelTable = new DefaultTableModel();
-        
+
         modelTable.addColumn("Codigo Imovel");
         modelTable.addColumn("Tipo do Imovel");
         modelTable.addColumn("Nome Prop.");
         modelTable.addColumn("Valor Original");
         modelTable.addColumn("Nome Comprador");
         modelTable.addColumn("Nome do Corretor");
-        modelTable.addColumn("Valor Real");      
-        
+        modelTable.addColumn("Valor Real");
+
         for (Venda v : listaVenda) {
             if (((v.getDataVenda().getYear() + 1900) == pAno) && ((v.getDataVenda().getMonth()) == pMes)) {
                 modelTable.addRow(new Object[]{v.getImovelVendido().getCodigo(),
-                                               v.getImovelVendido().getTipo(),
-                                               v.getImovelVendido().getNomePropietario(),
-                                               v.getImovelVendido().getPreco(),
-                                               v.getNomeComprador(),
-                                               v.getNomeCorretor().getNome(),
-                                               v.getValorReal()});
+                    v.getImovelVendido().getTipo(),
+                    v.getImovelVendido().getNomePropietario(),
+                    v.getImovelVendido().getPreco(),
+                    v.getNomeComprador(),
+                    v.getNomeCorretor().getNome(),
+                    v.getValorReal()});
             }
         }
         tabelaVenda.setModel(modelTable);
     }
 
+    public double calculaFaturamentoCorretorMes(int pMes, int pAno, Corretor pCorretor) {
+        double faturamento = 0;
+        //Vai percorrer a lista de vendas
+        for (Venda v : listaVenda) {
+            //Recebe a data da venda e a transforma em int para poder realizar a comparação
+            Date data = v.getDataVenda();
+            Calendar cal = Calendar.getInstance();
+            cal.setTime(new Date(data.getTime()));
+            int ano = cal.get(Calendar.YEAR);
+            int mes = cal.get(Calendar.MONTH) ;
+
+            if (ano == pAno && pCorretor.getNome().equals(v.getNomeCorretor().getNome())) {
+                //Caso o mes seja igual ao da venda calcula para comissionado e para contratado
+                if (mes == pMes) {
+                    faturamento += v.getValorReal() * 5 / 100;
+                }
+            }
+        }
+
+        return faturamento;
+    }
+
+    public void faturamentoCadaCorretor(int pMes, int pAno, JTable tabelaCorretor) {
+        DefaultTableModel table = new DefaultTableModel();
+
+        table.addColumn("CRECIC");
+        table.addColumn("Corretor");
+        table.addColumn("Valor");
+        
+        for(Object c: ctrPrincipal.getObjControleCorretor().getVecCorretor()){
+            table.addRow(new Object[]{((Corretor)c).getCrecic(),
+                        ((Corretor)c).getNome(),
+                        calculaFaturamentoCorretorMes(pMes, pAno, ((Corretor)c))});
+        }
+        
+        tabelaCorretor.setModel(table);
+    }
+    
+    public void valorPagoCorretor(int pMes, int pAno, JTable tabelaCorretor){
+        DefaultTableModel table = new DefaultTableModel();
+
+        table.addColumn("CRECIC");
+        table.addColumn("Corretor");
+        table.addColumn("Valor Pago");
+        
+        for(Object c: ctrPrincipal.getObjControleCorretor().getVecCorretor()){
+            table.addRow(new Object[]{((Corretor)c).getCrecic(),
+                        ((Corretor)c).getNome(),
+                        pagCorretorMes(pMes+1, pAno, ((Corretor)c))});
+        }
+        
+        tabelaCorretor.setModel(table);
+    }
+    
     public void finalize() throws Exception {
         serializaVenda();
     }

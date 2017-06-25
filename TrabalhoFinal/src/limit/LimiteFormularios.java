@@ -293,11 +293,11 @@ public class LimiteFormularios extends javax.swing.JFrame {
     }
 
     private void geraRelatorioFaturamentoPorCorretor(int mes, int ano) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        objControlePrin.getObjControleVendas().faturamentoCadaCorretor(mes, ano, jTableVendasDoMes);
     }
 
     private void geraRelatorioValorPagoCorretores(int mes, int ano) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        objControlePrin.getObjControleVendas().valorPagoCorretor(mes, ano, jTableVendasDoMes);
     }
 
     private void geraRelatorioCorretorMes(int mes, int ano) {
