@@ -25,19 +25,22 @@ public class ControleVendas {
     public ControleVendas(ControlePrincipal pCtrPrincipal) throws Exception {
         listaVenda = new ArrayList<Venda>();
         ctrPrincipal = pCtrPrincipal;
+        limVendas = new LimiteVendas(this);
         limPag = new LimitePagamento(this);
         desserializaVenda();
     }
 
-    //Metodo que deixará a view visível
+      //Metodo que deixará a view visível
     public void abrirJanelaVenda() {
-        limVendas = new LimiteVendas(this);
+        limVendas.iniciaArrays(ctrPrincipal.getObjControleImovel().getVecImovel(), ctrPrincipal.getObjControleCorretor().getVecCorretor());
         limVendas.setVisible(true);
     }
 
     public void abrirJanelaPagamento() {
+        limPag.iniciaArrays(ctrPrincipal.getObjControleCorretor().getVecCorretor());
         limPag.setVisible(true);
     }
+
 
     //Metodo que será o responsável por pegar os dados recebidos na view e fazer a verificação dos mesmos, e coloca-los no arraylist de vendas, que posteriormente será serializado
     public void cadVenda(int pIndexCodImovel, int pIndexCorretor, String pNome, String pData, String pPreco) throws Exception {
@@ -66,7 +69,7 @@ public class ControleVendas {
         Imovel imovel = (Imovel) ctrPrincipal.getObjControleImovel().getVecImovel().elementAt(pIndexCodImovel);
         //No momento em que cadastrar uma venda automaticamente irá retirar da lista de imóveis o imóvel vendido
         
-        listaVenda.add(new Venda(imovel,corretor,pNome,new Date(pData), preco));
+        listaVenda.add(new Venda(imovel,corretor,pNome,pData, preco));
         ctrPrincipal.getObjControleImovel().removeImovel(imovel.getCodigo());
         salva();
     }
@@ -81,9 +84,7 @@ public class ControleVendas {
             Calendar cal = Calendar.getInstance();
             cal.setTime(new Date(data.getTime()));
             int ano = cal.get(Calendar.YEAR);
-            //O campo date da venda armazenou os dados no formato MM/dd/YYYY,
-            //Usuando calendar para pegar o mes e ano, ele usa o formato dd//MM/YYYY, por isso é para pegar o mês é necessário pegar o dia do calendar
-            int mes = cal.get(Calendar.DAY_OF_MONTH);
+            int mes = cal.get(Calendar.MONTH)+1;
 
             if (ano == pAno && pCorretor.getNome().equals(v.getNomeCorretor().getNome())) {
                 //Caso o mes seja igual ao da venda calcula para comissionado e para contratado
@@ -116,9 +117,7 @@ public class ControleVendas {
             Calendar cal = Calendar.getInstance();
             cal.setTime(new Date(data.getTime()));
             int ano = cal.get(Calendar.YEAR);
-            //O campo date da venda armazenou os dados no formato MM/dd/YYYY,
-            //Usuando calendar para pegar o mes e ano, ele usa o formato dd//MM/YYYY, por isso é para pegar o mês é necessário pegar o dia do calendar
-            int mes = cal.get(Calendar.DAY_OF_MONTH);
+            int mes = cal.get(Calendar.MONTH)+1;
             if (ano == pAno && pCorretor.getNome().equals(v.getNomeCorretor().getNome())) {
                  //Aqui realiza a soma do vendedor para saber seus ganhos anuais
                 if (pCorretor instanceof Comissionado) {

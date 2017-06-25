@@ -1,9 +1,6 @@
 package limit;
 
 import control.ControleVendas;
-import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.Date;
 import model.*;
 import java.util.Vector;
 
@@ -22,7 +19,7 @@ public class LimitePagamento extends javax.swing.JFrame {
         //Recebe o controle de vendas
         ctrVenda = pCtrVendas;
         //Recebe a lista de vendedores
-        vec = ctrVenda.getCtrPrincipal().getObjControleCorretor().getVecCorretor();
+        vec = new Vector();
         initComponents();
         //Desabilita a possibilidade de edição dos campos de ganho no ano e no mes
         jTextFieldGanhoAno.setEditable(false);
@@ -150,6 +147,18 @@ public class LimitePagamento extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    public void iniciaArrays(Vector<Corretor> pCorretor) {
+        vec = pCorretor;
+        String[] str = new String[vec.size()];
+        int cont = 0;
+        for (Corretor ct : vec) {
+            str[cont] = ct.getNome();
+            cont++;
+        }
+        jComboBoxCorretor.setModel(new javax.swing.DefaultComboBoxModel<>(str));
+
+    }
+
     //Caso seja precionado o botão de cancelar o programa irá deixar os campos vazios para a próxima execução, e fechará a janela
     private void jButtonCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCancelarActionPerformed
         jTextFieldData.setText("");
@@ -170,10 +179,10 @@ public class LimitePagamento extends javax.swing.JFrame {
         //Coloca os valores do mês e ano nas sequintes variáveis
         int mesEscolhido = Integer.parseInt(split[0]);
         int anoEscolhido = Integer.parseInt(split[1]);
-        
+
         ganhoMes = ctrVenda.pagCorretorMes(mesEscolhido, anoEscolhido, cor);
         ganhoAno = ctrVenda.pagCorretorAnual(mesEscolhido, anoEscolhido, cor);
-        
+
         //Mostra o valor do salário
         jTextFieldGanhoMes.setText("R$" + ganhoMes);
         jTextFieldGanhoAno.setText("R$" + ganhoAno);

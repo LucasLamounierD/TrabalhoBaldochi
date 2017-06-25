@@ -124,7 +124,7 @@
         </Property>
       </Properties>
       <AuxValues>
-        <AuxValue name="JavaCodeGenerator_InitCodePre" type="java.lang.String" value="Vector&lt;Imovel&gt; vecImovel = ctrVendas.getCtrPrincipal().getObjControleImovel().getVecImovel();&#xa;String[] str = new String[vecImovel.size()];&#xa;int cont = 0;&#xa;for(Imovel im: vecImovel){&#xa;    str[cont] = im.getCodigo();&#xa;    cont++;&#xa;}"/>
+        <AuxValue name="JavaCodeGenerator_InitCodePre" type="java.lang.String" value="String[] str = new String[vecImovel.size()];&#xa;int cont = 0;&#xa;for(Imovel im: vecImovel){&#xa;    str[cont] = im.getCodigo();&#xa;    cont++;&#xa;}"/>
         <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
       </AuxValues>
     </Component>
@@ -200,7 +200,7 @@
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jComboCorretorActionPerformed"/>
       </Events>
       <AuxValues>
-        <AuxValue name="JavaCodeGenerator_InitCodePre" type="java.lang.String" value="Vector&lt;Corretor&gt; vec = ctrVendas.getCtrPrincipal().getObjControleCorretor().getVecCorretor();&#xa;String[] str2 = new String[vec.size()];&#xa;int cont2 = 0;&#xa;for(Corretor ct: vec){&#xa;    str2[cont2] = ct.getNome();&#xa;    cont2++;&#xa;}"/>
+        <AuxValue name="JavaCodeGenerator_InitCodePre" type="java.lang.String" value="String[] str2 = new String[vec.size()];&#xa;int cont2 = 0;&#xa;for(Corretor ct: vec){&#xa;    str2[cont2] = ct.getNome();&#xa;    cont2++;&#xa;}"/>
         <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
       </AuxValues>
     </Component>

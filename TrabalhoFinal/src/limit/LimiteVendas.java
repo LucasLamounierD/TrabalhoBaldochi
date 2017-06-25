@@ -15,11 +15,15 @@ import model.*;
  * @author Kevin
  */
 public class LimiteVendas extends javax.swing.JFrame {
-    
+
     private ControleVendas ctrVendas;
-    
+    private Vector<Imovel> vecImovel;
+    private Vector<Corretor> vec;
+
     public LimiteVendas(ControleVendas pCtrVendas) {
         ctrVendas = pCtrVendas;
+        vecImovel = new Vector();
+        vec = new Vector();
         initComponents();
     }
 
@@ -49,7 +53,6 @@ public class LimiteVendas extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setResizable(false);
 
-        Vector<Imovel> vecImovel = ctrVendas.getCtrPrincipal().getObjControleImovel().getVecImovel();
         String[] str = new String[vecImovel.size()];
         int cont = 0;
         for(Imovel im: vecImovel){
@@ -88,7 +91,6 @@ public class LimiteVendas extends javax.swing.JFrame {
 
         jLabel4.setText("Corretor: ");
 
-        Vector<Corretor> vec = ctrVendas.getCtrPrincipal().getObjControleCorretor().getVecCorretor();
         String[] str2 = new String[vec.size()];
         int cont2 = 0;
         for(Corretor ct: vec){
@@ -179,31 +181,54 @@ public class LimiteVendas extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    public void iniciaArrays(Vector<Imovel> pImovel, Vector<Corretor> pCorretor) {
+        vecImovel = pImovel;
+        vec = pCorretor;
+
+        String[] str = new String[vecImovel.size()];
+        int cont = 0;
+        for (Imovel im : vecImovel) {
+            str[cont] = im.getCodigo();
+            cont++;
+        }
+        jComboCodImovel.setModel(new javax.swing.DefaultComboBoxModel<>(str));
+
+        String[] str2 = new String[vec.size()];
+        int cont2 = 0;
+        for (Corretor ct : vec) {
+            str2[cont2] = ct.getNome();
+            cont2++;
+        }
+        jComboCorretor.setModel(new javax.swing.DefaultComboBoxModel(str2));
+
+    }
+
+
     private void jButtonConfirmarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonConfirmarActionPerformed
-        try{
+        try {
             ctrVendas.cadVenda(jComboCodImovel.getSelectedIndex(),
-                               jComboCorretor.getSelectedIndex(),
-                               jTextNome.getText(),
-                               jFormattedTextData.getText(),
-                               jFormattedTextValor.getText()
-                               );
-            
+                    jComboCorretor.getSelectedIndex(),
+                    jTextNome.getText(),
+                    jFormattedTextData.getText(),
+                    jFormattedTextValor.getText()
+            );
+
             JOptionPane.showMessageDialog(rootPane, "Venda cadastrado com sucesso",
-                                          "SUCESSO",JOptionPane.INFORMATION_MESSAGE);
+                    "SUCESSO", JOptionPane.INFORMATION_MESSAGE);
             this.dispose();
-        }catch(Exception ex){
+        } catch (Exception ex) {
             JOptionPane.showMessageDialog(rootPane, "Erro ao cadastrar venda\n\n"
-                                          + ex.getMessage(),"ERRO", JOptionPane.ERROR_MESSAGE);
+                    + ex.getMessage(), "ERRO", JOptionPane.ERROR_MESSAGE);
         }
         //Após o cadastro deixará os campos vazios para um próximo cadastro 
         jTextNome.setText("");
         jFormattedTextData.setText("");
-        jFormattedTextValor.setText("");        
+        jFormattedTextValor.setText("");
     }//GEN-LAST:event_jButtonConfirmarActionPerformed
-    
+
     //Caso seja apertado o botão cancelar o programa fechará a janela de cadastro
     private void jButtonCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCancelarActionPerformed
-    this.dispose();
+        this.dispose();
     }//GEN-LAST:event_jButtonCancelarActionPerformed
 
     private void jComboCorretorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboCorretorActionPerformed
@@ -213,7 +238,6 @@ public class LimiteVendas extends javax.swing.JFrame {
     /**
      * @param args the command line arguments
      */
-    
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButtonCancelar;
