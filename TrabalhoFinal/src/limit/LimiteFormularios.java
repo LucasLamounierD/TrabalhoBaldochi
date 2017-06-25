@@ -284,12 +284,13 @@ public class LimiteFormularios extends javax.swing.JFrame {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
+    //Gera relatorio de Imoveis Vendidos
     private void geraRelatorioImoveisVendidos(int mes, int ano) {
         objControlePrin.getObjControleVendas().buscaImoveisVendidos(mes, ano, jTableVendasDoMes);
     }
 
     private void geraRelatorioImoveisEncalhados(int mes, int ano) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        objControlePrin.getObjControleImovel().buscaImoveisEncalhados(mes,ano,jTableVendasDoMes);
     }
 
     private void geraRelatorioFaturamentoPorCorretor(int mes, int ano) {

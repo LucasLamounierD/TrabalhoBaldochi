@@ -83,6 +83,9 @@
               <Properties>
                 <Property name="text" type="java.lang.String" value="Rela&#xe7;&#xe3;o de Im&#xf3;veis Encalhados "/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jMenuItem6ActionPerformed"/>
+              </Events>
             </MenuItem>
             <MenuItem class="javax.swing.JMenuItem" name="faturamentoPorCorretor">
               <Properties>

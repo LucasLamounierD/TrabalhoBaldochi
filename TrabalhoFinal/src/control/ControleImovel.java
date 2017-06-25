@@ -124,6 +124,22 @@ public class ControleImovel {
         }
 
     }
+    
+    //Retorna imoveis á mais de 6 meses sem vender para o relatorio
+    public void buscaImoveisEncalhados(int mes, int ano, JTable tabelaExibicao) {        
+        DefaultTableModel tableModel = new DefaultTableModel();
+        
+        tableModel.addColumn("CODIGO");
+        tableModel.addColumn("TIPO");
+        tableModel.addColumn("PREÇO");
+        tableModel.addColumn("PROPRIETÁRIO");
+        
+        for(Imovel i : vecImovel){
+            tableModel.addRow(new Object[]{i.getCodigo(), i.getTipo(), String.valueOf(i.getPreco()), i.getNomePropietario()});
+        }
+        
+        tabelaExibicao.setModel(tableModel);
+    }
 
     //Cria a model da tabela e analisa quais tipos de imoveis estão disponiveis
     public void instTableImoveisModel() {         
@@ -197,7 +213,5 @@ public class ControleImovel {
 
     public DefaultComboBoxModel getComboBoxTipoImoveisDispModel() {
         return comboBoxTipoImoveisDispModel;
-    }
-
-    
+    }    
 }
