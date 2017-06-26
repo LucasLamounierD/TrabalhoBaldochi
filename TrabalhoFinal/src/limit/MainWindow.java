@@ -255,6 +255,11 @@ public class MainWindow extends javax.swing.JFrame {
         jMenuRelatorios.add(faturamentoPorCorretor);
 
         jMenuItem8.setText("Valor Pago a Cada Corretor");
+        jMenuItem8.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem8ActionPerformed(evt);
+            }
+        });
         jMenuRelatorios.add(jMenuItem8);
 
         jMenuItem9.setText("Corretor do Mês");
@@ -375,6 +380,10 @@ public class MainWindow extends javax.swing.JFrame {
     private void relatorioImoveisVendidosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_relatorioImoveisVendidosActionPerformed
         ctrPrincipal.abrirJanelaRelatorio(Util.REL_RELACAO_DE_IMOVEIS_VENDIDOS);
     }//GEN-LAST:event_relatorioImoveisVendidosActionPerformed
+
+    private void jMenuItem8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem8ActionPerformed
+        ctrPrincipal.abrirJanelaRelatorio(Util.REL_VALOR_PAGO_PARA_CADA_CORRETOR);
+    }//GEN-LAST:event_jMenuItem8ActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
