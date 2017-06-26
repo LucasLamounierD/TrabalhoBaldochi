@@ -8,6 +8,7 @@ import java.util.*;
 import javax.swing.*;
 import javax.swing.table.*;
 import util.Util;
+import util.MyTableModel;
 
 public class ControleImovel {
 
@@ -16,7 +17,7 @@ public class ControleImovel {
     private LimiteImovel limImovel;
     private ControlePrincipal ctrPrincipal;
     
-    private DefaultTableModel tableImoveisModel;
+    private MyTableModel tableImoveisModel;
     private DefaultComboBoxModel comboBoxTipoImoveisDispModel;
     private int IndexBeingEditedNow;
 
@@ -125,17 +126,27 @@ public class ControleImovel {
 
     }
     
-    //Retorna imoveis á mais de 6 meses sem vender para o relatorio
+    //Retorna imoveis que estejam á mais de 6 meses esperando por uma venda, para o relatorio
     public void buscaImoveisEncalhados(int mes, int ano, JTable tabelaExibicao) {        
-        DefaultTableModel tableModel = new DefaultTableModel();
-        
+        MyTableModel tableModel = new MyTableModel();
+        //Inseri colunas na tabela
         tableModel.addColumn("CODIGO");
         tableModel.addColumn("TIPO");
         tableModel.addColumn("PREÇO");
         tableModel.addColumn("PROPRIETÁRIO");
         
-        for(Imovel i : vecImovel){
-            tableModel.addRow(new Object[]{i.getCodigo(), i.getTipo(), String.valueOf(i.getPreco()), i.getNomePropietario()});
+         Locale local = new Locale("pt","br");
+         Calendar dataReq = Calendar.getInstance(local);
+         dataReq.set(ano,mes,0);//Seta mes se ano escolhido nos filtros do relatorio
+         dataReq.add(Calendar.MONTH, -6);//Diminui 6 meses da data escolhida.
+         Date dataFiltro = dataReq.getTime();//Guarda data de filtro
+                
+        //percorre lista de Imoveis
+        for(Imovel i : vecImovel){            
+            if(dataFiltro.compareTo(i.getDataCad())==1){//Se a data de cadastro do imovel vier antes da data de filtro 
+                //Inseri na tabela os dados sobre o imovel
+                tableModel.addRow(new Object[]{i.getCodigo(), i.getTipo(), String.valueOf(i.getPreco()), i.getNomePropietario()});
+            }
         }
         
         tabelaExibicao.setModel(tableModel);
@@ -144,12 +155,7 @@ public class ControleImovel {
     //Cria a model da tabela e analisa quais tipos de imoveis estão disponiveis
     public void instTableImoveisModel() {         
         //Desabilita a edição dos campos da tabela
-        tableImoveisModel = new DefaultTableModel() {
-            @Override
-            public boolean isCellEditable(int row, int colunm) {
-                return false;
-            }
-        };
+        tableImoveisModel = new MyTableModel();
         //Adiciona as colunas
         tableImoveisModel.addColumn("CODIGO");
         tableImoveisModel.addColumn("TIPO");

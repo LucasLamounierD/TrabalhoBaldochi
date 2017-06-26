@@ -9,6 +9,7 @@ import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 import limit.*;
 import model.*;
+import util.MyTableModel;
 import util.Util;
 
 public class ControleVendas {
@@ -177,7 +178,7 @@ public class ControleVendas {
         }
 
         //INSTANCIA UM MODELO DA TABELA PARA INSERÇÃO DAS VENDAS
-        DefaultTableModel t = new DefaultTableModel();
+        MyTableModel t = new MyTableModel();
 
         t.addColumn("Codigo Imovel");
         t.addColumn("Nome do Corretor");
@@ -195,7 +196,7 @@ public class ControleVendas {
     }
 
     public void buscaImoveisVendidos(int pMes, int pAno, JTable tabelaVenda) {
-        DefaultTableModel modelTable = new DefaultTableModel();
+        MyTableModel modelTable = new MyTableModel();
 
         modelTable.addColumn("Codigo Imovel");
         modelTable.addColumn("Tipo do Imovel");
@@ -242,7 +243,7 @@ public class ControleVendas {
     }
 
     public void faturamentoCadaCorretor(int pMes, int pAno, JTable tabelaCorretor) {
-        DefaultTableModel table = new DefaultTableModel();
+        MyTableModel table = new MyTableModel();
 
         table.addColumn("CRECIC");
         table.addColumn("Corretor");
@@ -258,7 +259,7 @@ public class ControleVendas {
     }
     
     public void valorPagoCorretor(int pMes, int pAno, JTable tabelaCorretor){
-        DefaultTableModel table = new DefaultTableModel();
+        MyTableModel table = new MyTableModel();
 
         table.addColumn("CRECIC");
         table.addColumn("Corretor");

@@ -8,6 +8,7 @@ import java.util.*;
 import java.util.logging.*;
 import javax.swing.table.DefaultTableModel;
 import model.*;
+import util.MyTableModel;
 import util.Util;
 
 public class ControleCorretor {
@@ -15,7 +16,7 @@ public class ControleCorretor {
     private LimiteCorretor lmtCorretor;
     private Vector<Corretor> vecCorretor = new Vector();
     private ControlePrincipal ctrPrincipal;
-    private DefaultTableModel tableCorretoresModel;
+    private MyTableModel tableCorretoresModel;
     private int IndexBeingEditedNow;
     //Constantes
     public final static int OP_CONTRATADO = 0;
@@ -137,12 +138,7 @@ public class ControleCorretor {
 
     public void instTableCorretoresModel(){
         
-        tableCorretoresModel = new DefaultTableModel(){
-            @Override
-            public boolean isCellEditable(int row,int colunm){
-                return false;
-            }
-        };
+        tableCorretoresModel = new MyTableModel();
         
         tableCorretoresModel.addColumn("Corretor");
         tableCorretoresModel.addColumn("CRECIC");
