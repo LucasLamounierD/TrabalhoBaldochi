@@ -1,3 +1,4 @@
+<<<<<<< Updated upstream
 <?xml version="1.0" encoding="UTF-8"?>
 <project-private xmlns="http://www.netbeans.org/ns/project-private/1">
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
@@ -11,3 +12,17 @@
         </group>
     </open-files>
 </project-private>
+=======
+<?xml version="1.0" encoding="UTF-8"?>
+<project-private xmlns="http://www.netbeans.org/ns/project-private/1">
+    <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
+    <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
+        <group>
+            <file>file:/home/linux/Documentos/SIN%202016.3/Baldochi/TrabalhoFinal/TrabalhoBaldochi/TrabalhoFinal/src/limit/MainWindow.java</file>
+            <file>file:/home/linux/Documentos/SIN%202016.3/Baldochi/TrabalhoFinal/TrabalhoBaldochi/TrabalhoFinal/src/limit/LimiteFormularios.java</file>
+            <file>file:/home/linux/Documentos/SIN%202016.3/Baldochi/TrabalhoFinal/TrabalhoBaldochi/TrabalhoFinal/src/control/ControleVendas.java</file>
+            <file>file:/home/linux/Documentos/SIN%202016.3/Baldochi/TrabalhoFinal/TrabalhoBaldochi/TrabalhoFinal/src/util/Util.java</file>
+        </group>
+    </open-files>
+</project-private>
+>>>>>>> Stashed changes
