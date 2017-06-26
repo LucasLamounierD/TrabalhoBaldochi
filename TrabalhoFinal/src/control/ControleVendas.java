@@ -136,6 +136,35 @@ public class ControleVendas {
         return salarioAnual;
     }
 
+    //Metodo para retornar o valor pago a todos os corretores para calculo do lucro
+    public float calcularLucroTotal(int pMes, int pAno) {
+
+        float valorTotal = 0;
+        Corretor c;
+
+        for (Venda v : listaVenda) {
+
+            //ENTRA AQUI SE OS MESES E ANOS CORRESPONDEREM AOS DA PESQUISA
+            if(v.getDataVenda().getMonth() == pMes && v.getDataVenda().getYear()+1900 == pAno){
+            
+            c = v.getNomeCorretor();
+
+            //ANALISA QUAL TIPO DE CORRETOR, PARA FAZER OS CALCULOS DO VALOR TOTAL
+            if (c instanceof Comissionado) {
+                valorTotal += v.getValorReal() * ((Comissionado) c).getComissao();
+            }
+            if (c instanceof Contratado) {
+                valorTotal += ((Contratado) c).getSalarioFixo() + (0.01 * v.getValorReal());
+            }
+            
+            }
+
+        }
+
+        return valorTotal;
+
+    }
+
     //Metodo que irá serializar os dados de venda e irá coloca-los no arquivo vendas.dat 
     private void serializaVenda() throws Exception {
         //Vai realizar as conversões necessárias para conseguir escrever os dados que estão na listaVenda
@@ -173,7 +202,7 @@ public class ControleVendas {
         for (Venda v : listaVenda) {
             if (((v.getDataVenda().getYear() + 1900) == pAno) && ((v.getDataVenda().getMonth()) == pMes)) {
                 vendasMes.add(v);
-                valorVendas += v.getValorReal();//FAZ O CALCULO DO VALOR TOTAL DE VENDAS PARA EXIBIÇÃO
+                valorVendas += (v.getValorReal() * 5)/100;//FAZ O CALCULO DO VALOR TOTAL DE VENDAS PARA EXIBIÇÃO
             }
         }
 
@@ -229,7 +258,7 @@ public class ControleVendas {
             Calendar cal = Calendar.getInstance();
             cal.setTime(new Date(data.getTime()));
             int ano = cal.get(Calendar.YEAR);
-            int mes = cal.get(Calendar.MONTH) ;
+            int mes = cal.get(Calendar.MONTH);
 
             if (ano == pAno && pCorretor.getNome().equals(v.getNomeCorretor().getNome())) {
                 //Caso o mes seja igual ao da venda calcula para comissionado e para contratado
@@ -248,13 +277,13 @@ public class ControleVendas {
         table.addColumn("CRECIC");
         table.addColumn("Corretor");
         table.addColumn("Valor");
-        
-        for(Object c: ctrPrincipal.getObjControleCorretor().getVecCorretor()){
-            table.addRow(new Object[]{((Corretor)c).getCrecic(),
-                        ((Corretor)c).getNome(),
-                        calculaFaturamentoCorretorMes(pMes, pAno, ((Corretor)c))});
+
+        for (Object c : ctrPrincipal.getObjControleCorretor().getVecCorretor()) {
+            table.addRow(new Object[]{((Corretor) c).getCrecic(),
+                ((Corretor) c).getNome(),
+                calculaFaturamentoCorretorMes(pMes, pAno, ((Corretor) c))});
         }
-        
+
         tabelaCorretor.setModel(table);
     }
     
@@ -264,16 +293,16 @@ public class ControleVendas {
         table.addColumn("CRECIC");
         table.addColumn("Corretor");
         table.addColumn("Valor Pago");
-        
-        for(Object c: ctrPrincipal.getObjControleCorretor().getVecCorretor()){
-            table.addRow(new Object[]{((Corretor)c).getCrecic(),
-                        ((Corretor)c).getNome(),
-                        pagCorretorMes(pMes+1, pAno, ((Corretor)c))});
+
+        for (Object c : ctrPrincipal.getObjControleCorretor().getVecCorretor()) {
+            table.addRow(new Object[]{((Corretor) c).getCrecic(),
+                ((Corretor) c).getNome(),
+                pagCorretorMes(pMes + 1, pAno, ((Corretor) c))});
         }
-        
+
         tabelaCorretor.setModel(table);
     }
-    
+
     public void finalize() throws Exception {
         serializaVenda();
     }

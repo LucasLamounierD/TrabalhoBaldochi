@@ -233,6 +233,11 @@ public class MainWindow extends javax.swing.JFrame {
         jMenuRelatorios.add(menuFaturamentoTotal);
 
         jMenuItem5.setText("Lucro Total");
+        jMenuItem5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem5ActionPerformed(evt);
+            }
+        });
         jMenuRelatorios.add(jMenuItem5);
 
         relatorioImoveisVendidos.setText("Relação de Imóveis Vendidos");
@@ -392,6 +397,10 @@ public class MainWindow extends javax.swing.JFrame {
     private void jMenuItem8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem8ActionPerformed
         ctrPrincipal.abrirJanelaRelatorio(Util.REL_VALOR_PAGO_PARA_CADA_CORRETOR);
     }//GEN-LAST:event_jMenuItem8ActionPerformed
+
+    private void jMenuItem5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem5ActionPerformed
+        ctrPrincipal.abrirJanelaRelatorio(Util.REL_LUCRO_TOTAL);
+    }//GEN-LAST:event_jMenuItem5ActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
