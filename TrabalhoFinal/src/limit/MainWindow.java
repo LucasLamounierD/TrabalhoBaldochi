@@ -6,13 +6,10 @@
 package limit;
 
 import control.ControlePrincipal;
-import java.util.Vector;
-import javax.swing.ComboBoxModel;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import util.Util;
-
 /**
  *
  * @author Rodrigo Maia
@@ -72,6 +69,8 @@ public class MainWindow extends javax.swing.JFrame {
         menuItemImovel = new javax.swing.JMenuItem();
         jMenuVendas = new javax.swing.JMenu();
         jMenuCadVenda = new javax.swing.JMenuItem();
+        jMenuRealizarPagamento = new javax.swing.JMenu();
+        jMenuItem1 = new javax.swing.JMenuItem();
         jMenuRelatorios = new javax.swing.JMenu();
         menuFaturamentoTotal = new javax.swing.JMenuItem();
         jMenuItem5 = new javax.swing.JMenuItem();
@@ -80,8 +79,6 @@ public class MainWindow extends javax.swing.JFrame {
         faturamentoPorCorretor = new javax.swing.JMenuItem();
         jMenuItem8 = new javax.swing.JMenuItem();
         jMenuItem9 = new javax.swing.JMenuItem();
-        jMenuRealizarPagamento = new javax.swing.JMenu();
-        jMenuItem1 = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setMinimumSize(new java.awt.Dimension(1024, 720));
@@ -222,6 +219,18 @@ public class MainWindow extends javax.swing.JFrame {
 
         jMenuBarMainWindow.add(jMenuVendas);
 
+        jMenuRealizarPagamento.setText("Pagamento");
+
+        jMenuItem1.setText("Realizar Pagamento");
+        jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem1ActionPerformed(evt);
+            }
+        });
+        jMenuRealizarPagamento.add(jMenuItem1);
+
+        jMenuBarMainWindow.add(jMenuRealizarPagamento);
+
         jMenuRelatorios.setText("Relatorios");
 
         menuFaturamentoTotal.setText("Faturamento Total");
@@ -282,18 +291,6 @@ public class MainWindow extends javax.swing.JFrame {
 
         jMenuBarMainWindow.add(jMenuRelatorios);
 
-        jMenuRealizarPagamento.setText("Pagamento");
-
-        jMenuItem1.setText("Realizar Pagamento");
-        jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem1ActionPerformed(evt);
-            }
-        });
-        jMenuRealizarPagamento.add(jMenuItem1);
-
-        jMenuBarMainWindow.add(jMenuRealizarPagamento);
-
         setJMenuBar(jMenuBarMainWindow);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -309,7 +306,7 @@ public class MainWindow extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 696, Short.MAX_VALUE)
+            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 698, Short.MAX_VALUE)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 643, javax.swing.GroupLayout.PREFERRED_SIZE)
