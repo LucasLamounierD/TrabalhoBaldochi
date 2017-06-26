@@ -302,6 +302,43 @@ public class ControleVendas {
 
         tabelaCorretor.setModel(table);
     }
+    
+    public float corretorDoMes(int pMes, int pAno, JTable tabelaCorretor){
+        
+        MyTableModel table = new MyTableModel();
+        float faturamentoMaior = 0;
+        Corretor funcDoMes = null;
+        
+        table.addColumn("CRECIC");
+        table.addColumn("Corretor");
+        table.addColumn("Valor Pago");
+        
+        for(Object c : ctrPrincipal.getObjControleCorretor().getVecCorretor()){
+            
+            if(calculaFaturamentoCorretorMes(pMes, pAno, (Corretor) c) > faturamentoMaior){
+                
+                faturamentoMaior = (float) calculaFaturamentoCorretorMes(pMes, pAno, (Corretor) c);
+                funcDoMes = (Corretor) c;
+                
+            }
+            
+        }
+        
+        for(Venda v : listaVenda){
+            
+            if(v.getNomeCorretor().getCrecic().equals(funcDoMes.getCrecic())){
+                
+                table.addRow(new Object[]{funcDoMes.getCrecic(), funcDoMes.getNome(), (v.getValorReal() * 5) / 100});
+                
+            }
+            
+        }
+        
+        tabelaCorretor.setModel(table);
+        
+        return faturamentoMaior;
+        
+    }
 
     public void finalize() throws Exception {
         serializaVenda();

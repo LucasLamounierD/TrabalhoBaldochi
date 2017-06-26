@@ -180,20 +180,20 @@ public class LimiteFormularios extends javax.swing.JFrame {
             .addGroup(relatorioFaturamentoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(relatorioFaturamentoLayout.createSequentialGroup()
                     .addContainerGap()
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 733, Short.MAX_VALUE)
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 740, Short.MAX_VALUE)
                     .addContainerGap()))
         );
         relatorioFaturamentoLayout.setVerticalGroup(
             relatorioFaturamentoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, relatorioFaturamentoLayout.createSequentialGroup()
-                .addContainerGap(449, Short.MAX_VALUE)
+                .addContainerGap(450, Short.MAX_VALUE)
                 .addComponent(painelResultadoTotal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
             .addGroup(relatorioFaturamentoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(relatorioFaturamentoLayout.createSequentialGroup()
                     .addContainerGap()
                     .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 416, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addContainerGap(73, Short.MAX_VALUE)))
+                    .addContainerGap(79, Short.MAX_VALUE)))
         );
 
         panelExibicaoRel.add(relatorioFaturamento, "Faturamento Total");
@@ -202,11 +202,11 @@ public class LimiteFormularios extends javax.swing.JFrame {
         faturamentoCadaCorretor.setLayout(faturamentoCadaCorretorLayout);
         faturamentoCadaCorretorLayout.setHorizontalGroup(
             faturamentoCadaCorretorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 757, Short.MAX_VALUE)
+            .addGap(0, 764, Short.MAX_VALUE)
         );
         faturamentoCadaCorretorLayout.setVerticalGroup(
             faturamentoCadaCorretorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 504, Short.MAX_VALUE)
+            .addGap(0, 539, Short.MAX_VALUE)
         );
 
         panelExibicaoRel.add(faturamentoCadaCorretor, "Faturamento por Corretor");
@@ -327,10 +327,8 @@ public class LimiteFormularios extends javax.swing.JFrame {
     }
 
     private void geraRelatorioLucro(int mes, int ano) {
-        jTextFieldLucroImob.setText("" + objControlePrin.getObjControleVendas().calcularLucroTotal(mes,ano));
-        panelExibicaoRel.removeAll();
-        panelExibicaoRel.add(jPanelLucroImob);
-        panelExibicaoRel.revalidate();
+        jTextFieldLucroImob.setText("" + objControlePrin.getObjControleVendas().calcularLucroTotal(mes, ano));
+        jPanelLucroImob.show();
     }
 
     //Gera relatorio de Imoveis Vendidos
@@ -339,7 +337,7 @@ public class LimiteFormularios extends javax.swing.JFrame {
     }
 
     private void geraRelatorioImoveisEncalhados(int mes, int ano) {
-        objControlePrin.getObjControleImovel().buscaImoveisEncalhados(mes,ano,jTableVendasDoMes);
+        objControlePrin.getObjControleImovel().buscaImoveisEncalhados(mes, ano, jTableVendasDoMes);
     }
 
     private void geraRelatorioFaturamentoPorCorretor(int mes, int ano) {
@@ -351,7 +349,7 @@ public class LimiteFormularios extends javax.swing.JFrame {
     }
 
     private void geraRelatorioCorretorMes(int mes, int ano) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        jLabelValorFinal.setText("" + objControlePrin.getObjControleVendas().corretorDoMes(mes, ano, jTableVendasDoMes));
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

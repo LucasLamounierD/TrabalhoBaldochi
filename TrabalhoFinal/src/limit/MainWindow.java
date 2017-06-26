@@ -273,6 +273,11 @@ public class MainWindow extends javax.swing.JFrame {
         jMenuRelatorios.add(jMenuItem8);
 
         jMenuItem9.setText("Corretor do Mês");
+        jMenuItem9.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem9ActionPerformed(evt);
+            }
+        });
         jMenuRelatorios.add(jMenuItem9);
 
         jMenuBarMainWindow.add(jMenuRelatorios);
@@ -401,6 +406,10 @@ public class MainWindow extends javax.swing.JFrame {
     private void jMenuItem5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem5ActionPerformed
         ctrPrincipal.abrirJanelaRelatorio(Util.REL_LUCRO_TOTAL);
     }//GEN-LAST:event_jMenuItem5ActionPerformed
+
+    private void jMenuItem9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem9ActionPerformed
+        ctrPrincipal.abrirJanelaRelatorio(Util.REL_CORRETOR_DO_MES);
+    }//GEN-LAST:event_jMenuItem9ActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
