@@ -2,6 +2,7 @@ package limit;
 
 import control.ControleImovel;
 import java.text.DateFormat;
+import java.text.DecimalFormat;
 import java.util.Date;
 import java.util.Locale;
 import javax.swing.JOptionPane;
@@ -174,11 +175,11 @@ public class LimiteImovel extends javax.swing.JFrame {
 
     //Caso seja apertado o botão Cadastrar será pego as informações que estão nos Jtext, e irá passa-las para o controle e será validado lá
     private void jButtonCadastrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCadastrarActionPerformed
-        System.out.println("Clicado");
+
         String msg="";
         try {
-            if(jButtonCadastrar.getActionCommand().equals("Create")){
-            //Passando ao controle os valores dos campos para o cadastro e tratado uma evetual exception
+            if(jButtonCadastrar.getActionCommand().equals("Create")){//Se for operação de cadastro 
+            //Passando ao controle os valores dos campos para o cadastro.
                 ctrImovel.cadImovel(jTextFieldCodigo.getText(),
                                     jComboBoxTipo.getSelectedItem().toString(),
                                     jTextAreaDescrição.getText(),
@@ -187,9 +188,10 @@ public class LimiteImovel extends javax.swing.JFrame {
                                     JFormattedData.getText()
                                     );              
                 JOptionPane.showMessageDialog(rootPane, "Imóvel cadastrado com sucesso",
-                "SUCESSO",JOptionPane.INFORMATION_MESSAGE);
-                
+                "SUCESSO",JOptionPane.INFORMATION_MESSAGE);//Mensagem de sucesso
+             //Se for operação de edição   
             }else if(jButtonCadastrar.getActionCommand().equals("Edit")){
+                //Passando ao controle os valores dos campo de edição
                 ctrImovel.editImovel(jTextFieldNomeProp.getText(),
                                      jTextFieldPreco.getText(),
                                      JFormattedData.getText(),
@@ -199,7 +201,7 @@ public class LimiteImovel extends javax.swing.JFrame {
             }
             this.dispose();
             
-        }catch (Exception ex) {//Mensagem de erro.
+        }catch (Exception ex) {//Tratando uma evetual Exception
             JOptionPane.showMessageDialog(rootPane,ex.getMessage(),"Erro ao cadastrar imóvel",JOptionPane.ERROR_MESSAGE);
         }
     }//GEN-LAST:event_jButtonCadastrarActionPerformed
@@ -229,18 +231,21 @@ public class LimiteImovel extends javax.swing.JFrame {
     private javax.swing.JFormattedTextField jTextFieldPreco;
     // End of variables declaration//GEN-END:variables
 
+    //Defini os valores aos campos ecistentes no formulario
      public void setValueField(String pCodigo,String pTipo,String pNomeProp,
                                 float pPreco,Date pData,String descricao ) {
          
-                
+        //Formatado data para que a mesma seja exibida na caixa de texto       
         Locale local = new Locale("pt","Br");
         DateFormat df = DateFormat.getDateInstance(DateFormat.MEDIUM, local);
+        //Classe para formatar o numero decimal para o padrão adquirido "0000,00";
+        DecimalFormat decFor = new DecimalFormat("#.00");
          
-         
+        //Inserido dados nas caixa de texto, e formatando se for preciso
         jTextFieldCodigo.setText(pCodigo);
         jComboBoxTipo.setSelectedItem(pTipo);
         jTextFieldNomeProp.setText(pNomeProp);
-        jTextFieldPreco.setText(""+pPreco);        
+        jTextFieldPreco.setText(decFor.format(pPreco));        
         JFormattedData.setText(df.format(pData));         
         jTextAreaDescrição.setText(descricao);
     }
@@ -255,18 +260,20 @@ public class LimiteImovel extends javax.swing.JFrame {
         JFormattedData.setText("");
     }
      
+    //Defini para que tipo de operação foi chamada a janela de imoveis.
     public void setTypeOperation(int opType) {
-        if(opType == Util.OP_CREATE){
-            this.enableFieldsRequired(true);
+        if(opType == Util.OP_CREATE){//Para cadastro.
+            this.enableFieldsRequired(true);//Deixa todos campos disponiveis para edição.
             jButtonCadastrar.setText("Cadastrar");
-            jButtonCadastrar.setActionCommand("Create");
-        }else if(opType == Util.OP_EDIT){
-            this.enableFieldsRequired(false);
+            jButtonCadastrar.setActionCommand("Create");//Definindo o tipo do processo como de cadatro.
+        }else if(opType == Util.OP_EDIT){//Para Edição.
+            this.enableFieldsRequired(false);//Defini campo codigo e tipo com indisponiveis para edição.
             jButtonCadastrar.setText("Concluir");
-            jButtonCadastrar.setActionCommand("Edit");
+            jButtonCadastrar.setActionCommand("Edit");//Definindo o tipo do processo como de edição.
         }
     }
 
+    //Defini a disponibilidade dos campos codigo e tipo.
     private void enableFieldsRequired(boolean status) {
         jTextFieldCodigo.setEnabled(status);
         jComboBoxTipo.setEnabled(status);

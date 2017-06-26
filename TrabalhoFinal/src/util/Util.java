@@ -3,8 +3,7 @@ package util;
 import java.text.NumberFormat;
 import java.text.ParseException;
 import java.util.Locale;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+
 
 public class Util {
     public final static int CADASTRO_COMISSIONADO = 1;

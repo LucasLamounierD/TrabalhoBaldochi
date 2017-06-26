@@ -18,6 +18,7 @@ public class LimiteCorretor extends javax.swing.JFrame {
         
     }
     
+    //Definindo qual é o tipo de Corretor que será cadastrado
     public void setSelectedComboTipoCorretor(int ent){
         jComboTipoCorretor.setSelectedIndex(ent);
     }
