@@ -3,6 +3,9 @@ package limit;
 import control.ControleImovel;
 import java.text.DateFormat;
 import java.text.DecimalFormat;
+import java.text.FieldPosition;
+import java.text.NumberFormat;
+import java.text.ParsePosition;
 import java.util.Date;
 import java.util.Locale;
 import javax.swing.JOptionPane;
@@ -233,17 +236,17 @@ public class LimiteImovel extends javax.swing.JFrame {
     // End of variables declaration//GEN-END:variables
 
     //Defini os valores aos campos ecistentes no formulario
-     public void setValueField(String pCodigo,String pTipo,String pNomeProp,
+     public void setValueField(int pCodigo,String pTipo,String pNomeProp,
                                 float pPreco,Date pData,String descricao ) {
          
         //Formatado data para que a mesma seja exibida na caixa de texto       
         Locale local = new Locale("pt","Br");
         DateFormat df = DateFormat.getDateInstance(DateFormat.MEDIUM, local);
         //Classe para formatar o numero decimal para o padrão adquirido "0000,00";
-        DecimalFormat decFor = new DecimalFormat("#.00");
+        DecimalFormat decFor = new DecimalFormat("#.00");            
          
         //Inserido dados nas caixa de texto, e formatando se for preciso
-        jTextFieldCodigo.setText(pCodigo);
+        jTextFieldCodigo.setText(String.valueOf(pCodigo));
         jComboBoxTipo.setSelectedItem(pTipo);
         jTextFieldNomeProp.setText(pNomeProp);
         jTextFieldPreco.setText(decFor.format(pPreco));    

@@ -2,6 +2,7 @@ package control;
 
 import model.Venda;
 import java.io.*;
+import java.text.DecimalFormat;
 import java.text.NumberFormat;
 import java.util.*;
 import javax.swing.JOptionPane;
@@ -235,15 +236,17 @@ public class ControleVendas {
         modelTable.addColumn("Nome do Corretor");
         modelTable.addColumn("Valor Real");
 
+        DecimalFormat decFor = new DecimalFormat("R$ #.00");//Classe para conversão decimal
+        
         for (Venda v : listaVenda) {
             if (((v.getDataVenda().getYear() + 1900) == pAno) && ((v.getDataVenda().getMonth()) == pMes)) {
                 modelTable.addRow(new Object[]{v.getImovelVendido().getCodigo(),
                     v.getImovelVendido().getTipo(),
                     v.getImovelVendido().getNomePropietario(),
-                    v.getImovelVendido().getPreco(),
+                    decFor.format(v.getImovelVendido().getPreco()),
                     v.getNomeComprador(),
                     v.getNomeCorretor().getNome(),
-                    v.getValorReal()});
+                    decFor.format(v.getValorReal())});
             }
         }
         tabelaVenda.setModel(modelTable);

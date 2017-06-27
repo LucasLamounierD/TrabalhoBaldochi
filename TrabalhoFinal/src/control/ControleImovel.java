@@ -39,7 +39,7 @@ public class ControleImovel {
     //Metodo que será o responsavél por deixar visível a janela
     void abrirJanelaCadastroImovel() {
         limImovel.resetFields();
-        limImovel.setValueField(""+(ultimoCodigoGerado+1),"","",0,null,"");        
+        limImovel.setValueField(ultimoCodigoGerado+1,"","",0,null,"");        
         limImovel.setTypeOperation(Util.OP_CREATE);
         limImovel.setVisible(true);
     }
@@ -49,7 +49,7 @@ public class ControleImovel {
         IndexBeingEditedNow = buscaIndiceListaImovel(chave);
         Imovel i = vecImovel.get(IndexBeingEditedNow);
         
-        limImovel.setValueField(i.getCodigo(),i.getTipo(),i.getNomePropietario(),
+        limImovel.setValueField(Integer.parseInt(i.getCodigo()),i.getTipo(),i.getNomePropietario(),
                                 i.getPreco(),i.getDataCad(),i.getDescricao());
         limImovel.setTypeOperation(Util.OP_EDIT);
         limImovel.setVisible(true);
@@ -177,12 +177,14 @@ public class ControleImovel {
          dataReq.set(ano,mes,0);//Seta mes se ano escolhido nos filtros do relatorio
          dataReq.add(Calendar.MONTH, -6);//Diminui 6 meses da data escolhida.
          Date dataFiltro = dataReq.getTime();//Guarda data de filtro
-                
+           
+         DecimalFormat decFor = new DecimalFormat("R$ #.00");//Classe para conversão decimal
+         
         //percorre lista de Imoveis
         for(Imovel i : vecImovel){            
             if(dataFiltro.compareTo(i.getDataCad())==1){//Se a data de cadastro do imovel vier antes da data de filtro 
                 //Inseri na tabela os dados sobre o imovel
-                tableModel.addRow(new Object[]{i.getCodigo(), i.getTipo(), String.valueOf(i.getPreco()), i.getNomePropietario()});
+                tableModel.addRow(new Object[]{i.getCodigo(), i.getTipo(), decFor.format(i.getPreco()), i.getNomePropietario()});
             }
         }
         
@@ -198,6 +200,8 @@ public class ControleImovel {
         tableImoveisModel.addColumn("TIPO");
         tableImoveisModel.addColumn("PREÇO");
         tableImoveisModel.addColumn("PROPRIETÁRIO");
+        
+        DecimalFormat decFor = new DecimalFormat("R$ #.00");//Classe para conversão decimal
 
         //Analisa imoveis disponiveis
         comboBoxTipoImoveisDispModel.addElement("Todos");
@@ -205,14 +209,14 @@ public class ControleImovel {
             if(comboBoxTipoImoveisDispModel.getIndexOf(i.getTipo())==-1){
                 comboBoxTipoImoveisDispModel.addElement(i.getTipo());
             }            
-            tableImoveisModel.addRow(new Object[]{i.getCodigo(), i.getTipo(), String.valueOf(i.getPreco()), i.getNomePropietario()});
+            tableImoveisModel.addRow(new Object[]{i.getCodigo(), i.getTipo(), decFor.format(i.getPreco()), i.getNomePropietario()});
         }
     }
     
     public void updateTableImoveis(String filterType,boolean updateModelTypeToo){             
         
         tableImoveisModel.setRowCount(0);  
-        
+        DecimalFormat decFor = new DecimalFormat("R$ #.00");//Classe para conversão decimal
         if(updateModelTypeToo){
             ctrPrincipal.getObjLimPrincipal().setActiveEventChangeFiltroTipoDeImovel(false);
             comboBoxTipoImoveisDispModel.removeAllElements();
@@ -225,17 +229,16 @@ public class ControleImovel {
             }
             
            if(filterType.equals("Todos")){
-               tableImoveisModel.addRow(new Object[]{i.getCodigo(), i.getTipo(), String.valueOf(i.getPreco()), i.getNomePropietario()});
+               tableImoveisModel.addRow(new Object[]{i.getCodigo(), i.getTipo(),decFor.format(i.getPreco()), i.getNomePropietario()});
            } if(i.getTipo().equals(filterType)){
-               tableImoveisModel.addRow(new Object[]{i.getCodigo(), i.getTipo(), String.valueOf(i.getPreco()), i.getNomePropietario()});
+               tableImoveisModel.addRow(new Object[]{i.getCodigo(), i.getTipo(), decFor.format(i.getPreco()), i.getNomePropietario()});
            } 
         }
         
         if(updateModelTypeToo){
             ctrPrincipal.getObjLimPrincipal().setActiveEventChangeFiltroTipoDeImovel(true);
             ctrPrincipal.getObjLimPrincipal().setSelectedFiltroTipoImoveis(filterType);
-        }
-        
+        }        
     }
     
     public void finalize() throws Exception {
