@@ -5,6 +5,8 @@ import limit.*;
 import java.io.*;
 import java.text.*;
 import java.util.*;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.*;
 import javax.swing.table.*;
 import util.Util;
@@ -20,21 +22,24 @@ public class ControleImovel {
     private MyTableModel tableImoveisModel;
     private DefaultComboBoxModel comboBoxTipoImoveisDispModel;
     private int IndexBeingEditedNow;
+    private int ultimoCodigoGerado;
 
     //Construtor do controle de Imovel
     public ControleImovel(ControlePrincipal pCtrPrincipal) throws Exception {
         vecImovel = new Vector();
         comboBoxTipoImoveisDispModel = new DefaultComboBoxModel ();
         //Passa o controle recebido para a variável ctrPrincipal
-        ctrPrincipal = pCtrPrincipal;
+        ctrPrincipal = pCtrPrincipal;        
         limImovel = new LimiteImovel(this);//Instacia uma janela para o cadastro
         desserializaImovel();
+        lerUltimoCodGerado();
         instTableImoveisModel();
     }
 
     //Metodo que será o responsavél por deixar visível a janela
     void abrirJanelaCadastroImovel() {
         limImovel.resetFields();
+        limImovel.setValueField(""+(ultimoCodigoGerado+1),"","",0,null,"");        
         limImovel.setTypeOperation(Util.OP_CREATE);
         limImovel.setVisible(true);
     }
@@ -71,13 +76,13 @@ public class ControleImovel {
     }
 
     //Metodo que será responsável pelo recebimento dos dados informados no limite
-    public void cadImovel(String pCod, String pTipo, String pDescricao, String pNomeProp, String pPreco, String pData) throws Exception {
+    public void cadImovel(String pTipo, String pDescricao, String pNomeProp, String pPreco, String pData) throws Exception {
         //declarando variaveis auxiliares para conversao e cadastro
         float preço = 0;
         //fazendo a conversão das preco   
         preço = Util.convFloatComVirgula(pPreco);
         //Instanciado Objeto e adicionando ao vetor
-        Imovel i = new Imovel(pCod, pTipo, pDescricao, pNomeProp, preço, pData);
+        Imovel i = new Imovel(""+(++ultimoCodigoGerado), pTipo, pDescricao, pNomeProp, preço, pData);
         vecImovel.add(i);
         salva();
         updateTableImoveis(comboBoxTipoImoveisDispModel.getSelectedItem().toString(),true);
@@ -94,11 +99,43 @@ public class ControleImovel {
         i.setDataCad(pData);
         salva();
         updateTableImoveis(comboBoxTipoImoveisDispModel.getSelectedItem().toString(),false);
+    }   
+    
+    private void salvaUltimoCodGerado(){
+         //Abrindo arquivo e salvando ultimo codigo gerado
+        FileOutputStream fileUltimoCodigoGerado;       
+        try {//Se o houve algum erro ele não grava a informação
+            fileUltimoCodigoGerado = new FileOutputStream("conf.dat");
+            ObjectOutputStream objUltimoCodigoGerado = new ObjectOutputStream(fileUltimoCodigoGerado);
+            objUltimoCodigoGerado.writeInt(ultimoCodigoGerado);
+            objUltimoCodigoGerado.flush();
+            objUltimoCodigoGerado.close();
+        } catch (Exception ex) {
+            return;
+        }        
+    }
+    
+    private void lerUltimoCodGerado(){
+        File objFile = new File("conf.dat");
+        if (objFile.exists()) {           
+            try {//Se houver algum erro o ultimo codigo gerado sera 0
+                FileInputStream objFileIS = new FileInputStream("conf.dat");
+                ObjectInputStream objIS;
+                objIS = new ObjectInputStream(objFileIS);
+                ultimoCodigoGerado = objIS.readInt();
+                objIS.close();
+            } catch (IOException ex) {
+                ultimoCodigoGerado=0;
+            }            
+        }else{//Se o arquivo não existir ultimi codigo gerado também será 0
+            ultimoCodigoGerado=0;
+        } 
     }
     
     //Serializa o Array de Imovel, o passando para o arquivo imoveis.dat
-    private void serializaImovel() throws Exception {
-        FileOutputStream objFileOS = new FileOutputStream("imoveis.dat");
+    private void serializaImovel() throws Exception { 
+        //Abrindo arquivo salvando imoveis e fechado o arquivo
+        FileOutputStream objFileOS = new FileOutputStream("imoveis.dat");       
         ObjectOutputStream objOS = new ObjectOutputStream(objFileOS);
         objOS.writeObject(vecImovel);
         objOS.flush();
@@ -203,7 +240,9 @@ public class ControleImovel {
     
     public void finalize() throws Exception {
         serializaImovel();
-    }
+        salvaUltimoCodGerado();
+    }  
+    
 
     public DefaultTableModel getTableCorretoresModel() {
         return tableImoveisModel;

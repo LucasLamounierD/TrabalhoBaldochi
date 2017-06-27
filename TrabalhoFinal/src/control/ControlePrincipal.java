@@ -113,8 +113,7 @@ public class ControlePrincipal {
 
     public MainWindow getObjLimPrincipal() {
         return objLimPrincipal;
-    }    
-    
+    }   
     
     public static void main (String [] args){
         ControlePrincipal main = new ControlePrincipal();

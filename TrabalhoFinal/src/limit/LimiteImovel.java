@@ -52,7 +52,9 @@ public class LimiteImovel extends javax.swing.JFrame {
 
         jComboBoxTipo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { " ", "Casa", "Apartamento", "Sala comercial", "Lote", "Chácara", "Sítio", "Fazenda" }));
 
-        jLabel2.setText("Codigo");
+        jLabel2.setText("Codigo:(Gerado Automaticamente)");
+
+        jTextFieldCodigo.setEditable(false);
 
         jLabel3.setText("Descrição:");
 
@@ -180,8 +182,7 @@ public class LimiteImovel extends javax.swing.JFrame {
         try {
             if(jButtonCadastrar.getActionCommand().equals("Create")){//Se for operação de cadastro 
             //Passando ao controle os valores dos campos para o cadastro.
-                ctrImovel.cadImovel(jTextFieldCodigo.getText(),
-                                    jComboBoxTipo.getSelectedItem().toString(),
+                ctrImovel.cadImovel(jComboBoxTipo.getSelectedItem().toString(),
                                     jTextAreaDescrição.getText(),
                                     jTextFieldNomeProp.getText(),
                                     jTextFieldPreco.getText(),
@@ -245,8 +246,10 @@ public class LimiteImovel extends javax.swing.JFrame {
         jTextFieldCodigo.setText(pCodigo);
         jComboBoxTipo.setSelectedItem(pTipo);
         jTextFieldNomeProp.setText(pNomeProp);
-        jTextFieldPreco.setText(decFor.format(pPreco));        
-        JFormattedData.setText(df.format(pData));         
+        jTextFieldPreco.setText(decFor.format(pPreco));    
+        if(pData!=null){
+            JFormattedData.setText(df.format(pData));   
+        }
         jTextAreaDescrição.setText(descricao);
     }
    
