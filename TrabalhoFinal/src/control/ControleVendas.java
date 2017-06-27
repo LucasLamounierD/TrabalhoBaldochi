@@ -140,29 +140,36 @@ public class ControleVendas {
     //Metodo para retornar o valor pago a todos os corretores para calculo do lucro
     public float calcularLucroTotal(int pMes, int pAno) {
 
-        float valorTotal = 0;
+        float valorTotalSalarios = 0;
+        float valorTotalFaturamento = 0;
         Corretor c;
 
         for (Venda v : listaVenda) {
 
             //ENTRA AQUI SE OS MESES E ANOS CORRESPONDEREM AOS DA PESQUISA
-            if(v.getDataVenda().getMonth() == pMes && v.getDataVenda().getYear()+1900 == pAno){
-            
-            c = v.getNomeCorretor();
+            if (v.getDataVenda().getMonth() == pMes && v.getDataVenda().getYear() + 1900 == pAno) {
 
-            //ANALISA QUAL TIPO DE CORRETOR, PARA FAZER OS CALCULOS DO VALOR TOTAL
-            if (c instanceof Comissionado) {
-                valorTotal += v.getValorReal() * ((Comissionado) c).getComissao();
-            }
-            if (c instanceof Contratado) {
-                valorTotal += ((Contratado) c).getSalarioFixo() + (0.01 * v.getValorReal());
-            }
-            
+                c = v.getNomeCorretor();
+
+                //ANALISA QUAL TIPO DE CORRETOR, PARA FAZER OS CALCULOS DO VALOR TOTAL
+                if (c instanceof Comissionado) {
+                    valorTotalSalarios += v.getValorReal() * (((Comissionado) c).getComissao()/100);
+                }
+                if (c instanceof Contratado) {
+                    valorTotalSalarios += ((Contratado) c).getSalarioFixo() + (0.01 * v.getValorReal());
+                }
+
             }
 
         }
+        
+        for (Venda v : listaVenda) {
+            if (((v.getDataVenda().getYear() + 1900) == pAno) && ((v.getDataVenda().getMonth()) == pMes)) {
+                valorTotalFaturamento += (v.getValorReal() * 5) / 100;//FAZ O CALCULO DO VALOR TOTAL DE VENDAS PARA EXIBIÇÃO
+            }
+        }
 
-        return valorTotal;
+        return valorTotalFaturamento - valorTotalSalarios;
 
     }
 
@@ -203,7 +210,7 @@ public class ControleVendas {
         for (Venda v : listaVenda) {
             if (((v.getDataVenda().getYear() + 1900) == pAno) && ((v.getDataVenda().getMonth()) == pMes)) {
                 vendasMes.add(v);
-                valorVendas += (v.getValorReal() * 5)/100;//FAZ O CALCULO DO VALOR TOTAL DE VENDAS PARA EXIBIÇÃO
+                valorVendas += (v.getValorReal() * 5) / 100;//FAZ O CALCULO DO VALOR TOTAL DE VENDAS PARA EXIBIÇÃO
             }
         }
 
@@ -237,7 +244,7 @@ public class ControleVendas {
         modelTable.addColumn("Valor Real");
 
         DecimalFormat decFor = new DecimalFormat("R$ #.00");//Classe para conversão decimal
-        
+
         for (Venda v : listaVenda) {
             if (((v.getDataVenda().getYear() + 1900) == pAno) && ((v.getDataVenda().getMonth()) == pMes)) {
                 modelTable.addRow(new Object[]{v.getImovelVendido().getCodigo(),
@@ -289,8 +296,8 @@ public class ControleVendas {
 
         tabelaCorretor.setModel(table);
     }
-    
-    public void valorPagoCorretor(int pMes, int pAno, JTable tabelaCorretor){
+
+    public void valorPagoCorretor(int pMes, int pAno, JTable tabelaCorretor) {
         MyTableModel table = new MyTableModel();
 
         table.addColumn("CRECIC");
@@ -305,42 +312,51 @@ public class ControleVendas {
 
         tabelaCorretor.setModel(table);
     }
-    
-    public float corretorDoMes(int pMes, int pAno, JTable tabelaCorretor){
-        
+
+    public Corretor corretorDoMes(int pMes, int pAno, JTable tabelaCorretor) {
+
         MyTableModel table = new MyTableModel();
         float faturamentoMaior = 0;
         Corretor funcDoMes = null;
-        
-        table.addColumn("CRECIC");
-        table.addColumn("Corretor");
-        table.addColumn("Valor Pago");
-        
-        for(Object c : ctrPrincipal.getObjControleCorretor().getVecCorretor()){
-            
-            if(calculaFaturamentoCorretorMes(pMes, pAno, (Corretor) c) > faturamentoMaior){
-                
+
+        table.addColumn("Tipo");
+        table.addColumn("Valor da venda");
+        table.addColumn("Data da venda");
+        table.addColumn("Comprador");
+
+        for (Object c : ctrPrincipal.getObjControleCorretor().getVecCorretor()) {
+
+            if (calculaFaturamentoCorretorMes(pMes, pAno, (Corretor) c) > faturamentoMaior) {
+
                 faturamentoMaior = (float) calculaFaturamentoCorretorMes(pMes, pAno, (Corretor) c);
                 funcDoMes = (Corretor) c;
-                
+
             }
-            
+
         }
-        
-        for(Venda v : listaVenda){
-            
-            if(v.getNomeCorretor().getCrecic().equals(funcDoMes.getCrecic())){
-                
-                table.addRow(new Object[]{funcDoMes.getCrecic(), funcDoMes.getNome(), (v.getValorReal() * 5) / 100});
-                
+
+        if (funcDoMes != null) {
+
+            for (Venda v : listaVenda) {
+
+                if (v.getNomeCorretor().getCrecic().equals(funcDoMes.getCrecic())) {
+
+                    table.addRow(new Object[]{v.getImovelVendido().getTipo(), v.getValorReal(),
+                        v.getDataVenda().getDate() + "/" + (v.getDataVenda().getMonth() + 1) + "/" + (v.getDataVenda().getYear() + 1900),
+                        v.getNomeComprador()});
+
+                }
+
             }
-            
+
+            return funcDoMes;
+
         }
-        
+
         tabelaCorretor.setModel(table);
-        
-        return faturamentoMaior;
-        
+
+        return null;
+
     }
 
     public void finalize() throws Exception {

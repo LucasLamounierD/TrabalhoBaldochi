@@ -10,6 +10,7 @@ import control.*;
 import java.awt.CardLayout;
 import java.util.Date;
 import javax.swing.table.DefaultTableModel;
+import model.Corretor;
 
 /**
  *
@@ -66,7 +67,7 @@ public class LimiteFormularios extends javax.swing.JFrame {
         RelatorioCorretorDoMes = new javax.swing.JPanel();
         nomeCorretor = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
-        nomeCorretor1 = new javax.swing.JTextField();
+        CRECICCorretor = new javax.swing.JTextField();
         jLabel5 = new javax.swing.JLabel();
         jScrollPane3 = new javax.swing.JScrollPane();
         TabelaVendasCorretorMes = new javax.swing.JTable();
@@ -319,7 +320,7 @@ public class LimiteFormularios extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 95, Short.MAX_VALUE)
                         .addGroup(RelatorioCorretorDoMesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel5)
-                            .addComponent(nomeCorretor1, javax.swing.GroupLayout.PREFERRED_SIZE, 320, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(CRECICCorretor, javax.swing.GroupLayout.PREFERRED_SIZE, 320, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(RelatorioCorretorDoMesLayout.createSequentialGroup()
                         .addComponent(jLabel6)
                         .addGap(0, 0, Short.MAX_VALUE)))
@@ -333,7 +334,7 @@ public class LimiteFormularios extends javax.swing.JFrame {
                     .addGroup(RelatorioCorretorDoMesLayout.createSequentialGroup()
                         .addComponent(jLabel5)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(nomeCorretor1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(CRECICCorretor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(RelatorioCorretorDoMesLayout.createSequentialGroup()
                         .addComponent(jLabel4)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -442,10 +443,15 @@ public class LimiteFormularios extends javax.swing.JFrame {
     }
 
     private void geraRelatorioCorretorMes(int mes, int ano) {
-        jLabelValorFinal.setText("" + objControlePrin.getObjControleVendas().corretorDoMes(mes, ano, TabelaVendasCorretorMes));
+        Corretor c = objControlePrin.getObjControleVendas().corretorDoMes(mes, ano, TabelaVendasCorretorMes);
+        if(c != null){
+        nomeCorretor.setText(c.getNome());
+        CRECICCorretor.setText(c.getCrecic());
+        }
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JTextField CRECICCorretor;
     private javax.swing.JPanel Menu;
     private javax.swing.JPanel RelatorioCorretorDoMes;
     private javax.swing.JPanel RelatorioGeral;
@@ -469,7 +475,6 @@ public class LimiteFormularios extends javax.swing.JFrame {
     private javax.swing.JTable jTableVendasDoMes;
     private javax.swing.JTextField jTextFieldLucroImob;
     private javax.swing.JTextField nomeCorretor;
-    private javax.swing.JTextField nomeCorretor1;
     private javax.swing.JPanel painelResultadoTotal;
     private javax.swing.JPanel panel;
     private javax.swing.JPanel panelExibicaoRel;
