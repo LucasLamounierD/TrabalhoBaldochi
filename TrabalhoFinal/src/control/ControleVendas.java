@@ -153,7 +153,7 @@ public class ControleVendas {
 
                 //ANALISA QUAL TIPO DE CORRETOR, PARA FAZER OS CALCULOS DO VALOR TOTAL
                 if (c instanceof Comissionado) {
-                    valorTotalSalarios += v.getValorReal() * (((Comissionado) c).getComissao()/100);
+                    valorTotalSalarios += v.getValorReal() * (((Comissionado) c).getComissao() / 100);
                 }
                 if (c instanceof Contratado) {
                     valorTotalSalarios += ((Contratado) c).getSalarioFixo() + (0.01 * v.getValorReal());
@@ -162,7 +162,7 @@ public class ControleVendas {
             }
 
         }
-        
+
         for (Venda v : listaVenda) {
             if (((v.getDataVenda().getYear() + 1900) == pAno) && ((v.getDataVenda().getMonth()) == pMes)) {
                 valorTotalFaturamento += (v.getValorReal() * 5) / 100;//FAZ O CALCULO DO VALOR TOTAL DE VENDAS PARA EXIBIÇÃO
@@ -348,6 +348,8 @@ public class ControleVendas {
                 }
 
             }
+
+            tabelaCorretor.setModel(table);
 
             return funcDoMes;
 
