@@ -52,6 +52,11 @@ public class LimitePagamento extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setIconImage(new ImageIcon(getClass().getResource("/icons/jframeicon.png")).getImage());
         setResizable(false);
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowClosed(java.awt.event.WindowEvent evt) {
+                formWindowClosed(evt);
+            }
+        });
 
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Pagamento", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 1, 13))); // NOI18N
 
@@ -179,13 +184,13 @@ public class LimitePagamento extends javax.swing.JFrame {
         Corretor cor = vec.elementAt(jComboBoxCorretor.getSelectedIndex());
         //Separa a data recebida, para poder comparar seu mês e ano
         String str = jTextFieldData.getText();
-        
-        if(str.isEmpty()){//Caso não seja digitado nada no campo pagamento
+
+        if (str.isEmpty()) {//Caso não seja digitado nada no campo pagamento
             JOptionPane.showMessageDialog(rootPane, "Preencha o campo Data Desejada no padrão (mm/yyyy) !", "Data Inválida", JOptionPane.ERROR_MESSAGE);
             return;
         }
-        
-        String[] split = str.split("/");         
+
+        String[] split = str.split("/");
         //Coloca os valores do mês e ano nas sequintes variáveis
         int mesEscolhido = Integer.parseInt(split[0]);
         int anoEscolhido = Integer.parseInt(split[1]);
@@ -203,6 +208,12 @@ public class LimitePagamento extends javax.swing.JFrame {
         }
 
     }//GEN-LAST:event_jButtonPagarActionPerformed
+
+    private void formWindowClosed(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosed
+        jTextFieldData.setText("");
+        jTextFieldGanhoAno.setText("");
+        jTextFieldGanhoMes.setText("");
+    }//GEN-LAST:event_formWindowClosed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
