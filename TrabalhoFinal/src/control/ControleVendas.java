@@ -7,11 +7,9 @@ import java.text.NumberFormat;
 import java.util.*;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
-import javax.swing.table.DefaultTableModel;
 import limit.*;
 import model.*;
 import util.MyTableModel;
-import util.Util;
 
 public class ControleVendas {
 
@@ -19,7 +17,6 @@ public class ControleVendas {
     private Venda entVenda;
     private ArrayList<Venda> listaVenda;
     private LimiteVendas limVendas;
-    private LimiteFormularios objLimiteFormulario;
     private ControlePrincipal ctrPrincipal;
     private LimitePagamento limPag;
 
@@ -202,7 +199,7 @@ public class ControleVendas {
             JOptionPane.showMessageDialog(null, "Falha na serialização", "ERRO", JOptionPane.INFORMATION_MESSAGE);
         }
     }
-
+    
     public float buscaVendasMes(int pMes, int pAno, JTable tabelaVenda) {
         ArrayList<Venda> vendasMes = new ArrayList();
         float valorVendas = 0;
@@ -231,10 +228,11 @@ public class ControleVendas {
         tabelaVenda.setModel(t);
         return valorVendas;//RETORNA O VALOR TOTAL DAS VENDAS PARA EXIBIR COMO TOTAL NO PAINEL
     }
-
+    
+    //Metodo que ira criar a Table com os imóveis vendidos 
     public void buscaImoveisVendidos(int pMes, int pAno, JTable tabelaVenda) {
         MyTableModel modelTable = new MyTableModel();
-
+        //Adiciona as colunas
         modelTable.addColumn("Codigo Imovel");
         modelTable.addColumn("Tipo do Imovel");
         modelTable.addColumn("Nome Prop.");
@@ -242,9 +240,9 @@ public class ControleVendas {
         modelTable.addColumn("Nome Comprador");
         modelTable.addColumn("Nome do Corretor");
         modelTable.addColumn("Valor Real");
-
-        DecimalFormat decFor = new DecimalFormat("R$ #.00");//Classe para conversão decimal
-
+        //Formatação do valor
+        DecimalFormat decFor = new DecimalFormat("R$ 0.00");//Classe para conversão decimal
+        //Adiciona os imóveis na tabela
         for (Venda v : listaVenda) {
             if (((v.getDataVenda().getYear() + 1900) == pAno) && ((v.getDataVenda().getMonth()) == pMes)) {
                 modelTable.addRow(new Object[]{v.getImovelVendido().getCodigo(),
@@ -258,7 +256,8 @@ public class ControleVendas {
         }
         tabelaVenda.setModel(modelTable);
     }
-
+    
+    //Metodo para calcular o faturamento de um corretor para certo mês
     public double calculaFaturamentoCorretorMes(int pMes, int pAno, Corretor pCorretor) {
         double faturamento = 0;
         //Vai percorrer a lista de vendas
@@ -280,50 +279,57 @@ public class ControleVendas {
 
         return faturamento;
     }
-
+    
+    //Metodo para a criação da Table de faturamento de cada Corretor
     public void faturamentoCadaCorretor(int pMes, int pAno, JTable tabelaCorretor) {
         MyTableModel table = new MyTableModel();
-
+        //Adiciona as colunas
         table.addColumn("CRECIC");
         table.addColumn("Corretor");
         table.addColumn("Valor");
-
+        
+        DecimalFormat decFor = new DecimalFormat("R$ 0.00");//Classe para conversão decimal
+        //Adiciona os corretores a cada linha
         for (Object c : ctrPrincipal.getObjControleCorretor().getVecCorretor()) {
             table.addRow(new Object[]{((Corretor) c).getCrecic(),
                 ((Corretor) c).getNome(),
-                calculaFaturamentoCorretorMes(pMes, pAno, ((Corretor) c))});
+                decFor.format(calculaFaturamentoCorretorMes(pMes, pAno, ((Corretor) c)))});
         }
-
+        
         tabelaCorretor.setModel(table);
     }
-
+    
+    //Metodo para valor pago para cadas corretor
     public void valorPagoCorretor(int pMes, int pAno, JTable tabelaCorretor) {
         MyTableModel table = new MyTableModel();
-
+        //Adiciona as colunas
         table.addColumn("CRECIC");
         table.addColumn("Corretor");
         table.addColumn("Valor Pago");
-
+        DecimalFormat decFor = new DecimalFormat("R$ 0.00");//Classe para conversão decimal
+        //Adiciona os corretores
         for (Object c : ctrPrincipal.getObjControleCorretor().getVecCorretor()) {
             table.addRow(new Object[]{((Corretor) c).getCrecic(),
                 ((Corretor) c).getNome(),
-                pagCorretorMes(pMes + 1, pAno, ((Corretor) c))});
+                decFor.format(pagCorretorMes(pMes + 1, pAno, ((Corretor) c)))});
         }
 
         tabelaCorretor.setModel(table);
     }
-
+    
+    //Metodo para obter o corretor do mês
     public Corretor corretorDoMes(int pMes, int pAno, JTable tabelaCorretor) {
 
         MyTableModel table = new MyTableModel();
         float faturamentoMaior = 0;
         Corretor funcDoMes = null;
-
+        //Adiciona as colunas
         table.addColumn("Tipo");
         table.addColumn("Valor da venda");
         table.addColumn("Data da venda");
         table.addColumn("Comprador");
-
+        DecimalFormat decFor = new DecimalFormat("R$ 0.00");//Classe para conversão decimal
+        //Obtem o vendedor do mês
         for (Object c : ctrPrincipal.getObjControleCorretor().getVecCorretor()) {
 
             if (calculaFaturamentoCorretorMes(pMes, pAno, (Corretor) c) > faturamentoMaior) {
@@ -334,14 +340,14 @@ public class ControleVendas {
             }
 
         }
-
+        //Se não for null ele retorna os dados do corretor do mês
         if (funcDoMes != null) {
 
             for (Venda v : listaVenda) {
 
                 if (v.getNomeCorretor().getCrecic().equals(funcDoMes.getCrecic())) {
 
-                    table.addRow(new Object[]{v.getImovelVendido().getTipo(), v.getValorReal(),
+                    table.addRow(new Object[]{v.getImovelVendido().getTipo(), decFor.format(v.getValorReal()),
                         v.getDataVenda().getDate() + "/" + (v.getDataVenda().getMonth() + 1) + "/" + (v.getDataVenda().getYear() + 1900),
                         v.getNomeComprador()});
 
@@ -354,7 +360,7 @@ public class ControleVendas {
             return funcDoMes;
 
         }
-
+        
         tabelaCorretor.setModel(table);
 
         return null;
