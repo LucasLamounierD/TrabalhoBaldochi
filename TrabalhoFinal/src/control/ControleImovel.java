@@ -21,6 +21,7 @@ public class ControleImovel {
     
     private MyTableModel tableImoveisModel;
     private DefaultComboBoxModel comboBoxTipoImoveisDispModel;
+    private DecimalFormat decFor;
     private int IndexBeingEditedNow;
     private int ultimoCodigoGerado;
 
@@ -31,6 +32,7 @@ public class ControleImovel {
         //Passa o controle recebido para a variável ctrPrincipal
         ctrPrincipal = pCtrPrincipal;        
         limImovel = new LimiteImovel(this);//Instacia uma janela para o cadastro
+        decFor = new DecimalFormat("R$ 0.00");//Classe para conversão decimal
         desserializaImovel();
         lerUltimoCodGerado();
         instTableImoveisModel();
@@ -85,22 +87,24 @@ public class ControleImovel {
         Imovel i = new Imovel(""+(++ultimoCodigoGerado), pTipo, pDescricao, pNomeProp, preço, pData);
         vecImovel.add(i);
         salva();
-        updateTableImoveis(comboBoxTipoImoveisDispModel.getSelectedItem().toString(),true);
+        updateTableImoveis(comboBoxTipoImoveisDispModel.getSelectedItem().toString(),true);//Atualizar tabela
     }
 
     //Metodo que será responsavel por editar o imovel selecionado
     public void editImovel(String pNomeProp,String pPreco,String pData,String descricao) throws Exception{
         Imovel i = vecImovel.get(IndexBeingEditedNow);
-        float preco = Util.convFloatComVirgula(pPreco);        
+        float preco = Util.convFloatComVirgula(pPreco);//Convertendo valor de String para float      
         
+        //Carregando campos
         i.setNomePropietario(pNomeProp);        
         i.setPreco(preco);
         i.setDescricao(descricao);
         i.setDataCad(pData);
         salva();
-        updateTableImoveis(comboBoxTipoImoveisDispModel.getSelectedItem().toString(),false);
+        updateTableImoveis(comboBoxTipoImoveisDispModel.getSelectedItem().toString(),false);//Atualizar tabela
     }   
     
+    //Salvar em arquivo, o ultimo codigo valido gerado.
     private void salvaUltimoCodGerado(){
          //Abrindo arquivo e salvando ultimo codigo gerado
         FileOutputStream fileUltimoCodigoGerado;       
@@ -115,6 +119,7 @@ public class ControleImovel {
         }        
     }
     
+    //Recuperar em arquivo, o ultimo codigo valido gerado.
     private void lerUltimoCodGerado(){
         File objFile = new File("conf.dat");
         if (objFile.exists()) {           
@@ -178,7 +183,6 @@ public class ControleImovel {
          dataReq.add(Calendar.MONTH, -6);//Diminui 6 meses da data escolhida.
          Date dataFiltro = dataReq.getTime();//Guarda data de filtro
            
-         DecimalFormat decFor = new DecimalFormat("R$ #.00");//Classe para conversão decimal
          
         //percorre lista de Imoveis
         for(Imovel i : vecImovel){            
@@ -186,8 +190,7 @@ public class ControleImovel {
                 //Inseri na tabela os dados sobre o imovel
                 tableModel.addRow(new Object[]{i.getCodigo(), i.getTipo(), decFor.format(i.getPreco()), i.getNomePropietario()});
             }
-        }
-        
+        }        
         tabelaExibicao.setModel(tableModel);
     }
 
@@ -201,7 +204,7 @@ public class ControleImovel {
         tableImoveisModel.addColumn("PREÇO");
         tableImoveisModel.addColumn("PROPRIETÁRIO");
         
-        DecimalFormat decFor = new DecimalFormat("R$ #.00");//Classe para conversão decimal
+        
 
         //Analisa imoveis disponiveis
         comboBoxTipoImoveisDispModel.addElement("Todos");
@@ -216,27 +219,32 @@ public class ControleImovel {
     public void updateTableImoveis(String filterType,boolean updateModelTypeToo){             
         
         tableImoveisModel.setRowCount(0);  
-        DecimalFormat decFor = new DecimalFormat("R$ #.00");//Classe para conversão decimal
-        if(updateModelTypeToo){
+        
+        if(updateModelTypeToo){//Se for uma operação que precisa atualizar o filtro de busca
+            //Desativa o evento de alteração do combo box, para que não interfira na remodelagem do combobox
             ctrPrincipal.getObjLimPrincipal().setActiveEventChangeFiltroTipoDeImovel(false);
-            comboBoxTipoImoveisDispModel.removeAllElements();
+            comboBoxTipoImoveisDispModel.removeAllElements();//Remover todos os elemntos atual do combobox
             comboBoxTipoImoveisDispModel.addElement("Todos");
         }       
         
-        for(Imovel i: vecImovel){            
+        for(Imovel i: vecImovel){       
+            //Atualizando os elementos do combobox
             if(updateModelTypeToo && comboBoxTipoImoveisDispModel.getIndexOf(i.getTipo())==-1){
                 comboBoxTipoImoveisDispModel.addElement(i.getTipo());
             }
-            
+           
+            //Preeche a tabela conforme o filtro escolhido
            if(filterType.equals("Todos")){
                tableImoveisModel.addRow(new Object[]{i.getCodigo(), i.getTipo(),decFor.format(i.getPreco()), i.getNomePropietario()});
            } if(i.getTipo().equals(filterType)){
                tableImoveisModel.addRow(new Object[]{i.getCodigo(), i.getTipo(), decFor.format(i.getPreco()), i.getNomePropietario()});
            } 
-        }
+        }        
         
         if(updateModelTypeToo){
+            //Desativa o evento de alteração do combo box
             ctrPrincipal.getObjLimPrincipal().setActiveEventChangeFiltroTipoDeImovel(true);
+            //Seleciona o filtro selecionado anteriormente
             ctrPrincipal.getObjLimPrincipal().setSelectedFiltroTipoImoveis(filterType);
         }        
     }

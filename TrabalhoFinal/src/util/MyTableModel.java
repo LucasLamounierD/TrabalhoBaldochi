@@ -5,7 +5,6 @@
  */
 package util;
 
-import java.util.Vector;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -18,7 +17,7 @@ public class MyTableModel extends DefaultTableModel{
     public MyTableModel(){
         super();
     } 
-            
+    //Impedindo que haja edição nas tabelas     
     @Override
     public boolean isCellEditable(int row,int colunm){
          return false;
