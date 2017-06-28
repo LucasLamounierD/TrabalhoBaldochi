@@ -181,13 +181,17 @@ public class ControleVendas {
 
                 c = v.getNomeCorretor();
 
-                if (c instanceof Comissionado) {
-                    t.addRow(new Object[]{v.getImovelVendido().getCodigo(), v.getImovelVendido().getTipo(),
-                        decFor.format(v.getValorReal()), decFor.format(v.getValorReal() * 5 / 100), decFor.format(v.getValorReal() * ((Comissionado) c).getComissao() / 100)});
-                }
-                if (c instanceof Contratado) {
-                    t.addRow(new Object[]{v.getImovelVendido().getCodigo(), v.getImovelVendido().getTipo(),
-                        decFor.format(v.getValorReal()), decFor.format(v.getValorReal() * 5 / 100), decFor.format(v.getValorReal() * 0.01)});
+                if (((v.getDataVenda().getYear() + 1900) == pAno) && ((v.getDataVenda().getMonth()) == pMes)) {
+
+                    if (c instanceof Comissionado) {
+                        t.addRow(new Object[]{v.getImovelVendido().getCodigo(), v.getImovelVendido().getTipo(),
+                            decFor.format(v.getValorReal()), decFor.format(v.getValorReal() * 5 / 100), decFor.format(v.getValorReal() * ((Comissionado) c).getComissao() / 100)});
+                    }
+                    if (c instanceof Contratado) {
+                        t.addRow(new Object[]{v.getImovelVendido().getCodigo(), v.getImovelVendido().getTipo(),
+                            decFor.format(v.getValorReal()), decFor.format(v.getValorReal() * 5 / 100), decFor.format(v.getValorReal() * 0.01)});
+                    }
+
                 }
 
             }
