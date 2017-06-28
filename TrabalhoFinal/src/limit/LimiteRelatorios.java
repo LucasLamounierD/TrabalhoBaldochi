@@ -540,14 +540,29 @@ public class LimiteRelatorios extends javax.swing.JFrame {
     }
 
     public void cleanFrame() {
+        //Pegando a model da tabela Relatorios em gerais
         DefaultTableModel df = (DefaultTableModel) tabelaRel.getModel();
-        df.setColumnCount(0);
+        df.setColumnCount(0);//Limpando ela
         df.setRowCount(0);
+        
+        //Efetua a mesma operação para todas as tabelas
         df = (DefaultTableModel) jTableVendasDoMes.getModel();
         df.setColumnCount(0);
         df.setRowCount(0);
+        
+        df = (DefaultTableModel) TabelaVendasCorretorMes.getModel();
+        df.setColumnCount(0);
+        df.setRowCount(0);
+        
+        df = (DefaultTableModel) TabelaVendasCorretorMes1.getModel();
+        df.setColumnCount(0);
+        df.setRowCount(0);
+        
+        
         jComboBoxAno.setSelectedIndex(0);
         jComboBox1.setSelectedIndex(0);
+        nomeCorretor.setText("");
+        CRECICCorretor.setText("");
     }
 
 }

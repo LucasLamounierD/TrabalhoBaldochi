@@ -2,6 +2,7 @@ package control;
 
 import model.Venda;
 import java.io.*;
+import java.text.DateFormat;
 import java.text.DecimalFormat;
 import java.text.NumberFormat;
 import java.util.*;
@@ -19,6 +20,7 @@ public class ControleVendas {
     private LimiteVendas limVendas;
     private ControlePrincipal ctrPrincipal;
     private LimitePagamento limPag;
+    
 
     //Controle de Vendas
     public ControleVendas(ControlePrincipal pCtrPrincipal) throws Exception {
@@ -359,6 +361,7 @@ public class ControleVendas {
         MyTableModel table = new MyTableModel();
         float faturamentoMaior = 0;
         Corretor funcDoMes = null;
+        DateFormat df = DateFormat.getDateInstance(DateFormat.MEDIUM,new Locale("pt","br"));
         //Adiciona as colunas
         table.addColumn("Tipo");
         table.addColumn("Valor da venda");
@@ -369,22 +372,18 @@ public class ControleVendas {
         for (Object c : ctrPrincipal.getObjControleCorretor().getVecCorretor()) {
 
             if (calculaFaturamentoCorretorMes(pMes, pAno, (Corretor) c) > faturamentoMaior) {
-
                 faturamentoMaior = (float) calculaFaturamentoCorretorMes(pMes, pAno, (Corretor) c);
                 funcDoMes = (Corretor) c;
-
             }
 
         }
         //Se não for null ele retorna os dados do corretor do mês
         if (funcDoMes != null) {
-
             for (Venda v : listaVenda) {
-
                 if (v.getNomeCorretor().getCrecic().equals(funcDoMes.getCrecic())) {
 
                     table.addRow(new Object[]{v.getImovelVendido().getTipo(), decFor.format(v.getValorReal()),
-                        v.getDataVenda().getDate() + "/" + (v.getDataVenda().getMonth() + 1) + "/" + (v.getDataVenda().getYear() + 1900),
+                        df.format(v.getDataVenda()),
                         v.getNomeComprador()});
 
                 }

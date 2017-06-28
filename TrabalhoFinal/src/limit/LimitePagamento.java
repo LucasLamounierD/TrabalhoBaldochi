@@ -166,7 +166,6 @@ public class LimitePagamento extends javax.swing.JFrame {
             cont++;
         }
         jComboBoxCorretor.setModel(new javax.swing.DefaultComboBoxModel<>(str));
-
     }
 
     //Caso seja precionado o botão de cancelar o programa irá deixar os campos vazios para a próxima execução, e fechará a janela
