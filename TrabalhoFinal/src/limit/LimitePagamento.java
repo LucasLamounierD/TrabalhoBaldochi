@@ -4,6 +4,7 @@ import control.ControleVendas;
 import model.*;
 import java.util.Vector;
 import javax.swing.ImageIcon;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -178,18 +179,28 @@ public class LimitePagamento extends javax.swing.JFrame {
         Corretor cor = vec.elementAt(jComboBoxCorretor.getSelectedIndex());
         //Separa a data recebida, para poder comparar seu mês e ano
         String str = jTextFieldData.getText();
-        String[] split = str.split("/");
-
+        
+        if(str.isEmpty()){//Caso não seja digitado nada no campo pagamento
+            JOptionPane.showMessageDialog(rootPane, "Preencha o campo Data Desejada no padrão (mm/yyyy) !", "Data Inválida", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+        
+        String[] split = str.split("/");         
         //Coloca os valores do mês e ano nas sequintes variáveis
         int mesEscolhido = Integer.parseInt(split[0]);
         int anoEscolhido = Integer.parseInt(split[1]);
 
-        ganhoMes = ctrVenda.pagCorretorMes(mesEscolhido, anoEscolhido, cor);
-        ganhoAno = ctrVenda.pagCorretorAnual(mesEscolhido, anoEscolhido, cor);
+        if (mesEscolhido < 1 || mesEscolhido > 12 || anoEscolhido < 2000 || anoEscolhido > 2018) {
+            JOptionPane.showMessageDialog(rootPane, "Data Inválida", "Data Inválida", JOptionPane.ERROR_MESSAGE);
+        } else {
 
-        //Mostra o valor do salário
-        jTextFieldGanhoMes.setText("R$" + ganhoMes);
-        jTextFieldGanhoAno.setText("R$" + ganhoAno);
+            ganhoMes = ctrVenda.pagCorretorMes(mesEscolhido, anoEscolhido, cor);
+            ganhoAno = ctrVenda.pagCorretorAnual(mesEscolhido, anoEscolhido, cor);
+
+            //Mostra o valor do salário
+            jTextFieldGanhoMes.setText("R$" + ganhoMes);
+            jTextFieldGanhoAno.setText("R$" + ganhoAno);
+        }
 
     }//GEN-LAST:event_jButtonPagarActionPerformed
 
