@@ -20,8 +20,8 @@ public class LimiteFormularios extends javax.swing.JFrame {
     /**
      * Creates new form LimiteFormularios
      */
-    String selectionForm;
-    ControlePrincipal objControlePrin;
+    private String selectionForm;
+    private ControlePrincipal objControlePrin;
 
     public LimiteFormularios(ControlePrincipal pCtr) {
         objControlePrin = pCtr;
