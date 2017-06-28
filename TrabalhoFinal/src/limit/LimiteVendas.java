@@ -6,6 +6,7 @@
 package limit;
 
 import control.*;
+import java.text.DecimalFormat;
 import java.util.Vector;
 import javax.swing.*;
 import model.*;
@@ -19,8 +20,10 @@ public class LimiteVendas extends javax.swing.JFrame {
     private ControleVendas ctrVendas;
     private Vector<Imovel> vecImovel;
     private Vector<Corretor> vec;
+    private DecimalFormat decFor;
 
     public LimiteVendas(ControleVendas pCtrVendas) {
+        decFor = new DecimalFormat("R$ 0.00");
         ctrVendas = pCtrVendas;
         vecImovel = new Vector();
         vec = new Vector();
@@ -54,6 +57,9 @@ public class LimiteVendas extends javax.swing.JFrame {
         AreaImovel = new javax.swing.JTextArea();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setMinimumSize(new java.awt.Dimension(330, 490));
+        setPreferredSize(new java.awt.Dimension(330, 500));
+        setSize(new java.awt.Dimension(330, 490));
 
         Vector<Imovel> vecImovel = ctrVendas.getCtrPrincipal().getObjControleImovel().getVecImovel();
         String[] str = new String[vecImovel.size()];
@@ -230,7 +236,7 @@ public class LimiteVendas extends javax.swing.JFrame {
         jComboCorretor.setModel(new javax.swing.DefaultComboBoxModel(str2));
 
         Imovel i = vecImovel.get(jComboCodImovel.getSelectedIndex());
-        AreaImovel.setText("Proprietário: " + i.getNomePropietario() + "\nPreço: R$" + i.getPreco()+ "\nTipo: "+ i.getTipo());
+        AreaImovel.setText("Proprietário: " + i.getNomePropietario() + "\nPreço: " + decFor.format(i.getPreco())+ "\nTipo: "+ i.getTipo());
 
     }
 
@@ -268,7 +274,7 @@ public class LimiteVendas extends javax.swing.JFrame {
 
     private void jComboCodImovelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboCodImovelActionPerformed
         Imovel i = vecImovel.get(jComboCodImovel.getSelectedIndex());
-        AreaImovel.setText("Proprietário: " + i.getNomePropietario() + "\nPreço: R$" + i.getPreco()+ "\nTipo: "+ i.getTipo());
+        AreaImovel.setText("Proprietário: " + i.getNomePropietario() + "\nPreço: " + decFor.format(i.getPreco())+ "\nTipo: "+ i.getTipo());
     }//GEN-LAST:event_jComboCodImovelActionPerformed
 
     /**

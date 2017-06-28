@@ -6,7 +6,6 @@
 package util;
 
 import javax.swing.table.DefaultTableModel;
-
 /**
  *
  * @author Rodrigo Maia

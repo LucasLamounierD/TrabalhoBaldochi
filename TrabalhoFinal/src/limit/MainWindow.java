@@ -81,6 +81,7 @@ public class MainWindow extends javax.swing.JFrame {
         jMenuItem9 = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("Brasil Imóveis");
         setMinimumSize(new java.awt.Dimension(1024, 720));
         setModalExclusionType(null);
         setSize(new java.awt.Dimension(1024, 720));

@@ -5,8 +5,6 @@ import limit.*;
 import java.io.*;
 import java.text.*;
 import java.util.*;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.*;
 import javax.swing.table.*;
 import util.Util;
