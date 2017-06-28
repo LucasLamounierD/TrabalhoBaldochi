@@ -135,7 +135,7 @@ public class ControleImovel {
         } 
     }
     
-    //Serializa o Array de Imovel, o passando para o arquivo imoveis.dat
+    //Serializa o Array de Imovel, o passando para o arquivo imoveis.
     private void serializaImovel() throws Exception { 
         //Abrindo arquivo salvando imoveis e fechado o arquivo
         FileOutputStream objFileOS = new FileOutputStream("imoveis.dat");       
@@ -174,19 +174,25 @@ public class ControleImovel {
         tableModel.addColumn("TIPO");
         tableModel.addColumn("PREÇO");
         tableModel.addColumn("PROPRIETÁRIO");
+        tableModel.addColumn("DATA DE CADASTRO");
         
          Locale local = new Locale("pt","br");
          Calendar dataReq = Calendar.getInstance(local);
          dataReq.set(ano,mes,0);//Seta mes se ano escolhido nos filtros do relatorio
          dataReq.add(Calendar.MONTH, -6);//Diminui 6 meses da data escolhida.
          Date dataFiltro = dataReq.getTime();//Guarda data de filtro
-           
          
+         
+         DateFormat  df = DateFormat.getDateInstance(DateFormat.MEDIUM, local);
         //percorre lista de Imoveis
         for(Imovel i : vecImovel){            
             if(dataFiltro.compareTo(i.getDataCad())==1){//Se a data de cadastro do imovel vier antes da data de filtro 
                 //Inseri na tabela os dados sobre o imovel
-                tableModel.addRow(new Object[]{i.getCodigo(), i.getTipo(), decFor.format(i.getPreco()), i.getNomePropietario()});
+                tableModel.addRow(new Object[]{i.getCodigo(),
+                                               i.getTipo(),
+                                               decFor.format(i.getPreco()),
+                                               i.getNomePropietario(),
+                                               df.format(i.getDataCad())});
             }
         }        
         tabelaExibicao.setModel(tableModel);
@@ -200,9 +206,7 @@ public class ControleImovel {
         tableImoveisModel.addColumn("CODIGO");
         tableImoveisModel.addColumn("TIPO");
         tableImoveisModel.addColumn("PREÇO");
-        tableImoveisModel.addColumn("PROPRIETÁRIO");
-        
-        
+        tableImoveisModel.addColumn("PROPRIETÁRIO");            
 
         //Analisa imoveis disponiveis
         comboBoxTipoImoveisDispModel.addElement("Todos");

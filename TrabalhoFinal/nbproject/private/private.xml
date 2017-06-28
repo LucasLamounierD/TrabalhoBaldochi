@@ -1,30 +1,16 @@
-<<<<<<< Updated upstream
 <?xml version="1.0" encoding="UTF-8"?>
 <project-private xmlns="http://www.netbeans.org/ns/project-private/1">
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
             <file>file:/C:/Users/Rodrigo%20Maia/Documents/NetBeansProjects/TrabalhoBaldochi/TrabalhoBaldochi/TrabalhoBaldochi/TrabalhoFinal/src/control/ControleImovel.java</file>
+            <file>file:/C:/Users/Rodrigo%20Maia/Documents/NetBeansProjects/TrabalhoBaldochi/TrabalhoBaldochi/TrabalhoBaldochi/TrabalhoFinal/src/limit/LimiteFormularios.java</file>
             <file>file:/C:/Users/Rodrigo%20Maia/Documents/NetBeansProjects/TrabalhoBaldochi/TrabalhoBaldochi/TrabalhoBaldochi/TrabalhoFinal/src/limit/MainWindow.java</file>
-            <file>file:/C:/Users/Rodrigo%20Maia/Documents/NetBeansProjects/TrabalhoBaldochi/TrabalhoBaldochi/TrabalhoBaldochi/TrabalhoFinal/src/util/MyTableModel.java</file>
             <file>file:/C:/Users/Rodrigo%20Maia/Documents/NetBeansProjects/TrabalhoBaldochi/TrabalhoBaldochi/TrabalhoBaldochi/TrabalhoFinal/src/limit/LimiteVendas.java</file>
-            <file>file:/C:/Users/Rodrigo%20Maia/Documents/NetBeansProjects/TrabalhoBaldochi/TrabalhoBaldochi/TrabalhoBaldochi/TrabalhoFinal/src/control/ControleVendas.java</file>
-            <file>file:/C:/Users/Rodrigo%20Maia/Documents/NetBeansProjects/TrabalhoBaldochi/TrabalhoBaldochi/TrabalhoBaldochi/TrabalhoFinal/src/control/ControlePrincipal.java</file>
+            <file>file:/C:/Users/Rodrigo%20Maia/Documents/NetBeansProjects/TrabalhoBaldochi/TrabalhoBaldochi/TrabalhoBaldochi/TrabalhoFinal/src/util/MyTableModel.java</file>
+            <file>file:/C:/Users/Rodrigo%20Maia/Documents/NetBeansProjects/TrabalhoBaldochi/TrabalhoBaldochi/TrabalhoBaldochi/TrabalhoFinal/src/limit/LimitePagamento.java</file>
+            <file>file:/C:/Users/Rodrigo%20Maia/Documents/NetBeansProjects/TrabalhoBaldochi/TrabalhoBaldochi/TrabalhoBaldochi/TrabalhoFinal/src/limit/LimiteCorretor.java</file>
             <file>file:/C:/Users/Rodrigo%20Maia/Documents/NetBeansProjects/TrabalhoBaldochi/TrabalhoBaldochi/TrabalhoBaldochi/TrabalhoFinal/src/limit/LimiteImovel.java</file>
-            <file>file:/C:/Users/Rodrigo%20Maia/Documents/NetBeansProjects/TrabalhoBaldochi/TrabalhoBaldochi/TrabalhoBaldochi/TrabalhoFinal/src/model/Venda.java</file>
         </group>
     </open-files>
 </project-private>
-=======
-<?xml version="1.0" encoding="UTF-8"?>
-<project-private xmlns="http://www.netbeans.org/ns/project-private/1">
-    <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
-    <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
-        <group>
-            <file>file:/home/linux/Documentos/SIN%202016.3/Baldochi/TrabalhoFinal/TrabalhoBaldochi/TrabalhoFinal/src/control/ControleCorretor.java</file>
-            <file>file:/home/linux/Documentos/SIN%202016.3/Baldochi/TrabalhoFinal/TrabalhoBaldochi/TrabalhoFinal/src/limit/LimiteFormularios.java</file>
-            <file>file:/home/linux/Documentos/SIN%202016.3/Baldochi/TrabalhoFinal/TrabalhoBaldochi/TrabalhoFinal/src/control/ControleVendas.java</file>
-        </group>
-    </open-files>
-</project-private>
->>>>>>> Stashed changes
