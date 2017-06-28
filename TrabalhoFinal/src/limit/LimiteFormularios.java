@@ -8,6 +8,7 @@ package limit;
 import util.*;
 import control.*;
 import java.awt.CardLayout;
+import java.text.DecimalFormat;
 import java.util.Date;
 import javax.swing.table.DefaultTableModel;
 import model.Corretor;
@@ -439,10 +440,11 @@ public class LimiteFormularios extends javax.swing.JFrame {
     //Gera relatorio de faturamento
     private void geraRelatorioFaturamento(int mes, int ano) {
         //RECEBE O VALOR TOTAL DAS VENDAS E FAZ O PREENCHIMENTO DA TABELA NA FUNÇÃO
+        DecimalFormat decFor = new DecimalFormat("R$ 0.00");//Classe para conversão decimal
         float total = objControlePrin.getObjControleVendas().buscaVendasMes(mes, ano, jTableVendasDoMes);
 
         //MOSTRA O VALOR TOTAL DAS VENDAS
-        jLabelValorFinal.setText("" + total);
+        jLabelValorFinal.setText("" + decFor.format(total));
     }
 
     private void geraRelatorioLucro(int mes, int ano) {

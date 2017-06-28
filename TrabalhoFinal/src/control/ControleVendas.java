@@ -165,7 +165,7 @@ public class ControleVendas {
                 valorTotalFaturamento += (v.getValorReal() * 5) / 100;//FAZ O CALCULO DO VALOR TOTAL DE VENDAS PARA EXIBIÇÃO
             }
         }
-
+        
         MyTableModel t = new MyTableModel();
 
         t.addColumn("Codigo");
@@ -173,18 +173,20 @@ public class ControleVendas {
         t.addColumn("Valor Real");
         t.addColumn("Valor Faturado");
         t.addColumn("Valor pago Corretor");
-
+        
+        DecimalFormat decFor = new DecimalFormat("R$ 0.00");//Classe para conversão decimal
+        
         for (Venda v : listaVenda) {
 
             c = v.getNomeCorretor();
 
             if (c instanceof Comissionado) {
                 t.addRow(new Object[]{v.getImovelVendido().getCodigo(), v.getImovelVendido().getTipo(),
-                    v.getValorReal(), (v.getValorReal() * 5 / 100), (v.getValorReal()*((Comissionado) c).getComissao()/100)});
+                    decFor.format(v.getValorReal()), decFor.format(v.getValorReal() * 5 / 100), decFor.format(v.getValorReal()*((Comissionado) c).getComissao()/100)});
             }
             if (c instanceof Contratado) {
                 t.addRow(new Object[]{v.getImovelVendido().getCodigo(), v.getImovelVendido().getTipo(),
-                    v.getValorReal(), (v.getValorReal() * 5 / 100), (v.getValorReal()*0.01)});
+                    decFor.format(v.getValorReal()), decFor.format(v.getValorReal() * 5 / 100), decFor.format(v.getValorReal()*0.01)});
             }
 
         }
@@ -246,11 +248,11 @@ public class ControleVendas {
 
         //LIMPA O QUE HAVIA NA TABELA PASSADA PARA RENOVAR OS VALORES
         t.setNumRows(0);
-
+        DecimalFormat decFor = new DecimalFormat("R$ 0.00");//Classe para conversão decimal
         //ADICIONA NA TABELA AS VENDAS DO MES QUE ESTAO NO ARRAY AUXILIAR
         for (Venda v : vendasMes) {
             t.addRow(new Object[]{v.getImovelVendido().getCodigo(), v.getNomeCorretor().getNome(),
-                v.getValorReal(), (v.getValorReal() * 5 / 100)});
+                decFor.format(v.getValorReal()), decFor.format(v.getValorReal() * 5 / 100)});
         }
         tabelaVenda.setModel(t);
         return valorVendas;//RETORNA O VALOR TOTAL DAS VENDAS PARA EXIBIR COMO TOTAL NO PAINEL
