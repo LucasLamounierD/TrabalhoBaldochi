@@ -3,6 +3,7 @@ package limit;
 import control.ControleVendas;
 import model.*;
 import java.util.Vector;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -180,12 +181,17 @@ public class LimitePagamento extends javax.swing.JFrame {
         int mesEscolhido = Integer.parseInt(split[0]);
         int anoEscolhido = Integer.parseInt(split[1]);
 
-        ganhoMes = ctrVenda.pagCorretorMes(mesEscolhido, anoEscolhido, cor);
-        ganhoAno = ctrVenda.pagCorretorAnual(mesEscolhido, anoEscolhido, cor);
+        if (mesEscolhido < 1 || mesEscolhido > 12 || anoEscolhido < 2000 || anoEscolhido > 2018) {
+            JOptionPane.showMessageDialog(null, "Data Inválida", "Data Inválida", JOptionPane.INFORMATION_MESSAGE);
+        } else {
 
-        //Mostra o valor do salário
-        jTextFieldGanhoMes.setText("R$" + ganhoMes);
-        jTextFieldGanhoAno.setText("R$" + ganhoAno);
+            ganhoMes = ctrVenda.pagCorretorMes(mesEscolhido, anoEscolhido, cor);
+            ganhoAno = ctrVenda.pagCorretorAnual(mesEscolhido, anoEscolhido, cor);
+
+            //Mostra o valor do salário
+            jTextFieldGanhoMes.setText("R$" + ganhoMes);
+            jTextFieldGanhoAno.setText("R$" + ganhoAno);
+        }
 
     }//GEN-LAST:event_jButtonPagarActionPerformed
 
