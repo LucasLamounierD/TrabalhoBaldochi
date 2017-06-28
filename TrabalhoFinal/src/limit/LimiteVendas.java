@@ -57,6 +57,7 @@ public class LimiteVendas extends javax.swing.JFrame {
         AreaImovel = new javax.swing.JTextArea();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setTitle("Cadastro Vendas");
         setIconImage(new ImageIcon(getClass().getResource("/icons/jframeicon.png")).getImage());
         setMinimumSize(new java.awt.Dimension(330, 490));
         setPreferredSize(new java.awt.Dimension(330, 500));

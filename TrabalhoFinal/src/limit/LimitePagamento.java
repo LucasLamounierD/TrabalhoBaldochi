@@ -50,6 +50,7 @@ public class LimitePagamento extends javax.swing.JFrame {
         jTextFieldData = new javax.swing.JFormattedTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setTitle("Cadastrar Pagamento");
         setIconImage(new ImageIcon(getClass().getResource("/icons/jframeicon.png")).getImage());
         setResizable(false);
         addWindowListener(new java.awt.event.WindowAdapter() {

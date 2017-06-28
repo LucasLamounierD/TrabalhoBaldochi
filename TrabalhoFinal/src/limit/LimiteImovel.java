@@ -46,7 +46,7 @@ public class LimiteImovel extends javax.swing.JFrame {
         jTextFieldPreco = new javax.swing.JFormattedTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        setTitle("Cadastro de imóvel");
+        setTitle("Formulário de imóvel");
         setIconImage(new ImageIcon(getClass().getResource("/icons/jframeicon.png")).getImage());
         setResizable(false);
 
