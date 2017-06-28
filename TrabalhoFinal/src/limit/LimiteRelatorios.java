@@ -12,26 +12,27 @@ import java.text.DecimalFormat;
 import java.util.Date;
 import javax.swing.table.DefaultTableModel;
 import model.Corretor;
+import javax.swing.ImageIcon;
 
 /**
  *
  * @author linux
  */
-public class LimiteFormularios extends javax.swing.JFrame {
+public class LimiteRelatorios extends javax.swing.JFrame {
 
     /**
-     * Creates new form LimiteFormularios
+     * Creates new form LimiteRelatorios
      */
     private String selectionForm;
     private ControlePrincipal objControlePrin;
 
-    public LimiteFormularios(ControlePrincipal pCtr) {
+    public LimiteRelatorios(ControlePrincipal pCtr) {
         objControlePrin = pCtr;
         this.setVisible(true);
         initComponents();
     }
 
-    public LimiteFormularios() {
+    public LimiteRelatorios() {
         initComponents();
     }
 
@@ -78,6 +79,7 @@ public class LimiteFormularios extends javax.swing.JFrame {
         jLabel6 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setIconImage(new ImageIcon(getClass().getResource("/icons/jframeicon.png")).getImage());
         setMinimumSize(new java.awt.Dimension(820, 708));
         setPreferredSize(new java.awt.Dimension(820, 700));
         setSize(new java.awt.Dimension(820, 700));
@@ -395,7 +397,7 @@ public class LimiteFormularios extends javax.swing.JFrame {
                 .addComponent(Menu, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(1, 1, 1)
                 .addComponent(panelExibicaoRel, javax.swing.GroupLayout.PREFERRED_SIZE, 515, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(16, Short.MAX_VALUE))
+                .addContainerGap(23, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());

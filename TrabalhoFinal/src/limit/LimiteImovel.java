@@ -7,6 +7,7 @@ import java.util.Date;
 import java.util.Locale;
 import javax.swing.JOptionPane;
 import util.Util;
+import javax.swing.ImageIcon;
 
 public class LimiteImovel extends javax.swing.JFrame {
 
@@ -46,6 +47,7 @@ public class LimiteImovel extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Cadastro de imóvel");
+        setIconImage(new ImageIcon(getClass().getResource("/icons/jframeicon.png")).getImage());
         setResizable(false);
 
         jLabel1.setText("Tipo:");

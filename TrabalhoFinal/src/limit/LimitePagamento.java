@@ -3,6 +3,7 @@ package limit;
 import control.ControleVendas;
 import model.*;
 import java.util.Vector;
+import javax.swing.ImageIcon;
 
 /**
  *
@@ -37,7 +38,6 @@ public class LimitePagamento extends javax.swing.JFrame {
 
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
-        jTextFieldData = new javax.swing.JTextField();
         jComboBoxCorretor = new javax.swing.JComboBox<>();
         jLabel2 = new javax.swing.JLabel();
         jButtonPagar = new javax.swing.JButton();
@@ -46,8 +46,10 @@ public class LimitePagamento extends javax.swing.JFrame {
         jLabel4 = new javax.swing.JLabel();
         jTextFieldGanhoMes = new javax.swing.JTextField();
         jTextFieldGanhoAno = new javax.swing.JTextField();
+        jTextFieldData = new javax.swing.JFormattedTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setIconImage(new ImageIcon(getClass().getResource("/icons/jframeicon.png")).getImage());
         setResizable(false);
 
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Pagamento", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 1, 13))); // NOI18N
@@ -82,6 +84,8 @@ public class LimitePagamento extends javax.swing.JFrame {
 
         jLabel4.setText("Ganhos no Ano: ");
 
+        jTextFieldData.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.DateFormatter(new java.text.SimpleDateFormat("MM/yyyy"))));
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -98,10 +102,10 @@ public class LimitePagamento extends javax.swing.JFrame {
                         .addComponent(jButtonPagar)
                         .addGap(32, 32, 32)
                         .addComponent(jButtonCancelar))
-                    .addComponent(jTextFieldData)
                     .addComponent(jComboBoxCorretor, 0, 251, Short.MAX_VALUE)
                     .addComponent(jTextFieldGanhoMes)
-                    .addComponent(jTextFieldGanhoAno))
+                    .addComponent(jTextFieldGanhoAno)
+                    .addComponent(jTextFieldData))
                 .addContainerGap(36, Short.MAX_VALUE))
         );
 
@@ -199,7 +203,7 @@ public class LimitePagamento extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JTextField jTextFieldData;
+    private javax.swing.JFormattedTextField jTextFieldData;
     private javax.swing.JTextField jTextFieldGanhoAno;
     private javax.swing.JTextField jTextFieldGanhoMes;
     // End of variables declaration//GEN-END:variables

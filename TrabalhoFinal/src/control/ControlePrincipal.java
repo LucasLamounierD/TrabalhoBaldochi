@@ -4,13 +4,13 @@ import control.ControleCorretor;
 import java.util.Vector;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
-import limit.LimiteFormularios;
+import limit.LimiteRelatorios;
 import limit.MainWindow;
 import util.Util;
 
 public class ControlePrincipal {
     private MainWindow objLimPrincipal;   
-    private LimiteFormularios objLimRel;
+    private LimiteRelatorios objLimRel;
     private ControleCorretor objControleCorretor;
     private ControleImovel objControleImovel;
     private ControleVendas objControleVendas;
@@ -87,7 +87,7 @@ public class ControlePrincipal {
     //Abri janela de relatorio
     public void abrirJanelaRelatorio(String relatorioEscolhido) {
         if(objLimRel==null){//Se a janela não estiver instaciada, instacia ela
-            objLimRel = new LimiteFormularios(this);
+            objLimRel = new LimiteRelatorios(this);
             //isso garante que ela so será carregada na memoria quando utilizada pelo menos uma vez
         }
         objLimRel.setWhichReportView(relatorioEscolhido);//Setando o relatorio que será utilizado

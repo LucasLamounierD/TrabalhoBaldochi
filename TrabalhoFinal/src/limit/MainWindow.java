@@ -9,6 +9,7 @@ import control.ControlePrincipal;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.ImageIcon;
 import util.Util;
 /**
  *
@@ -82,6 +83,7 @@ public class MainWindow extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Brasil Imóveis");
+        setIconImage(new ImageIcon(getClass().getResource("/icons/jframeicon.png")).getImage());
         setMinimumSize(new java.awt.Dimension(1024, 720));
         setModalExclusionType(null);
         setSize(new java.awt.Dimension(1024, 720));

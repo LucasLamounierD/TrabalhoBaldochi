@@ -82,6 +82,7 @@ public class LimiteCorretor extends javax.swing.JFrame {
         fieldValorSalario = new javax.swing.JFormattedTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setIconImage(new ImageIcon(getClass().getResource("/icons/jframeicon.png")).getImage());
         setPreferredSize(null);
         setResizable(false);
         setSize(new java.awt.Dimension(450, 320));
