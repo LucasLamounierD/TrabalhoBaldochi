@@ -18,6 +18,7 @@ import model.Corretor;
  * @author linux
  */
 public class LimiteFormularios extends javax.swing.JFrame {
+
     /**
      * Creates new form LimiteFormularios
      */
@@ -278,7 +279,7 @@ public class LimiteFormularios extends javax.swing.JFrame {
             .addGroup(jPanelLucroImobLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(401, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         panelExibicaoRel.add(jPanelLucroImob, "Lucro Total");
@@ -311,7 +312,11 @@ public class LimiteFormularios extends javax.swing.JFrame {
 
         panelExibicaoRel.add(RelatorioGeral, "Generic");
 
+        nomeCorretor.setEditable(false);
+
         jLabel4.setText("Nome do Corretor");
+
+        CRECICCorretor.setEditable(false);
 
         jLabel5.setText("CRECIC:");
 
@@ -390,7 +395,7 @@ public class LimiteFormularios extends javax.swing.JFrame {
                 .addComponent(Menu, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(1, 1, 1)
                 .addComponent(panelExibicaoRel, javax.swing.GroupLayout.PREFERRED_SIZE, 515, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(21, Short.MAX_VALUE))
+                .addContainerGap(16, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -448,7 +453,7 @@ public class LimiteFormularios extends javax.swing.JFrame {
     }
 
     private void geraRelatorioLucro(int mes, int ano) {
-        jTextFieldLucroImob.setText("" + objControlePrin.getObjControleVendas().calcularLucroTotal(mes, ano,TabelaVendasCorretorMes1));
+        jTextFieldLucroImob.setText(objControlePrin.getObjControleVendas().calcularLucroTotal(mes, ano, TabelaVendasCorretorMes1));
     }
 
     //Gera relatorio de Imoveis Vendidos
@@ -470,9 +475,12 @@ public class LimiteFormularios extends javax.swing.JFrame {
 
     private void geraRelatorioCorretorMes(int mes, int ano) {
         Corretor c = objControlePrin.getObjControleVendas().corretorDoMes(mes, ano, TabelaVendasCorretorMes);
-        if(c != null){
-        nomeCorretor.setText(c.getNome());
-        CRECICCorretor.setText(c.getCrecic());
+        if (c != null) {
+            nomeCorretor.setText(c.getNome());
+            CRECICCorretor.setText(c.getCrecic());
+        } else {
+            nomeCorretor.setText("");
+            CRECICCorretor.setText("");
         }
     }
 
@@ -517,28 +525,27 @@ public class LimiteFormularios extends javax.swing.JFrame {
         selectionForm = relView;
         cleanFrame();
         //Avalia qual relatorio será exibido   
-        if(relView.equals(Util.REL_LUCRO_TOTAL) 
-                || relView.equals(Util.REL_FATURAMENTO_TOTAL) 
-                        || relView.equals(Util.REL_CORRETOR_DO_MES)){
+        if (relView.equals(Util.REL_LUCRO_TOTAL)
+                || relView.equals(Util.REL_FATURAMENTO_TOTAL)
+                || relView.equals(Util.REL_CORRETOR_DO_MES)) {
             cl.show(panelExibicaoRel, relView);//Exibi o painel de visualização do relatorio escolhido        
-        }else{
+        } else {
             cl.show(panelExibicaoRel, "Generic");//Exibi painel generico que serve para varios Relatorios
         }
         //   cl.show(panelExibicaoRel, relView);//Exibi o painel de visualização do relatorio escolhido
         jButtonGerarRelatorio.setActionCommand(relView);//defini qual processo vai ser executando quando botão gerar for apertado
-    
+
     }
-    
-    public void cleanFrame(){
-        DefaultTableModel  df = (DefaultTableModel)tabelaRel.getModel();
+
+    public void cleanFrame() {
+        DefaultTableModel df = (DefaultTableModel) tabelaRel.getModel();
         df.setColumnCount(0);
         df.setRowCount(0);
-        df = (DefaultTableModel)jTableVendasDoMes.getModel();
+        df = (DefaultTableModel) jTableVendasDoMes.getModel();
         df.setColumnCount(0);
         df.setRowCount(0);
         jComboBoxAno.setSelectedIndex(0);
         jComboBox1.setSelectedIndex(0);
     }
-    
 
 }
