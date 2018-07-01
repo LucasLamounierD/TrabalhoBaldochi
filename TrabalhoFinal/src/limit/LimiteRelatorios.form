@@ -84,7 +84,7 @@
                   <Component id="Menu" min="-2" max="-2" attributes="0"/>
                   <EmptySpace min="-2" pref="1" max="-2" attributes="0"/>
                   <Component id="panelExibicaoRel" min="-2" pref="515" max="-2" attributes="0"/>
-                  <EmptySpace pref="21" max="32767" attributes="0"/>
+                  <EmptySpace pref="16" max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -174,7 +174,7 @@
                 </Property>
               </Properties>
               <AuxValues>
-                <AuxValue name="JavaCodeGenerator_InitCodePre" type="java.lang.String" value="String[] str2 = new String[28];  &#xa;int cont2 = 0, anoAtual;  &#xa;Date data = new Date();&#xa;anoAtual = data.getYear() + 1900;&#xa;for(int i = anoAtual ; i &gt;= 1990 ; i--){ str2[cont2] = &quot;&quot; + i; cont2++;  }"/>
+                <AuxValue name="JavaCodeGenerator_InitCodePre" type="java.lang.String" value="String[] str2 = new String[50];  &#xa;int cont2 = 0, anoAtual;  &#xa;Date data = new Date();&#xa;anoAtual = data.getYear() + 1900;&#xa;for(int i = anoAtual ; i &gt;= 1990 ; i--){ str2[cont2] = &quot;&quot; + i; cont2++;  }"/>
                 <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
               </AuxValues>
             </Component>

@@ -95,7 +95,7 @@ public class LimiteRelatorios extends javax.swing.JFrame {
 
         jLabel2.setText("Ano:");
 
-        String[] str2 = new String[28];
+        String[] str2 = new String[50];
         int cont2 = 0, anoAtual;
         Date data = new Date();
         anoAtual = data.getYear() + 1900;
@@ -397,7 +397,7 @@ public class LimiteRelatorios extends javax.swing.JFrame {
                 .addComponent(Menu, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(1, 1, 1)
                 .addComponent(panelExibicaoRel, javax.swing.GroupLayout.PREFERRED_SIZE, 515, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(21, Short.MAX_VALUE))
+                .addContainerGap(16, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
